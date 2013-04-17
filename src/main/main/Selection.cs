@@ -94,8 +94,34 @@ namespace main
 		
 		public static Genome MultiTournament(List<Genome> generation, int memberCount, SelPropType type)
 		{
-			//todo
-			return null;
+			switch(type)
+			{
+				case SelPropType.Fitness : 
+					CalcSelPropByFitness(generation);
+					break;
+				case SelPropType.Ranking : 
+					CalcSelPropByRanking(generation);
+					break;
+			}
+			
+			Dictionary<Genome, int> tournament = new Dictionary<Genome, int>();
+			int winCounter;
+			
+			foreach (Genome genome in generation)
+			{
+				winCounter = 0;
+				
+				for (int i = 0; i < memberCount; i++) {
+					if (genome.SelectionProbability > generation[Helper.GetRandomInteger(0,generation.Count-1)].SelectionProbability)
+						winCounter++;
+				}				
+				tournament.Add(genome, winCounter);
+				
+			}
+			List<KeyValuePair<Genome, int>> winTable = tournament.ToList();
+			
+			winTable.Sort((a,b) => b.Value.CompareTo(a.Value));
+			return winTable[0].Key.Copy();
 		}
 		
 		private static void CalcSelPropByFitness(List<Genome> generation)

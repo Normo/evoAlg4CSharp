@@ -269,8 +269,8 @@ namespace main
 								papa = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
 								break;
 							case main.Selection.SelType.MultiTournament :
-								//mama = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-								//papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+								mama = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+								papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
 								break;							
 						}
 						Genome child = Recombine(mama,papa);
