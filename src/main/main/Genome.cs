@@ -22,14 +22,16 @@ namespace main
 			set {
 				_SelectionProbability = value;
 			}
-		}			
+		}	
 		
-		/// <summary>
-		/// Leerer Konstruktor
-		/// </summary>
-		public Genome()
+		public Genome ()
 		{
-
+			
+		}
+		
+		public Genome(int size)
+		{
+			throw new NotImplementedException();
 		}
 		
 		/// <summary>
@@ -40,34 +42,6 @@ namespace main
 		{
 			this.Clear();
 			this.AddRange(arr);
-		}
-	
-		/// <summary>
-		/// Konstruktor
-		/// </summary>
-		/// <param name='size'>Anzahl der Gene</param>
-		public Genome(int size) 
-		{
-			//List<int> genome = new List<int>() {1};
-			this.Add(1);
-			
-			Random rnd = new Random(Guid.NewGuid().GetHashCode());
-			
-			int rndInt;
-			
-			for(int i = 0; i < size-1; i++)
-			{
-				rndInt=rnd.Next(1, size+1);
-				while (this.Contains(rndInt))
-				{
-					rndInt=rnd.Next(1,size+1);
-				}
-				this.Add(rndInt);
-			}
-			
-			//Console.WriteLine("Create new Genome:");
-//			Console.WriteLine(string.Format("\tGenom: {0}", this.AsString()));
-			//return genome;
 		}
 				
 		/// <summary>
@@ -90,11 +64,9 @@ namespace main
 		/// <summary>
 		/// Kopiert ein Genom
 		/// </summary>
-		public Genome Copy()
+		public virtual Genome Copy()
 		{
-			Genome result = new Genome (this.ToArray());
-			result.Fitness = this.Fitness;
-			return result;
+			throw new NotImplementedException();
 		}
 	}
 }

@@ -2,6 +2,7 @@ using System;
 using Gtk;
 using System.Collections.Generic;
 using main;
+using System.Linq;
 
 public partial class MainWindow: Gtk.Window
 {		
@@ -40,37 +41,49 @@ public partial class MainWindow: Gtk.Window
 		Console.WriteLine("Create new Population:");
 		Population p0 = new Population(100, 8);
 		*/
-		bool? mutate = null;
-		
-		mutate = rb_Rnd.Active ? (bool?)null : (rb_Change.Active ? false : true);
-		
-		Evolution evol = new Evolution();
-		
-		evol.countGene = (int)txt_countGenes.Value;
-		evol.maxGenerations = (int)txt_maxGeneration.Value;
-		evol.countIndividuals = (int)txt_countIndividuals.Value;
-		evol.countChilds = (int)txt_countChilds.Value;
-		evol.recombinationProbability = txt_recombProb.Value;
-		evol.SelPropType = rb_Fitness.Active ? main.Selection.SelPropType.Fitness : main.Selection.SelPropType.Ranking;
-		evol.SelType = (main.Selection.SelType)cbo_SelType.Active;
-		evol.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
-		
-		evol.mutate =  mutate;
-		evol.output = txt_Output;
-		
-		
-		evol.Compute();
-	}
-
-	protected void OnBtnStartActivated (object sender, System.EventArgs e)
-	{
-		throw new System.NotImplementedException ();
+//		try
+//		{
+			Problem problem = null;
+			
+			switch (cbo_Problem.Active)
+			{
+				case 0 :	problem = new TravelingSalesMan(); break;
+	//			case 1 :	problem = new TravelingSalesMan(); break;
+	//			case 2 :	problem = new TravelingSalesMan(); break;
+			}
+			
+			if (problem == null)
+				throw new NullReferenceException();
+			
+			problem.countGene = (int)txt_countGenes.Value;
+			problem.maxGenerations = (int)txt_maxGeneration.Value;
+			problem.countIndividuals = (int)txt_countIndividuals.Value;
+			problem.countChilds = (int)txt_countChilds.Value;
+			problem.recombinationProbability = txt_recombProb.Value;
+			problem.InvertOnMutate = rb_Invert.Active ? true : false;
+			problem.SelPropType = rb_Fitness.Active ? main.Helper.Enums.SelPropType.Fitness : main.Helper.Enums.SelPropType.Ranking;
+			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
+			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
+			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
+					
+			Evolution evol = new Evolution(problem);
+			evol.output = txt_Output;
+			
+			
+			evol.Compute();
+//		}
+//		catch
+//		{
+//			
+//		}
 	}
 
 	protected void OnCboSelTypeChanged (object sender, System.EventArgs e)
 	{
 		txt_TournamentMemberCount.Sensitive = cbo_SelType.Active > 0;
 	}
+	
+	
 
 	
 }

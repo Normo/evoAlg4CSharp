@@ -40,6 +40,13 @@ namespace main
 			return rnd.NextDouble();
 		}
 		
+		public static class Enums
+		{
+			public enum Encryption { None, Binary, Real };
+			public enum SelPropType { Fitness, Ranking };
+			public enum SelType { Roulette, SingleTournament, MultiTournament }; 
+		}
+		
 		public static class Fitness
 		{
 			/// <summary>

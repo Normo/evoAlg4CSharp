@@ -5,10 +5,7 @@ using System.Linq;
 namespace main
 {
 	public static class Selection
-	{
-		public enum SelPropType { Fitness, Ranking };
-		public enum SelType { Roulette, SingleTournament, MultiTournament }; 
-		
+	{		
 		public static void Plus (Population population, int TopCount)
 		{
 			List<Genome> newGen = new List<Genome> ();
@@ -47,14 +44,14 @@ namespace main
 		
 		
 		
-		public static Genome Roulette (List<Genome> generation, SelPropType type)
+		public static Genome Roulette (List<Genome> generation, Helper.Enums.SelPropType type)
 		{			
 			switch(type)
 			{
-				case SelPropType.Fitness : 
+				case Helper.Enums.SelPropType.Fitness : 
 					CalcSelPropByFitness(generation);
 					break;
-				case SelPropType.Ranking : 
+				case Helper.Enums.SelPropType.Ranking : 
 					CalcSelPropByRanking(generation);
 					break;
 			}
@@ -70,14 +67,14 @@ namespace main
 			return null;
 		}
 		
-		public static Genome SingleTournament(List<Genome> generation, int memberCount, SelPropType type)
+		public static Genome SingleTournament(List<Genome> generation, int memberCount, Helper.Enums.SelPropType type)
 		{
 			switch(type)
 			{
-				case SelPropType.Fitness : 
+				case Helper.Enums.SelPropType.Fitness : 
 					CalcSelPropByFitness(generation);
 					break;
-				case SelPropType.Ranking : 
+				case Helper.Enums.SelPropType.Ranking : 
 					CalcSelPropByRanking(generation);
 					break;
 			}
@@ -92,14 +89,14 @@ namespace main
 			return member[0].Copy();
 		}
 		
-		public static Genome MultiTournament(List<Genome> generation, int memberCount, SelPropType type)
+		public static Genome MultiTournament(List<Genome> generation, int memberCount, Helper.Enums.SelPropType type)
 		{
 			switch(type)
 			{
-				case SelPropType.Fitness : 
+				case Helper.Enums.SelPropType.Fitness : 
 					CalcSelPropByFitness(generation);
 					break;
-				case SelPropType.Ranking : 
+				case Helper.Enums.SelPropType.Ranking : 
 					CalcSelPropByRanking(generation);
 					break;
 			}

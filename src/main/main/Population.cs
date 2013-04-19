@@ -8,7 +8,9 @@ namespace main
 	/// Stellt eine Population dar.
 	/// </summary>
 	public class Population
-	{				
+	{	
+		private Helper.Enums.Encryption _encryption;
+		
 		public List<Genome> curGeneration;
 		public List<Genome> oldGeneration;
 		
@@ -17,14 +19,18 @@ namespace main
 		/// </summary>
 		/// <param name='size'>Größe der Population</param>
 		/// <param name='genomeSize'>Größe des einzelnen Genomes</param>
-		public Population (int size, int genomeSize)
+		public Population (int size, int genomeSize, Helper.Enums.Encryption encryption)
 		{
+			_encryption = encryption;			
 			curGeneration = new List<Genome>();
 			oldGeneration = new List<Genome>();
 
 			for(int i = 0; i < size; i++)
 			{
-				curGeneration.Add(new Genome(genomeSize));
+				if (_encryption == Helper.Enums.Encryption.Real)
+					throw new NotImplementedException(); //todo
+				else	
+					curGeneration.Add(new GenomeReal(genomeSize));
 			}
 		}
 		
