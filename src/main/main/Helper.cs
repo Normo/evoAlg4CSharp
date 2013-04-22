@@ -22,6 +22,23 @@ namespace main
 			return tmp;
 		}
 		
+		/// <summary>
+		/// Konvertiert den Inhalt einer Liste in einem String.
+		/// </summary>
+		/// <returns>Inhalt als String</returns>
+		/// <param name='list'>Zu konvertierende Liste</param>
+		public static string ListToString (List<double> list)
+		{
+			string tmp = "{";
+			string sep = string.Empty;
+			foreach (double i in list) {
+				tmp = string.Format("{0}{1} {2}", tmp, sep, i);
+				sep = ",";
+			}
+			tmp = string.Format("{0} }}", tmp);
+			return tmp;
+		}
+		
 		public static int GetRandomInteger()
 		{
 			Random rnd =  new Random(Guid.NewGuid().GetHashCode());

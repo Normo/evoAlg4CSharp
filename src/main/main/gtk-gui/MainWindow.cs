@@ -70,6 +70,7 @@ public partial class MainWindow
 	private global::Gtk.Label GtkLabel9;
 	private global::Gtk.Label label11;
 	private global::Gtk.Button btn_Start;
+	private global::Gtk.Button btn_Start10;
 	
 	protected virtual void Build ()
 	{
@@ -130,7 +131,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook ();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 0;
+		this.notebook1.CurrentPage = 1;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.vbox7 = new global::Gtk.VBox ();
 		this.vbox7.Name = "vbox7";
@@ -236,7 +237,7 @@ public partial class MainWindow
 		this.hpaned1 = new global::Gtk.HPaned ();
 		this.hpaned1.CanFocus = true;
 		this.hpaned1.Name = "hpaned1";
-		this.hpaned1.Position = 118;
+		this.hpaned1.Position = 143;
 		// Container child hpaned1.Gtk.Paned+PanedChild
 		this.label2 = new global::Gtk.Label ();
 		this.label2.Name = "label2";
@@ -245,7 +246,7 @@ public partial class MainWindow
 		global::Gtk.Paned.PanedChild w15 = ((global::Gtk.Paned.PanedChild)(this.hpaned1 [this.label2]));
 		w15.Resize = false;
 		// Container child hpaned1.Gtk.Paned+PanedChild
-		this.txt_countIndividuals = new global::Gtk.SpinButton (0, 100, 1);
+		this.txt_countIndividuals = new global::Gtk.SpinButton (0, 1000, 1);
 		this.txt_countIndividuals.CanFocus = true;
 		this.txt_countIndividuals.Name = "txt_countIndividuals";
 		this.txt_countIndividuals.Adjustment.PageIncrement = 10;
@@ -288,7 +289,7 @@ public partial class MainWindow
 		this.hpaned5 = new global::Gtk.HPaned ();
 		this.hpaned5.CanFocus = true;
 		this.hpaned5.Name = "hpaned5";
-		this.hpaned5.Position = 147;
+		this.hpaned5.Position = 142;
 		// Container child hpaned5.Gtk.Paned+PanedChild
 		this.label5 = new global::Gtk.Label ();
 		this.label5.Name = "label5";
@@ -297,7 +298,7 @@ public partial class MainWindow
 		global::Gtk.Paned.PanedChild w21 = ((global::Gtk.Paned.PanedChild)(this.hpaned5 [this.label5]));
 		w21.Resize = false;
 		// Container child hpaned5.Gtk.Paned+PanedChild
-		this.txt_countChilds = new global::Gtk.SpinButton (0, 100, 1);
+		this.txt_countChilds = new global::Gtk.SpinButton (0, 1000, 1);
 		this.txt_countChilds.CanFocus = true;
 		this.txt_countChilds.Name = "txt_countChilds";
 		this.txt_countChilds.Adjustment.PageIncrement = 10;
@@ -314,7 +315,7 @@ public partial class MainWindow
 		this.hpaned6 = new global::Gtk.HPaned ();
 		this.hpaned6.CanFocus = true;
 		this.hpaned6.Name = "hpaned6";
-		this.hpaned6.Position = 147;
+		this.hpaned6.Position = 141;
 		// Container child hpaned6.Gtk.Paned+PanedChild
 		this.label6 = new global::Gtk.Label ();
 		this.label6.Name = "label6";
@@ -366,7 +367,7 @@ public partial class MainWindow
 		this.hpaned12 = new global::Gtk.HPaned ();
 		this.hpaned12.CanFocus = true;
 		this.hpaned12.Name = "hpaned12";
-		this.hpaned12.Position = 158;
+		this.hpaned12.Position = 143;
 		// Container child hpaned12.Gtk.Paned+PanedChild
 		this.label7 = new global::Gtk.Label ();
 		this.label7.Name = "label7";
@@ -417,7 +418,7 @@ public partial class MainWindow
 		this.hpaned3 = new global::Gtk.HPaned ();
 		this.hpaned3.CanFocus = true;
 		this.hpaned3.Name = "hpaned3";
-		this.hpaned3.Position = 62;
+		this.hpaned3.Position = 114;
 		// Container child hpaned3.Gtk.Paned+PanedChild
 		this.label8 = new global::Gtk.Label ();
 		this.label8.Name = "label8";
@@ -459,7 +460,7 @@ public partial class MainWindow
 		this.hpaned7 = new global::Gtk.HPaned ();
 		this.hpaned7.CanFocus = true;
 		this.hpaned7.Name = "hpaned7";
-		this.hpaned7.Position = 108;
+		this.hpaned7.Position = 115;
 		// Container child hpaned7.Gtk.Paned+PanedChild
 		this.label9 = new global::Gtk.Label ();
 		this.label9.Name = "label9";
@@ -575,10 +576,21 @@ public partial class MainWindow
 		w56.Position = 1;
 		w56.Expand = false;
 		w56.Fill = false;
+		// Container child vbox2.Gtk.Box+BoxChild
+		this.btn_Start10 = new global::Gtk.Button ();
+		this.btn_Start10.CanFocus = true;
+		this.btn_Start10.Name = "btn_Start10";
+		this.btn_Start10.UseUnderline = true;
+		this.btn_Start10.Label = global::Mono.Unix.Catalog.GetString ("Evolutioniere x 10!");
+		this.vbox2.Add (this.btn_Start10);
+		global::Gtk.Box.BoxChild w57 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.btn_Start10]));
+		w57.Position = 2;
+		w57.Expand = false;
+		w57.Fill = false;
 		this.hpaned4.Add (this.vbox2);
 		this.hbox1.Add (this.hpaned4);
-		global::Gtk.Box.BoxChild w58 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.hpaned4]));
-		w58.Position = 0;
+		global::Gtk.Box.BoxChild w59 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.hpaned4]));
+		w59.Position = 0;
 		this.Add (this.hbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -589,5 +601,6 @@ public partial class MainWindow
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.cbo_SelType.Changed += new global::System.EventHandler (this.OnCboSelTypeChanged);
 		this.btn_Start.Clicked += new global::System.EventHandler (this.OnBtnStartClicked);
+		this.btn_Start10.Clicked += new global::System.EventHandler (this.OnBtnStart10Clicked);
 	}
 }

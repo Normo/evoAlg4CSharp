@@ -246,7 +246,7 @@ Reell</property>
                                           <widget class="Gtk.SpinButton" id="txt_countIndividuals">
                                             <property name="MemberName" />
                                             <property name="CanFocus">True</property>
-                                            <property name="Upper">100</property>
+                                            <property name="Upper">1000</property>
                                             <property name="PageIncrement">10</property>
                                             <property name="StepIncrement">1</property>
                                             <property name="ClimbRate">1</property>
@@ -314,7 +314,7 @@ Reell</property>
                                           <widget class="Gtk.SpinButton" id="txt_countChilds">
                                             <property name="MemberName" />
                                             <property name="CanFocus">True</property>
-                                            <property name="Upper">100</property>
+                                            <property name="Upper">1000</property>
                                             <property name="PageIncrement">10</property>
                                             <property name="StepIncrement">1</property>
                                             <property name="ClimbRate">1</property>
@@ -700,6 +700,22 @@ q-Stufige Zweifache Turnierselektion</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Button" id="btn_Start10">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextOnly</property>
+                    <property name="Label" translatable="yes">Evolutioniere x 10!</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnBtnStart10Clicked" />
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>

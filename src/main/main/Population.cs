@@ -24,13 +24,19 @@ namespace main
 			_encryption = encryption;			
 			curGeneration = new List<Genome>();
 			oldGeneration = new List<Genome>();
-
+			Genome tmp;
+			
 			for(int i = 0; i < size; i++)
 			{
 				if (_encryption == Helper.Enums.Encryption.Real)
 					throw new NotImplementedException(); //todo
-				else	
-					curGeneration.Add(new GenomeReal(genomeSize));
+				else
+					tmp = new GenomeReal(genomeSize);
+					// um Duplikate bei der Erzeugung der Population zu vermeiden
+					while(curGeneration.Contains(tmp))
+						Console.WriteLine(String.Format("Duplikat: {0}\r\ni = {1}", tmp.AsString(),i));
+						tmp = new GenomeReal(genomeSize);
+					curGeneration.Add(tmp);
 			}
 		}
 		

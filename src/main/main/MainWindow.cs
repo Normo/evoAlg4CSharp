@@ -69,7 +69,6 @@ public partial class MainWindow: Gtk.Window
 			Evolution evol = new Evolution(problem);
 			evol.output = txt_Output;
 			
-			
 			evol.Compute();
 //		}
 //		catch
@@ -82,8 +81,45 @@ public partial class MainWindow: Gtk.Window
 	{
 		txt_TournamentMemberCount.Sensitive = cbo_SelType.Active > 0;
 	}
-	
-	
 
-	
+	protected void OnBtnStart10Clicked (object sender, System.EventArgs e)
+	{
+		Problem problem = null;
+			
+			switch (cbo_Problem.Active)
+			{
+				case 0 :	problem = new TravelingSalesMan(); break;
+	//			case 1 :	problem = new TravelingSalesMan(); break;
+	//			case 2 :	problem = new TravelingSalesMan(); break;
+			}
+			
+			if (problem == null)
+				throw new NullReferenceException();
+			
+			problem.countGene = (int)txt_countGenes.Value;
+			problem.maxGenerations = (int)txt_maxGeneration.Value;
+			problem.countIndividuals = (int)txt_countIndividuals.Value;
+			problem.countChilds = (int)txt_countChilds.Value;
+			problem.recombinationProbability = txt_recombProb.Value;
+			problem.InvertOnMutate = rb_Invert.Active ? true : false;
+			problem.SelPropType = rb_Fitness.Active ? main.Helper.Enums.SelPropType.Fitness : main.Helper.Enums.SelPropType.Ranking;
+			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
+			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
+			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
+					
+			Evolution evol = new Evolution(problem);
+			evol.output = txt_Output;
+			
+			
+			for(int i = 0; i < 10; i++)
+			{
+				evol.Compute();
+			}
+			evol.GetStats();
+//		}
+//		catch
+//		{
+//			
+//		}
+	}
 }

@@ -14,17 +14,25 @@ namespace main
 		public RecombineMethod Recombine;
 		public FitnessMethod CalcFitness;
 		
-		public int countGene;
-		public int maxGenerations;
-		public int countIndividuals;
-		public int countChilds;
-		public double recombinationProbability;
+		public int countGene;							// Anzahl der Gene
+		public int maxGenerations;						// Maximale Anzahl zu erzeugender Generationen
+		public int countIndividuals;					// Anzahl an Individuen einer Population
+		public int countChilds;							// Anzahl zu erzeugender Kinder
+		public double recombinationProbability;			// Rekombinationswahrscheinlichkeit
 		public bool InvertOnMutate;
-		public Helper.Enums.SelPropType SelPropType;
-		public Helper.Enums.SelType SelType;
-		public Helper.Enums.Encryption Encryption;
-		public int TournamentMemberCount;
-		public Gtk.TextView output;
+		public Helper.Enums.SelPropType SelPropType;	// Selektionswahrscheinlichkeit: Fitness- oder Rangbasiert
+		public Helper.Enums.SelType SelType;			// Selektionsverfahren: Roulette, Single-, MultiTournament
+		public Helper.Enums.Encryption Encryption;		// Genomkodierung
+		public int TournamentMemberCount;				// Anzahl Teilnehmer der Turnierselektion
+		public Gtk.TextView output;						// Textbox Objekt
+		
+		public double bestFitness;						// Bester Fitnesswert
+		public double averageFitness;					// Durchschnittliche Fitness der aktuellen Generation
+		public int bestFitnessGeneration;				// Generationzahl, in der bestFitness aufgetreten ist
+		
+		public int stableGenerations;					// Anzahl an Generationen, in denen sich die beste Fitness nicht geaendert hat
+		public List<double> bestSolutions;				// Liste mit den besten Fitnesswerten aus mehreren Durchläufen
+		public List<int> bestSolutionsGeneration;		// Liste mit den Generationzahlen, in denen die beste Fitness das erste Mal aufgetreten ist
 		
 		/// <summary>
 		/// Konstruktor
@@ -42,6 +50,12 @@ namespace main
 			SelType = problem.SelType;
 			Encryption = problem.Encryption;
 			TournamentMemberCount = problem.TournamentMemberCount;
+			
+			bestFitness = double.MaxValue;
+			averageFitness = double.MaxValue;
+			bestFitnessGeneration = 0;
+			bestSolutions = new List<double>();
+			bestSolutionsGeneration = new List<int>();
 			
 			switch (Encryption)
 			{
@@ -111,7 +125,11 @@ namespace main
 		/// </summary>
 		public void Compute()
 		{
-			int countGeneration;	
+			int countGeneration = 0;	
+			
+			bestFitness = double.MaxValue;
+			averageFitness = double.MaxValue;
+			bestFitnessGeneration = 0;
 			
 			output.Buffer.Text = "Compute:\r\n";
 			
@@ -120,17 +138,30 @@ namespace main
 			// 1. Initialisiere Population P(0) mit zufälligen Genomen
 			Population p = new Population(countIndividuals, countGene, Encryption);
 			
-			for (countGeneration = 0; countGeneration < maxGenerations; countGeneration++)
+			while(countGeneration < maxGenerations && stableGenerations < 1000)
+			//for (countGeneration = 0; countGeneration < maxGenerations; countGeneration++)
 			{	
 				// 2. Berechne die Fitnesswerte von P(0)
 				foreach (Genome genome in p.curGeneration) {
 					CalcFitness(genome);
 				}
-
-				output.Buffer.Text += string.Format("\r\nDurchlauf: {0}\r\n", countGeneration + 1);
+				
+				output.Buffer.Text += string.Format("\r\nGeneration: {0}\r\n", countGeneration + 1);
 				output.Buffer.Text += string.Format("\tAktuelle Population (Count: {1}): \r\n{0}", p.CurrentGenerationAsString(), p.curGeneration.Count());
 
 				bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration); // p.GetBestGenome();
+				
+				// Fitness des besten Genoms, ist hoeher als bisherige beste Fitness
+				if (bestGenome.Fitness < bestFitness)
+				{
+					bestFitness = bestGenome.Fitness;
+					bestFitnessGeneration = countGeneration + 1;
+				} 
+				else 
+				{
+					// Zähle stableGenerations hoch, wenn sich bester Fitnesswert nicht geändert hat
+					stableGenerations++;
+				}
 				
 				//output.Buffer.Text += string.Format("\tBeste Fitness {0}\r\n", bestGenome.Fitness);
 				output.Buffer.Text += string.Format("\tBestes Genom {0}\r\n", bestGenome.AsString());
@@ -178,6 +209,7 @@ namespace main
 						Mutate(childs);
 						
 						// III.	Füge Kinder C zu P' hinzu
+						if (!p.oldGeneration.Contains(childs[0]) || !p.curGeneration.Contains(childs[0]))
 						p.curGeneration.AddRange(childs);
 						
 						c++;
@@ -192,6 +224,8 @@ namespace main
 				// 5. Erzeuge Kind-Population -> die besten Individuen aus P' + P(0)
 				Selection.Plus(p, countIndividuals);
 				//todo: Selection.Comma(p, countIndividuals);
+				
+				countGeneration++;
 			}
 
 			//Ausgabe der besten Genome
@@ -201,7 +235,34 @@ namespace main
 			foreach (Genome genome in bestGenomes) {
 				output.Buffer.Text += genome.AsString() + "\r\n";
 			}
+			
+			// Konsolenausgabe der Endergebnisse
+			//Console.WriteLine(String.Format("Beste Fitness: {0}\r\nGeneration: {1}", bestFitness, bestFitnessGeneration));
+			
+			// Speichere den besten Fitnesswert und die Generation in der er aufgetreten ist zur späteren Auswertung
+			bestSolutions.Add(bestFitness);
+			bestSolutionsGeneration.Add(bestFitnessGeneration);
 		}
+		
+		/// <summary>
+		/// Ausgabe der durchschnittlichen besten Fitness + Generation aus mehreren Durchläufen
+		/// </summary>
+		public void GetStats()
+		{
+			double bestAverageFitness = 0;
+			double bestAverageGenerations = 0;
+			
+			for (int i = 0; i < bestSolutions.Count; i++)
+			{
+				bestAverageFitness += bestSolutions[i];
+				bestAverageGenerations += bestSolutionsGeneration[i];
+			}
+			bestAverageFitness = bestAverageFitness / bestSolutions.Count;
+			bestAverageGenerations = bestAverageGenerations / bestSolutionsGeneration.Count;
+			
+			Console.WriteLine(String.Format("BestSolutions: {0}\r\nBestSolutionsGeneration: {1}", Helper.ListToString(bestSolutions), Helper.ListToString(bestSolutionsGeneration)));
+			Console.WriteLine(String.Format("Durchschnittliche Fitness: {0}\r\nDurchschnittliche Generation: {1}", bestAverageFitness, bestAverageGenerations));
+		}			
 	}
 }
 
