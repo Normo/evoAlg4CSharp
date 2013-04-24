@@ -15,6 +15,8 @@ namespace main
 		public Helper.Enums.SelType SelType;
 		public Helper.Enums.Encryption Encryption;
 		public int TournamentMemberCount;
+		public int minAllelValue;
+		public int maxAllelValue;
 		
 		public Problem ()
 		{

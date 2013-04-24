@@ -85,7 +85,7 @@
                   <widget class="Gtk.Notebook" id="notebook1">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">1</property>
+                    <property name="CurrentPage">0</property>
                     <child>
                       <widget class="Gtk.VBox" id="vbox7">
                         <property name="MemberName" />
@@ -109,7 +109,8 @@
                                       <widget class="Gtk.ComboBox" id="cbo_Problem">
                                         <property name="MemberName" />
                                         <property name="IsTextCombo">True</property>
-                                        <property name="Items" translatable="yes">Traveling Salesman</property>
+                                        <property name="Items" translatable="yes">Traveling Salesman
+Griewank</property>
                                         <property name="Active">0</property>
                                       </widget>
                                       <packing>

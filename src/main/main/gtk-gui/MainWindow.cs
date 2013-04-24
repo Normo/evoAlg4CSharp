@@ -131,7 +131,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook ();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 1;
+		this.notebook1.CurrentPage = 0;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.vbox7 = new global::Gtk.VBox ();
 		this.vbox7.Name = "vbox7";
@@ -152,6 +152,7 @@ public partial class MainWindow
 		// Container child vbox8.Gtk.Box+BoxChild
 		this.cbo_Problem = global::Gtk.ComboBox.NewText ();
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Traveling Salesman"));
+		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Griewank"));
 		this.cbo_Problem.Name = "cbo_Problem";
 		this.cbo_Problem.Active = 0;
 		this.vbox8.Add (this.cbo_Problem);

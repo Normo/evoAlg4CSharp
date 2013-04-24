@@ -79,6 +79,8 @@
     <Compile Include="Problems\TravelingSalesMan.cs" />
     <Compile Include="Problems\Problem.cs" />
     <Compile Include="GenomeBinary.cs" />
+    <Compile Include="Problems\Griewank.cs" />
+    <Compile Include="Problems\TestBinary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

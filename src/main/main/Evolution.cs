@@ -19,7 +19,9 @@ namespace main
 		public int countIndividuals;					// Anzahl an Individuen einer Population
 		public int countChilds;							// Anzahl zu erzeugender Kinder
 		public double recombinationProbability;			// Rekombinationswahrscheinlichkeit
-		public bool InvertOnMutate;
+		public bool InvertOnMutate;						// Mutation: true = invertieren, false = tauschen
+		public int minAllelValue;						// Minimaler Wert der Allele
+		public int maxAllelValue;						// Maximaler Wert der Allele
 		public Helper.Enums.SelPropType SelPropType;	// Selektionswahrscheinlichkeit: Fitness- oder Rangbasiert
 		public Helper.Enums.SelType SelType;			// Selektionsverfahren: Roulette, Single-, MultiTournament
 		public Helper.Enums.Encryption Encryption;		// Genomkodierung
@@ -46,6 +48,8 @@ namespace main
 			countChilds = problem.countChilds;
 			recombinationProbability = problem.recombinationProbability;
 			InvertOnMutate = problem.InvertOnMutate;
+			minAllelValue = problem.minAllelValue;
+			maxAllelValue = problem.maxAllelValue;
 			SelPropType = problem.SelPropType;
 			SelType = problem.SelType;
 			Encryption = problem.Encryption;
@@ -136,7 +140,7 @@ namespace main
 			Genome bestGenome;
 			
 			// 1. Initialisiere Population P(0) mit zufälligen Genomen
-			Population p = new Population(countIndividuals, countGene, Encryption);
+			Population p = new Population(countIndividuals, countGene, minAllelValue, maxAllelValue, Encryption);
 			
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
 			//for (countGeneration = 0; countGeneration < maxGenerations; countGeneration++)

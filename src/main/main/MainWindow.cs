@@ -48,7 +48,7 @@ public partial class MainWindow: Gtk.Window
 			switch (cbo_Problem.Active)
 			{
 				case 0 :	problem = new TravelingSalesMan(); break;
-	//			case 1 :	problem = new TravelingSalesMan(); break;
+				case 1 :	problem = new Griewank(); break;
 	//			case 2 :	problem = new TravelingSalesMan(); break;
 			}
 			
@@ -61,6 +61,10 @@ public partial class MainWindow: Gtk.Window
 			problem.countChilds = (int)txt_countChilds.Value;
 			problem.recombinationProbability = txt_recombProb.Value;
 			problem.InvertOnMutate = rb_Invert.Active ? true : false;
+		
+			problem.minAllelValue = problem.minAllelValue == 0 ? 1 : problem.minAllelValue;
+			problem.maxAllelValue = problem.maxAllelValue == 0 ? problem.countGene + 1 : problem.maxAllelValue;
+		
 			problem.SelPropType = rb_Fitness.Active ? main.Helper.Enums.SelPropType.Fitness : main.Helper.Enums.SelPropType.Ranking;
 			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
 			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	

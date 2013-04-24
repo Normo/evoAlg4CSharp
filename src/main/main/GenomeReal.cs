@@ -15,21 +15,22 @@ namespace main
 		/// Konstruktor
 		/// </summary>
 		/// <param name='size'>Anzahl der Gene</param>
-		public GenomeReal(int size) 
+		public GenomeReal(int size, int minValue, int maxValue) 
 		{
 			//List<int> genome = new List<int>() {1};
-			this.Add(1);
+			//this.Add(1);
 			
 			Random rnd = new Random(Guid.NewGuid().GetHashCode());
 			
 			int rndInt;
 			
-			for(int i = 0; i < size-1; i++)
+			//for(int i = 0; i < size-1; i++)
+			for(int i = 0; i < size; i++)
 			{
-				rndInt=rnd.Next(1, size+1);
+				rndInt=rnd.Next(minValue, maxValue);
 				while (this.Contains(rndInt))
 				{
-					rndInt=rnd.Next(1,size+1);
+					rndInt=rnd.Next(minValue,maxValue);
 				}
 				this.Add(rndInt);
 			}

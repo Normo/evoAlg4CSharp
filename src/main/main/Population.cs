@@ -19,7 +19,7 @@ namespace main
 		/// </summary>
 		/// <param name='size'>Größe der Population</param>
 		/// <param name='genomeSize'>Größe des einzelnen Genomes</param>
-		public Population (int size, int genomeSize, Helper.Enums.Encryption encryption)
+		public Population (int size, int genomeSize, int minAllelValue, int maxAllelValue, Helper.Enums.Encryption encryption)
 		{
 			_encryption = encryption;			
 			curGeneration = new List<Genome>();
@@ -31,12 +31,16 @@ namespace main
 				if (_encryption == Helper.Enums.Encryption.Real)
 					throw new NotImplementedException(); //todo
 				else
-					tmp = new GenomeReal(genomeSize);
+				{
+					tmp = new GenomeReal(genomeSize, minAllelValue, maxAllelValue);
 					// um Duplikate bei der Erzeugung der Population zu vermeiden
 					while(curGeneration.Contains(tmp))
+					{
 						Console.WriteLine(String.Format("Duplikat: {0}\r\ni = {1}", tmp.AsString(),i));
-						tmp = new GenomeReal(genomeSize);
+						tmp = new GenomeReal(genomeSize, minAllelValue, maxAllelValue);
+					}
 					curGeneration.Add(tmp);
+				}
 			}
 		}
 		
