@@ -30,7 +30,7 @@ namespace main
 		/// Konstruktor
 		/// </summary>
 		/// <param name='arr'>Integer Array, mit dem Genom initialisiert wird</param>
-		public GenomeBinary (int[] arr)
+		public GenomeBinary (double[] arr)
 		{
 			this.Clear();
 			this.AddRange(arr);

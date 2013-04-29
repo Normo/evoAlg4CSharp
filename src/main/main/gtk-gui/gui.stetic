@@ -165,6 +165,7 @@ Griewank</property>
 Binär
 Reell</property>
                                         <property name="Active">0</property>
+                                        <signal name="Changed" handler="OnCboEncryptionChanged" />
                                       </widget>
                                       <packing>
                                         <property name="Position">0</property>

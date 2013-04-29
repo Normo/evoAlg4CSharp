@@ -15,22 +15,22 @@ namespace main
 		/// Konstruktor
 		/// </summary>
 		/// <param name='size'>Anzahl der Gene</param>
-		public GenomeReal(int size, int minValue, int maxValue) 
+		public GenomeReal(int size, double minValue, double maxValue) 
 		{
 			//List<int> genome = new List<int>() {1};
 			this.Add(1); //todo 1.1 Travelings Salesman ... muss dafür immer umkommentiert werden
 			
 			Random rnd = new Random(Guid.NewGuid().GetHashCode());
 			
-			int rndInt;
+			double rndInt;
 			
 			for(int i = 0; i < size-1; i++)
 			//for(int i = 0; i < size; i++) //todo 1.2
 			{
-				rndInt=rnd.Next(minValue, maxValue);
+				rndInt=rnd.NextDouble() * (maxValue - minValue) + minValue;
 				while (this.Contains(rndInt))
 				{
-					rndInt=rnd.Next(minValue,maxValue);
+					rndInt=rnd.NextDouble() * (maxValue - minValue) + minValue;
 				}
 				this.Add(rndInt);
 			}
@@ -44,7 +44,7 @@ namespace main
 		/// Konstruktor
 		/// </summary>
 		/// <param name='arr'>Integer Array, mit dem Genom initialisiert wird</param>
-		public GenomeReal (int[] arr)
+		public GenomeReal (double[] arr)
 		{
 			this.Clear();
 			this.AddRange(arr);

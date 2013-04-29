@@ -70,13 +70,13 @@ namespace main
 		/// <param name="value">Allel</param>
 		/// <param name="genomeA">Genome A</param>
 		/// <param name="genomeB">Genome B</param>
-		private Genome GetNeighboursOfValue (int value, Genome genomeA, Genome genomeB)
+		private Genome GetNeighboursOfValue (double value, Genome genomeA, Genome genomeB)
 		{	
 			//Kreisgenom simulieren
-			List<int> a = genomeA.ToList();
+			List<double> a = genomeA.ToList();
 			a.Insert(0,genomeA[genomeA.Count-1]);
 			a.Add(genomeA[0]);
-			List<int> b = genomeB.ToList();
+			List<double> b = genomeB.ToList();
 			b.Insert(0,genomeB[genomeB.Count-1]);
 			b.Add(genomeB[0]);
 
@@ -117,8 +117,8 @@ namespace main
 								{ 7, 12,  6,  4, 13,  5,  5,  8,  9,  0 }
 							 };
 			
-			foreach (int gene in genome) {
-				genome.Fitness += matrix[gene - 1,tempGenome[tempGenome.IndexOf(gene)+1]-1];
+			foreach (double gene in genome) {
+				genome.Fitness += matrix[(int)gene - 1,(int)tempGenome[tempGenome.IndexOf(gene)+1]-1];
 			}
 		}
 
@@ -128,7 +128,6 @@ namespace main
 			{				
 				int z1 = 0;
 				int z2 = 0;
-				int tmp = 0;
 				int length = genome.Count;
 				bool equal = true;
 	
@@ -145,11 +144,13 @@ namespace main
 				// Wenn true, invertiere, sonst, tausche
 				if (InvertOnMutate) 
 				{
+					int tmp = 0;
 					tmp = z1 < z2 ? z1 : z2;
 					genome.Reverse(tmp, Math.Abs(z1-z2)+1);
 				}
 				else
 				{
+					double tmp = 0;
 					tmp = genome[z1];
 					genome[z1] = genome[z2];
 					genome[z2] = tmp;

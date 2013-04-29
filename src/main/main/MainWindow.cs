@@ -80,9 +80,9 @@ public partial class MainWindow: Gtk.Window
 			
 			evol.Compute();
 		}
-		catch
+		catch (Exception ex)
 		{
-			
+			txt_Output.Buffer.Text += "\r\n\r\nFehler:\r\n" + ex.Message;
 		}
 	}
 
@@ -125,10 +125,16 @@ public partial class MainWindow: Gtk.Window
 				evol.Compute();
 			}
 			evol.GetStats();
-//		}
-//		catch
-//		{
-//			
-//		}
+	}
+
+	protected void OnCboEncryptionChanged (object sender, System.EventArgs e)
+	{
+		//throw new System.NotImplementedException ();
+		
+		switch (cbo_Encryption.Active) {
+			case 0:	break;
+			//case 1:	cbo_RecombType. = "1-Punkt\r\n2-Punkt";
+		}		
+		
 	}
 }

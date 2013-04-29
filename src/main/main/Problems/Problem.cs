@@ -39,8 +39,8 @@ namespace main
 			{
 				int rnd = Helper.GetRandomInteger(2, genomeA.Count - 2);
 				
-				List<int> childA = new List<int>();
-				List<int> childB = new List<int>();
+				List<double> childA = new List<double>();
+				List<double> childB = new List<double>();
 				
 				childA.AddRange(genomeA.GetRange(0, rnd));
 				childA.AddRange(genomeB.GetRange(rnd, genomeB.Count - rnd ));
@@ -62,7 +62,7 @@ namespace main
 		
 		public List<Genome> RecombineReal (Genome genomeA, Genome genomeB)
 		{
-			List<int> child = new List<int>();
+			List<double> child = new List<double>();
 			
 			if (RecombRealIsIntermidiate)
 			{
@@ -93,7 +93,7 @@ namespace main
 						b = genomeA[i];
 					}
 					// todo: int-cast entfernen, wenn auf alles auf double umgestellt wurde
-					child.Add((int)(a + t * (b - a)));
+					child.Add((a + t * (b - a)));
 				}
 			}
 			

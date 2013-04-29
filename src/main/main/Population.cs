@@ -19,7 +19,7 @@ namespace main
 		/// </summary>
 		/// <param name='size'>Größe der Population</param>
 		/// <param name='genomeSize'>Größe des einzelnen Genomes</param>
-		public Population (int size, int genomeSize, int minAllelValue, int maxAllelValue, Helper.Enums.Encryption encryption)
+		public Population (int size, int genomeSize, double minAllelValue, double maxAllelValue, Helper.Enums.Encryption encryption)
 		{
 			_encryption = encryption;			
 			curGeneration = new List<Genome>();

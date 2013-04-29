@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace main
 {
-	public class Genome : List<int>
+	public class Genome : List<double>
 	{		
 		private double _Fitness;
 		private double _SelectionProbability;
@@ -38,7 +38,7 @@ namespace main
 		/// Konstruktor
 		/// </summary>
 		/// <param name='arr'>Integer Array, mit dem Genom initialisiert wird</param>
-		public Genome (int[] arr)
+		public Genome (double[] arr)
 		{
 			this.Clear();
 			this.AddRange(arr);
@@ -53,7 +53,7 @@ namespace main
 		{
 			string tmp = "{";
 			string sep = string.Empty;
-			foreach (int i in this) {
+			foreach (double i in this) {
 				tmp = string.Format("{0}{1} {2}", tmp, sep, i);
 				sep = ",";
 			}

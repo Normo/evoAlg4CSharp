@@ -624,6 +624,7 @@ public partial class MainWindow
 		this.DefaultHeight = 548;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.cbo_Encryption.Changed += new global::System.EventHandler (this.OnCboEncryptionChanged);
 		this.cbo_SelType.Changed += new global::System.EventHandler (this.OnCboSelTypeChanged);
 		this.btn_Start.Clicked += new global::System.EventHandler (this.OnBtnStartClicked);
 		this.btn_Start10.Clicked += new global::System.EventHandler (this.OnBtnStart10Clicked);
