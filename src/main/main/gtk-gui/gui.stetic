@@ -647,6 +647,35 @@ q-Stufige Zweifache Turnierselektion</property>
                                         <property name="Fill">False</property>
                                       </packing>
                                     </child>
+                                    <child>
+                                      <widget class="Gtk.HPaned" id="hpaned10">
+                                        <property name="MemberName" />
+                                        <property name="CanFocus">True</property>
+                                        <property name="Position">124</property>
+                                        <child>
+                                          <widget class="Gtk.Label" id="lbl_Recombination">
+                                            <property name="MemberName" />
+                                            <property name="LabelProp" translatable="yes">Rekombination</property>
+                                          </widget>
+                                          <packing>
+                                            <property name="Resize">False</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <widget class="Gtk.ComboBox" id="cbo_RecombType">
+                                            <property name="MemberName" />
+                                            <property name="IsTextCombo">True</property>
+                                            <property name="Items" translatable="yes" />
+                                          </widget>
+                                        </child>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">3</property>
+                                        <property name="AutoSize">True</property>
+                                        <property name="Expand">False</property>
+                                        <property name="Fill">False</property>
+                                      </packing>
+                                    </child>
                                   </widget>
                                 </child>
                               </widget>

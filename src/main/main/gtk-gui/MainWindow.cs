@@ -67,6 +67,9 @@ public partial class MainWindow
 	private global::Gtk.HPaned hpaned9;
 	private global::Gtk.ComboBox cbo_SelType;
 	private global::Gtk.SpinButton txt_TournamentMemberCount;
+	private global::Gtk.HPaned hpaned10;
+	private global::Gtk.Label lbl_Recombination;
+	private global::Gtk.ComboBox cbo_RecombType;
 	private global::Gtk.Label GtkLabel9;
 	private global::Gtk.Label label11;
 	private global::Gtk.Button btn_Start;
@@ -541,6 +544,27 @@ public partial class MainWindow
 		w50.Position = 2;
 		w50.Expand = false;
 		w50.Fill = false;
+		// Container child vbox6.Gtk.Box+BoxChild
+		this.hpaned10 = new global::Gtk.HPaned ();
+		this.hpaned10.CanFocus = true;
+		this.hpaned10.Name = "hpaned10";
+		this.hpaned10.Position = 124;
+		// Container child hpaned10.Gtk.Paned+PanedChild
+		this.lbl_Recombination = new global::Gtk.Label ();
+		this.lbl_Recombination.Name = "lbl_Recombination";
+		this.lbl_Recombination.LabelProp = global::Mono.Unix.Catalog.GetString ("Rekombination");
+		this.hpaned10.Add (this.lbl_Recombination);
+		global::Gtk.Paned.PanedChild w51 = ((global::Gtk.Paned.PanedChild)(this.hpaned10 [this.lbl_Recombination]));
+		w51.Resize = false;
+		// Container child hpaned10.Gtk.Paned+PanedChild
+		this.cbo_RecombType = global::Gtk.ComboBox.NewText ();
+		this.cbo_RecombType.Name = "cbo_RecombType";
+		this.hpaned10.Add (this.cbo_RecombType);
+		this.vbox6.Add (this.hpaned10);
+		global::Gtk.Box.BoxChild w53 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.hpaned10]));
+		w53.Position = 3;
+		w53.Expand = false;
+		w53.Fill = false;
 		this.GtkAlignment2.Add (this.vbox6);
 		this.frame3.Add (this.GtkAlignment2);
 		this.GtkLabel9 = new global::Gtk.Label ();
@@ -549,13 +573,13 @@ public partial class MainWindow
 		this.GtkLabel9.UseMarkup = true;
 		this.frame3.LabelWidget = this.GtkLabel9;
 		this.vbox1.Add (this.frame3);
-		global::Gtk.Box.BoxChild w53 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame3]));
-		w53.Position = 2;
-		w53.Expand = false;
-		w53.Fill = false;
+		global::Gtk.Box.BoxChild w56 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.frame3]));
+		w56.Position = 2;
+		w56.Expand = false;
+		w56.Fill = false;
 		this.notebook1.Add (this.vbox1);
-		global::Gtk.Notebook.NotebookChild w54 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.vbox1]));
-		w54.Position = 1;
+		global::Gtk.Notebook.NotebookChild w57 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1 [this.vbox1]));
+		w57.Position = 1;
 		// Notebook tab
 		this.label11 = new global::Gtk.Label ();
 		this.label11.Name = "label11";
@@ -564,8 +588,8 @@ public partial class MainWindow
 		this.notebook1.SetTabLabel (this.vbox1, this.label11);
 		this.label11.ShowAll ();
 		this.vbox2.Add (this.notebook1);
-		global::Gtk.Box.BoxChild w55 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.notebook1]));
-		w55.Position = 0;
+		global::Gtk.Box.BoxChild w58 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.notebook1]));
+		w58.Position = 0;
 		// Container child vbox2.Gtk.Box+BoxChild
 		this.btn_Start = new global::Gtk.Button ();
 		this.btn_Start.CanFocus = true;
@@ -573,10 +597,10 @@ public partial class MainWindow
 		this.btn_Start.UseUnderline = true;
 		this.btn_Start.Label = global::Mono.Unix.Catalog.GetString ("Evolutioniere!");
 		this.vbox2.Add (this.btn_Start);
-		global::Gtk.Box.BoxChild w56 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.btn_Start]));
-		w56.Position = 1;
-		w56.Expand = false;
-		w56.Fill = false;
+		global::Gtk.Box.BoxChild w59 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.btn_Start]));
+		w59.Position = 1;
+		w59.Expand = false;
+		w59.Fill = false;
 		// Container child vbox2.Gtk.Box+BoxChild
 		this.btn_Start10 = new global::Gtk.Button ();
 		this.btn_Start10.CanFocus = true;
@@ -584,14 +608,14 @@ public partial class MainWindow
 		this.btn_Start10.UseUnderline = true;
 		this.btn_Start10.Label = global::Mono.Unix.Catalog.GetString ("Evolutioniere x 10!");
 		this.vbox2.Add (this.btn_Start10);
-		global::Gtk.Box.BoxChild w57 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.btn_Start10]));
-		w57.Position = 2;
-		w57.Expand = false;
-		w57.Fill = false;
+		global::Gtk.Box.BoxChild w60 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.btn_Start10]));
+		w60.Position = 2;
+		w60.Expand = false;
+		w60.Fill = false;
 		this.hpaned4.Add (this.vbox2);
 		this.hbox1.Add (this.hpaned4);
-		global::Gtk.Box.BoxChild w59 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.hpaned4]));
-		w59.Position = 0;
+		global::Gtk.Box.BoxChild w62 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.hpaned4]));
+		w62.Position = 0;
 		this.Add (this.hbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();

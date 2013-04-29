@@ -62,7 +62,45 @@ namespace main
 		
 		public List<Genome> RecombineReal (Genome genomeA, Genome genomeB)
 		{
-			throw new NotImplementedException();
+			List<int> child = new List<int>();
+			
+			if (RecombRealIsIntermidiate)
+			{
+				// Intermediäre Rekombination
+				
+				for (int i = 0; i < genomeA.Count-1; i++)
+				{
+					child.Add(((genomeA[i]+genomeB[i])/2));
+				}
+			}
+			else
+			{
+				// Arithmetische Rekombination
+				
+				double a, b;
+				double t = 1/3;
+				
+				for (int i = 0; i < genomeA.Count-1; i++)
+				{
+					if (genomeA[i] <= genomeB[i])
+					{
+						a = genomeA[i];
+						b = genomeB[i];
+					}
+					else
+					{
+						a = genomeB[i];
+						b = genomeA[i];
+					}
+					// todo: int-cast entfernen, wenn auf alles auf double umgestellt wurde
+					child.Add((int)(a + t * (b - a)));
+				}
+			}
+			
+			List<Genome> result = new List<Genome>();
+			result.Add(new GenomeReal(child.ToArray()));
+			
+			return result;	
 		}
 		
 		public abstract void CalcFitnessDefault (Genome genome);
