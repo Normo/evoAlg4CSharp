@@ -10,9 +10,11 @@ namespace main
 	{
 		public delegate List<Genome> RecombineMethod (Genome genomeA, Genome genomeB);
 		public delegate void FitnessMethod (Genome genome);
+		public delegate void MutateMethod (List<Genome> genomes);
 		
 		public RecombineMethod Recombine;
 		public FitnessMethod CalcFitness;
+		public MutateMethod Mutate;
 		
 		public int countGene;							// Anzahl der Gene
 		public int maxGenerations;						// Maximale Anzahl zu erzeugender Generationen
@@ -67,20 +69,23 @@ namespace main
 				{
 					Recombine = problem.RecombineDefault; 
 					CalcFitness = problem.CalcFitnessDefault;
+					Mutate = problem.MutateDefault;
 					break;
 				}
-//				case Helper.Enums.Encryption.Binary :
-//				{
-//					Recombine = problem.RecombineBinary;
-//					CalcFitness = problem.CalcFitnessBinary;
-//					break;
-//				}
-//				case Helper.Enums.Encryption.Real :
-//				{
-//					Recombine = problem.RecombineReal;
-//					CalcFitness = problem.CalcFitnessReal;
-//					break;
-//				}
+				case Helper.Enums.Encryption.Binary :
+				{
+					Recombine = problem.RecombineBinary;
+					CalcFitness = problem.CalcFitnessBinary;				
+					Mutate = problem.MutateBinary;
+					break;
+				}
+				case Helper.Enums.Encryption.Real :
+				{
+					Recombine = problem.RecombineReal;
+					CalcFitness = problem.CalcFitnessReal;
+					Mutate = problem.MutateReal;
+					break;
+				}
 			}			
 		}
 		
@@ -88,41 +93,41 @@ namespace main
 		/// Mutiert ein Genom
 		/// </summary>
 		/// <param name="genome">Das Genome, was mutiert werden soll</param>
-		private void Mutate (List<Genome> genomes) 
-		{
-			foreach (Genome genome in genomes)
-			{				
-				int z1 = 0;
-				int z2 = 0;
-				int tmp = 0;
-				int length = genome.Count;
-				bool equal = true;
-	
-				//Zwei verschiedene Zufallsindices ermitteln
-				while (equal)
-				{
-					//Von Index 1 an da sich der erste Wert (index 0) nicht ändern soll
-					z1 = Helper.GetRandomInteger(1, length-1);
-					z2 = Helper.GetRandomInteger(1, length-1);
-					if (z1 != z2 )
-						equal = false;
-				}
-	
-				// Wenn true, invertiere, sonst, tausche
-				if (InvertOnMutate) 
-				{
-					tmp = z1 < z2 ? z1 : z2;
-					genome.Reverse(tmp, Math.Abs(z1-z2)+1);
-				}
-				else
-				{
-					tmp = genome[z1];
-					genome[z1] = genome[z2];
-					genome[z2] = tmp;
-				}
-			}
-			return;
-		}
+//		private void Mutate (List<Genome> genomes) 
+//		{
+//			foreach (Genome genome in genomes)
+//			{				
+//				int z1 = 0;
+//				int z2 = 0;
+//				int tmp = 0;
+//				int length = genome.Count;
+//				bool equal = true;
+//	
+//				//Zwei verschiedene Zufallsindices ermitteln
+//				while (equal)
+//				{
+//					//Von Index 1 an da sich der erste Wert (index 0) nicht ändern soll
+//					z1 = Helper.GetRandomInteger(1, length-1);
+//					z2 = Helper.GetRandomInteger(1, length-1);
+//					if (z1 != z2 )
+//						equal = false;
+//				}
+//	
+//				// Wenn true, invertiere, sonst, tausche
+//				if (InvertOnMutate) 
+//				{
+//					tmp = z1 < z2 ? z1 : z2;
+//					genome.Reverse(tmp, Math.Abs(z1-z2)+1);
+//				}
+//				else
+//				{
+//					tmp = genome[z1];
+//					genome[z1] = genome[z2];
+//					genome[z2] = tmp;
+//				}
+//			}
+//			return;
+//		}
 		
 		/// <summary>
 		/// Der eigentliche evolutionäre Algorithmus - entspricht doc/EvoAlgTSP.pdf.

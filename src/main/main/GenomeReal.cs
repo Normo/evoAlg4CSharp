@@ -18,14 +18,14 @@ namespace main
 		public GenomeReal(int size, int minValue, int maxValue) 
 		{
 			//List<int> genome = new List<int>() {1};
-			//this.Add(1);
+			this.Add(1); //todo 1.1 Travelings Salesman ... muss dafür immer umkommentiert werden
 			
 			Random rnd = new Random(Guid.NewGuid().GetHashCode());
 			
 			int rndInt;
 			
-			//for(int i = 0; i < size-1; i++)
-			for(int i = 0; i < size; i++)
+			for(int i = 0; i < size-1; i++)
+			//for(int i = 0; i < size; i++) //todo 1.2
 			{
 				rndInt=rnd.Next(minValue, maxValue);
 				while (this.Contains(rndInt))

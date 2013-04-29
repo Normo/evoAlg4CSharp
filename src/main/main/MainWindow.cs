@@ -41,8 +41,8 @@ public partial class MainWindow: Gtk.Window
 		Console.WriteLine("Create new Population:");
 		Population p0 = new Population(100, 8);
 		*/
-//		try
-//		{
+		try
+		{
 			Problem problem = null;
 			
 			switch (cbo_Problem.Active)
@@ -79,11 +79,11 @@ public partial class MainWindow: Gtk.Window
 			evol.output = txt_Output;
 			
 			evol.Compute();
-//		}
-//		catch
-//		{
-//			
-//		}
+		}
+		catch
+		{
+			
+		}
 	}
 
 	protected void OnCboSelTypeChanged (object sender, System.EventArgs e)
