@@ -121,6 +121,54 @@ namespace main
 				genome.Fitness += matrix[gene - 1,tempGenome[tempGenome.IndexOf(gene)+1]-1];
 			}
 		}
+
+		public override void MutateDefault (List<Genome> genomes)
+		{
+			foreach (Genome genome in genomes)
+			{				
+				int z1 = 0;
+				int z2 = 0;
+				int tmp = 0;
+				int length = genome.Count;
+				bool equal = true;
+	
+				//Zwei verschiedene Zufallsindices ermitteln
+				while (equal)
+				{
+					//Von Index 1 an da sich der erste Wert (index 0) nicht ändern soll
+					z1 = Helper.GetRandomInteger(1, length-1);
+					z2 = Helper.GetRandomInteger(1, length-1);
+					if (z1 != z2 )
+						equal = false;
+				}
+	
+				// Wenn true, invertiere, sonst, tausche
+				if (InvertOnMutate) 
+				{
+					tmp = z1 < z2 ? z1 : z2;
+					genome.Reverse(tmp, Math.Abs(z1-z2)+1);
+				}
+				else
+				{
+					tmp = genome[z1];
+					genome[z1] = genome[z2];
+					genome[z2] = tmp;
+				}
+			}
+			return;
+		}
+
+		#region implemented abstract members of main.Problem
+		public override void CalcFitnessBinary (Genome genome)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override void CalcFitnessReal (Genome genome)
+		{
+			throw new NotImplementedException ();
+		}
+		#endregion
 	}
 }
 
