@@ -14,16 +14,6 @@ namespace main
 			throw new NotImplementedException ();
 		}
 
-//		public override System.Collections.Generic.List<Genome> RecombineBinary (Genome genomeA, Genome genomeB)
-//		{
-//			throw new NotImplementedException ();
-//		}
-//
-//		public override System.Collections.Generic.List<Genome> RecombineReal (Genome genomeA, Genome genomeB)
-//		{
-//			throw new NotImplementedException ();
-//		}
-
 		public override void CalcFitnessDefault (Genome genome)
 		{
 			throw new NotImplementedException ();

@@ -60,6 +60,11 @@ public partial class MainWindow: Gtk.Window
 			problem.countIndividuals = (int)txt_countIndividuals.Value;
 			problem.countChilds = (int)txt_countChilds.Value;
 			problem.recombinationProbability = txt_recombProb.Value;
+		
+			//todo, in Oberfläche bauen
+//			problem.RecombBinaryIsSinglePoint =
+//			problem.RecombRealIsIntermidiate =
+		
 			problem.InvertOnMutate = rb_Invert.Active ? true : false;
 		
 			problem.minAllelValue = problem.minAllelValue == 0 ? 1 : problem.minAllelValue;
@@ -69,7 +74,7 @@ public partial class MainWindow: Gtk.Window
 			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
 			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
 			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
-					
+							
 			Evolution evol = new Evolution(problem);
 			evol.output = txt_Output;
 			

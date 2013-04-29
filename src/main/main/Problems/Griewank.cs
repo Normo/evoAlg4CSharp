@@ -14,36 +14,9 @@ namespace main
 		#region implemented abstract members of main.Problem
 		public override List<Genome> RecombineDefault (Genome genomeA, Genome genomeB)
 		{
-			//throw new NotImplementedException ();
+			throw new NotImplementedException ();
 			
-			// ############ Ein-Punkt-Rekombination ###########
-			
-			int rnd = Helper.GetRandomInteger(2, genomeA.Count - 2);
-			
-			List<int> childA = new List<int>();
-			List<int> childB = new List<int>();
-			
-			childA.AddRange(genomeA.GetRange(0, rnd));
-			childA.AddRange(genomeB.GetRange(rnd, genomeB.Count - rnd ));
-			
-			childB.AddRange(genomeB.GetRange(0, rnd));
-			childB.AddRange(genomeA.GetRange(rnd, genomeA.Count - rnd ));
-			           
-			List<Genome> result = new List<Genome>();
-			result.Add(new GenomeReal(childA.ToArray()));
-			result.Add(new GenomeReal(childB.ToArray()));
-			return result;
 		}
-
-//		public override System.Collections.Generic.List<Genome> RecombineBinary (Genome genomeA, Genome genomeB)
-//		{
-//			throw new NotImplementedException ();
-//		}
-//
-//		public override System.Collections.Generic.List<Genome> RecombineReal (Genome genomeA, Genome genomeB)
-//		{
-//			throw new NotImplementedException ();
-//		}
 
 		public override void CalcFitnessDefault (Genome genome)
 		{
