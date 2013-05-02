@@ -62,8 +62,14 @@ public partial class MainWindow: Gtk.Window
 			problem.recombinationProbability = txt_recombProb.Value;
 		
 			//todo, in Oberfläche bauen
-//			problem.RecombBinaryIsSinglePoint =
-//			problem.RecombRealIsIntermidiate =
+			if (cbo_Encryption.Active == 1)
+			{
+				problem.RecombBinaryIsSinglePoint = cbo_recombBinary.Active == 0;
+			}
+			if (cbo_Encryption.Active == 2)
+			{
+				problem.RecombRealIsIntermidiate = cbo_recombReal.Active == 0;
+			}
 		
 			problem.InvertOnMutate = rb_Invert.Active ? true : false;
 		
@@ -131,9 +137,24 @@ public partial class MainWindow: Gtk.Window
 	{
 		//throw new System.NotImplementedException ();
 		
+		pnl_recombEncrypt.Sensitive = false;
+		cbo_recombBinary.Visible = false;
+		cbo_recombReal.Visible = false;
+		
 		switch (cbo_Encryption.Active) {
 			case 0:	break;
-			//case 1:	cbo_RecombType. = "1-Punkt\r\n2-Punkt";
+			case 1:	
+			{
+				pnl_recombEncrypt.Sensitive = true;
+				cbo_recombBinary.Visible = true;
+				break;
+			}
+			case 2:
+			{
+				pnl_recombEncrypt.Sensitive = true;
+				cbo_recombReal.Visible = true;
+				break;
+			}
 		}		
 		
 	}

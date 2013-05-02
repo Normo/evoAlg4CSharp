@@ -85,7 +85,7 @@
                   <widget class="Gtk.Notebook" id="notebook1">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">0</property>
+                    <property name="CurrentPage">1</property>
                     <child>
                       <widget class="Gtk.VBox" id="vbox7">
                         <property name="MemberName" />
@@ -649,8 +649,9 @@ q-Stufige Zweifache Turnierselektion</property>
                                       </packing>
                                     </child>
                                     <child>
-                                      <widget class="Gtk.HPaned" id="hpaned10">
+                                      <widget class="Gtk.HPaned" id="pnl_recombEncrypt">
                                         <property name="MemberName" />
+                                        <property name="Sensitive">False</property>
                                         <property name="CanFocus">True</property>
                                         <property name="Position">124</property>
                                         <child>
@@ -663,10 +664,37 @@ q-Stufige Zweifache Turnierselektion</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <widget class="Gtk.ComboBox" id="cbo_RecombType">
+                                          <widget class="Gtk.HBox" id="hbox4">
                                             <property name="MemberName" />
-                                            <property name="IsTextCombo">True</property>
-                                            <property name="Items" translatable="yes" />
+                                            <property name="Homogeneous">True</property>
+                                            <child>
+                                              <widget class="Gtk.ComboBox" id="cbo_recombBinary">
+                                                <property name="MemberName" />
+                                                <property name="Visible">False</property>
+                                                <property name="IsTextCombo">True</property>
+                                                <property name="Items" translatable="yes">1-Punkt
+2-Punkt</property>
+                                                <property name="Active">0</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="Position">0</property>
+                                                <property name="AutoSize">False</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <widget class="Gtk.ComboBox" id="cbo_recombReal">
+                                                <property name="MemberName" />
+                                                <property name="Visible">False</property>
+                                                <property name="IsTextCombo">True</property>
+                                                <property name="Items" translatable="yes">Intermediär
+Arithmetisch</property>
+                                                <property name="Active">0</property>
+                                              </widget>
+                                              <packing>
+                                                <property name="Position">1</property>
+                                                <property name="AutoSize">False</property>
+                                              </packing>
+                                            </child>
                                           </widget>
                                         </child>
                                       </widget>
