@@ -136,7 +136,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook ();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 1;
+		this.notebook1.CurrentPage = 0;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.vbox7 = new global::Gtk.VBox ();
 		this.vbox7.Name = "vbox7";
@@ -159,7 +159,7 @@ public partial class MainWindow
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Traveling Salesman"));
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Griewank"));
 		this.cbo_Problem.Name = "cbo_Problem";
-		this.cbo_Problem.Active = 0;
+		this.cbo_Problem.Active = 1;
 		this.vbox8.Add (this.cbo_Problem);
 		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox8 [this.cbo_Problem]));
 		w6.Position = 0;
@@ -196,7 +196,7 @@ public partial class MainWindow
 		this.cbo_Encryption.AppendText (global::Mono.Unix.Catalog.GetString ("Binär"));
 		this.cbo_Encryption.AppendText (global::Mono.Unix.Catalog.GetString ("Reell"));
 		this.cbo_Encryption.Name = "cbo_Encryption";
-		this.cbo_Encryption.Active = 0;
+		this.cbo_Encryption.Active = 2;
 		this.vbox9.Add (this.cbo_Encryption);
 		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox9 [this.cbo_Encryption]));
 		w10.Position = 0;

@@ -156,32 +156,56 @@ namespace main
 						//todo: Genom aus der Populationsklasse liefern lassen damit der Genom-Typ immer passt
 						Genome mama = new GenomeReal();
 						Genome papa = new GenomeReal();
+						bool equals = true;
 						
-						switch (SelType)
-						{
-							case main.Helper.Enums.SelType.Roulette :
-								mama = Selection.Roulette(p.oldGeneration, SelPropType);
-								papa = Selection.Roulette(p.oldGeneration, SelPropType);
-								break;
-							case main.Helper.Enums.SelType.SingleTournament :
-								mama = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-								papa = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-								break;
-							case main.Helper.Enums.SelType.MultiTournament :
-								mama = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-								papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-								break;							
+						while (equals)
+						{						
+							switch (SelType)
+							{
+								case main.Helper.Enums.SelType.Roulette :
+									mama = Selection.Roulette(p.oldGeneration, SelPropType);
+									papa = Selection.Roulette(p.oldGeneration, SelPropType);
+									break;
+								case main.Helper.Enums.SelType.SingleTournament :
+									mama = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+									papa = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+									break;
+								case main.Helper.Enums.SelType.MultiTournament :
+									mama = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+									papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+									break;							
+							}
+							if (!mama.IsEqual(papa))
+								equals = false;
 						}
+						
+						
 						List<Genome> childs = Recombine(mama,papa);
-
+						CalcFitness(childs[0]);
+						//PAUSE!!!!!
+						
 						// II.	Mutiere Kind c
 						Mutate(childs);
 						
-						// III.	Füge Kinder C zu P' hinzu
-						if (!p.oldGeneration.Contains(childs[0]) || !p.curGeneration.Contains(childs[0]))
-						p.curGeneration.AddRange(childs);
+						Console.WriteLine("Old: ");
+						foreach (Genome genome in p.oldGeneration) {
+							Console.WriteLine(genome.AsString());
+						}
+						Console.WriteLine("New: ");
+						foreach (Genome genome in p.curGeneration) {
+							Console.WriteLine(genome.AsString());
+						}
+						Console.WriteLine("Child: " + childs[0].AsString());
+						Console.WriteLine("Mama: " + mama.AsString());
+						Console.WriteLine("Papa: " + papa.AsString());
 						
-						c++;
+						// III.	Füge Kinder C zu P' hinzu
+						//if (!p.oldGeneration.Contains(childs[0]) && !p.curGeneration.Contains(childs[0]))
+						if (!p.ContainsGenome(childs[0]))
+						{
+							p.curGeneration.AddRange(childs);
+							c++;
+						}
 					}
 				}
 				

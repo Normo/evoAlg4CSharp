@@ -28,9 +28,13 @@ namespace main
 			
 			for(int i = 0; i < size; i++)
 			{
-				if (_encryption == Helper.Enums.Encryption.Real)
+				if (_encryption == Helper.Enums.Encryption.None)
+					throw new NotImplementedException(); //todo Genome mit Integerwerten
+				else if (_encryption == Helper.Enums.Encryption.Binary)
+				{
 					throw new NotImplementedException(); //todo
-				else
+				}
+				else if (_encryption == Helper.Enums.Encryption.Real)
 				{
 					tmp = new GenomeReal(genomeSize, minAllelValue, maxAllelValue);
 					// um Duplikate bei der Erzeugung der Population zu vermeiden
@@ -56,7 +60,20 @@ namespace main
 			curGeneration.Clear();
 		}
 		
-		
+		public bool ContainsGenome (Genome genome)
+		{
+			foreach (Genome popGenome in curGeneration)
+			{
+				if (popGenome.IsEqual(genome))
+					return true;
+			}
+			foreach (Genome popGenome in oldGeneration)
+			{
+				if (popGenome.IsEqual(genome))
+					return true;
+			}
+			return false;			
+		}
 		
 		/// <summary>
 		/// Konvertiert die aktuelle Generation in einen String.

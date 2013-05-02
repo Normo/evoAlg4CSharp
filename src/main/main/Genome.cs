@@ -44,6 +44,16 @@ namespace main
 			this.AddRange(arr);
 		}
 				
+		public bool IsEqual (Genome genome)
+		{
+			foreach (double item in this) 
+			{
+				if (!item.Equals(genome[this.IndexOf(item)]))
+				    return false;
+			}
+			return true;
+		}
+		
 		/// <summary>
 		/// Convertiert den Inhalt eines Genoms in einen String.
 		/// </summary>

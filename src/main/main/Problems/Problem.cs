@@ -30,6 +30,10 @@ namespace main
 		
 		public List<Genome> RecombineBinary (Genome genomeA, Genome genomeB)
 		{		
+			
+			List<double> childA = new List<double>();
+			List<double> childB = new List<double>();
+			
 			if (!RecombBinaryIsSinglePoint.HasValue)
 			{
 				//todo gleichmäßige Rekomb.
@@ -37,27 +41,35 @@ namespace main
 			}
 			else if (RecombBinaryIsSinglePoint.Value)
 			{
+				// 1-Punkt Rekombination
 				int rnd = Helper.GetRandomInteger(2, genomeA.Count - 2);
-				
-				List<double> childA = new List<double>();
-				List<double> childB = new List<double>();
-				
+							
 				childA.AddRange(genomeA.GetRange(0, rnd));
 				childA.AddRange(genomeB.GetRange(rnd, genomeB.Count - rnd ));
 				
 				childB.AddRange(genomeB.GetRange(0, rnd));
 				childB.AddRange(genomeA.GetRange(rnd, genomeA.Count - rnd ));
-				           
-				List<Genome> result = new List<Genome>();
-				result.Add(new GenomeReal(childA.ToArray()));
-				result.Add(new GenomeReal(childB.ToArray()));
-				return result;
 			}
 			else
 			{
-				//todo 2-Punkt
-				return null;
+				// 2-Punkt Rekombination
+				int rnd1 = Helper.GetRandomInteger(1, genomeA.Count-2);
+				int rnd2 = Helper.GetRandomInteger(1, genomeA.Count-rnd1-1);
+				
+				childA.AddRange(genomeA.GetRange(0, rnd1+1));
+				childA.AddRange(genomeB.GetRange(rnd1+1, rnd2));
+				if ((rnd1+rnd2+1) <= genomeA.Count -1)
+					childA.AddRange(genomeA.GetRange((rnd1+rnd2+1), (genomeA.Count-1-rnd1-rnd2)));
+				
+				childB.AddRange(genomeB.GetRange(0, rnd1+1));
+				childB.AddRange(genomeA.GetRange(rnd1+1, rnd2));
+				if ((rnd1+rnd2+1) <= genomeA.Count -1)
+					childB.AddRange(genomeB.GetRange((rnd1+rnd2+1), (genomeA.Count-1-rnd1-rnd2)));
 			}
+			List<Genome> result = new List<Genome>();
+			result.Add(new GenomeReal(childA.ToArray()));
+			result.Add(new GenomeReal(childB.ToArray()));
+			return result;
 		}
 		
 		public List<Genome> RecombineReal (Genome genomeA, Genome genomeB)
@@ -68,7 +80,7 @@ namespace main
 			{
 				// Intermediäre Rekombination
 				
-				for (int i = 0; i < genomeA.Count-1; i++)
+				for (int i = 0; i <= genomeA.Count-1; i++)
 				{
 					child.Add(((genomeA[i]+genomeB[i])/2));
 				}
@@ -78,9 +90,9 @@ namespace main
 				// Arithmetische Rekombination
 				
 				double a, b;
-				double t = 1/3;
+				double t = 0.33333;//Helper.GetRandomDouble();
 				
-				for (int i = 0; i < genomeA.Count-1; i++)
+				for (int i = 0; i <= genomeA.Count-1; i++)
 				{
 					if (genomeA[i] <= genomeB[i])
 					{

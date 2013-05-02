@@ -47,7 +47,7 @@ namespace main
 
 		public override void CalcFitnessReal (Genome genome)
 		{
-			throw new NotImplementedException ();
+			CalcFitnessDefault(genome);
 		}
 		#endregion
 

@@ -9,6 +9,7 @@ public partial class MainWindow: Gtk.Window
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
+		OnCboEncryptionChanged(cbo_Encryption, null);
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -88,7 +89,7 @@ public partial class MainWindow: Gtk.Window
 		}
 		catch (Exception ex)
 		{
-			txt_Output.Buffer.Text += "\r\n\r\nFehler:\r\n" + ex.Message;
+			txt_Output.Buffer.Text += "\r\n\r\nFehler: " + ex.Message + "\r\n\r\n" + ex.StackTrace;
 		}
 	}
 
