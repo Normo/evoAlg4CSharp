@@ -110,13 +110,15 @@ namespace main
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
 			//for (countGeneration = 0; countGeneration < maxGenerations; countGeneration++)
 			{	
+				Console.WriteLine(countGeneration +1);
+				
 				// 2. Berechne die Fitnesswerte von P(0)
 				foreach (Genome genome in p.curGeneration) {
 					CalcFitness(genome);
 				}
 				
-				output.Buffer.Text += string.Format("\r\nGeneration: {0}\r\n", countGeneration + 1);
-				output.Buffer.Text += string.Format("\tAktuelle Population (Count: {1}): \r\n{0}", p.CurrentGenerationAsString(), p.curGeneration.Count());
+//				output.Buffer.Text += string.Format("\r\nGeneration: {0}\r\n", countGeneration + 1);
+//				output.Buffer.Text += string.Format("\tAktuelle Population (Count: {1}): \r\n{0}", p.CurrentGenerationAsString(), p.curGeneration.Count());
 
 				bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration); // p.GetBestGenome();
 				
@@ -133,10 +135,10 @@ namespace main
 				}
 				
 				//output.Buffer.Text += string.Format("\tBeste Fitness {0}\r\n", bestGenome.Fitness);
-				output.Buffer.Text += string.Format("\tBestes Genom {0}\r\n", bestGenome.AsString());
+//				output.Buffer.Text += string.Format("\tBestes Genom {0}\r\n", bestGenome.AsString());
 				
 				// Berechne Durchschnittsfitnesswert der aktuellen Generation
-				output.Buffer.Text += string.Format("\tDurchschnittliche Fitness {0}\r\n", Helper.Fitness.GetAverageFitness(p.curGeneration));
+//				output.Buffer.Text += string.Format("\tDurchschnittliche Fitness {0}\r\n", Helper.Fitness.GetAverageFitness(p.curGeneration));
 			
 				//alte Generation merken
 				p.SaveAsOldGen();
@@ -186,18 +188,18 @@ namespace main
 						
 						// II.	Mutiere Kind c
 						Mutate(childs);
-						
-						Console.WriteLine("Old: ");
-						foreach (Genome genome in p.oldGeneration) {
-							Console.WriteLine(genome.AsString());
-						}
-						Console.WriteLine("New: ");
-						foreach (Genome genome in p.curGeneration) {
-							Console.WriteLine(genome.AsString());
-						}
-						Console.WriteLine("Child: " + childs[0].AsString());
-						Console.WriteLine("Mama: " + mama.AsString());
-						Console.WriteLine("Papa: " + papa.AsString());
+//						
+//						Console.WriteLine("Old: ");
+//						foreach (Genome genome in p.oldGeneration) {
+//							Console.WriteLine(genome.AsString());
+//						}
+//						Console.WriteLine("New: ");
+//						foreach (Genome genome in p.curGeneration) {
+//							Console.WriteLine(genome.AsString());
+//						}
+//						Console.WriteLine("Child: " + childs[0].AsString());
+//						Console.WriteLine("Mama: " + mama.AsString());
+//						Console.WriteLine("Papa: " + papa.AsString());
 						
 						// III.	Füge Kinder C zu P' hinzu
 						//if (!p.oldGeneration.Contains(childs[0]) && !p.curGeneration.Contains(childs[0]))

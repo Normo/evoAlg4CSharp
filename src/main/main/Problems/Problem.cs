@@ -128,7 +128,16 @@ namespace main
 		
 		public void MutateReal (List<Genome> genomes)
 		{
-			//
+			double rndProb = 0.5;
+			double rnd;
+			foreach (Genome genome in genomes) {
+				for (int i = 0; i <= genome.Count -1; i++) 
+				{
+					rnd = Helper.GetRandomDouble();
+					if (rnd <= rndProb)
+						genome[i] += 0.3;
+				}
+			}
 		}
 	}
 }

@@ -34,7 +34,8 @@ namespace main
 				// sum[i = 1 bis n, xi² / 400n]
 				a = a + ((gene * gene) / (400 * genome.Count));
 				// prod[i = 1 bis n, cos(xi / wurzel(i))]
-				b = b + Math.Cos((double)gene / Math.Sqrt(i));
+				b = b * Math.Cos((double)gene / Math.Sqrt(i));
+				
 				i++;
 			}
 			genome.Fitness = 1 + a - b;
@@ -54,7 +55,7 @@ namespace main
 		#region implemented abstract members of main.Problem
 		public override void MutateDefault (List<Genome> genomes)
 		{
-			throw new NotImplementedException ();
+			throw new NotImplementedException();
 		}
 		#endregion
 	}
