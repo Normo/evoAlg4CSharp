@@ -135,7 +135,7 @@ namespace main
 				{
 					rnd = Helper.GetRandomDouble();
 					if (rnd <= rndProb)
-						genome[i] += 0.3;
+						genome[i] += 0.01;
 				}
 			}
 		}

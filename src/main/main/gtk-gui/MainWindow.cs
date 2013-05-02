@@ -158,6 +158,7 @@ public partial class MainWindow
 		this.cbo_Problem = global::Gtk.ComboBox.NewText ();
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Traveling Salesman"));
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Griewank"));
+		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Ackley"));
 		this.cbo_Problem.Name = "cbo_Problem";
 		this.cbo_Problem.Active = 1;
 		this.vbox8.Add (this.cbo_Problem);

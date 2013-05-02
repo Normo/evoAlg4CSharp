@@ -50,7 +50,7 @@ public partial class MainWindow: Gtk.Window
 			{
 				case 0 :	problem = new TravelingSalesMan(); break;
 				case 1 :	problem = new Griewank(); break;
-	//			case 2 :	problem = new TravelingSalesMan(); break;
+				case 2 :	problem = new Ackley(); break;
 			}
 			
 			if (problem == null)
@@ -61,8 +61,7 @@ public partial class MainWindow: Gtk.Window
 			problem.countIndividuals = (int)txt_countIndividuals.Value;
 			problem.countChilds = (int)txt_countChilds.Value;
 			problem.recombinationProbability = txt_recombProb.Value;
-		
-			//todo, in Oberfläche bauen
+			
 			if (cbo_Encryption.Active == 1)
 			{
 				problem.RecombBinaryIsSinglePoint = cbo_recombBinary.Active == 0;
