@@ -52,7 +52,7 @@ public partial class MainWindow
 	private global::Gtk.Frame frame3;
 	private global::Gtk.Alignment GtkAlignment2;
 	private global::Gtk.VBox vbox6;
-	private global::Gtk.HPaned hpaned3;
+	private global::Gtk.HPaned pnl_MutationType;
 	private global::Gtk.Label label8;
 	private global::Gtk.HBox hbox2;
 	private global::Gtk.RadioButton rb_Change;
@@ -136,7 +136,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook ();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 0;
+		this.notebook1.CurrentPage = 1;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.vbox7 = new global::Gtk.VBox ();
 		this.vbox7.Name = "vbox7";
@@ -422,18 +422,18 @@ public partial class MainWindow
 		this.vbox6.Name = "vbox6";
 		this.vbox6.Spacing = 6;
 		// Container child vbox6.Gtk.Box+BoxChild
-		this.hpaned3 = new global::Gtk.HPaned ();
-		this.hpaned3.CanFocus = true;
-		this.hpaned3.Name = "hpaned3";
-		this.hpaned3.Position = 114;
-		// Container child hpaned3.Gtk.Paned+PanedChild
+		this.pnl_MutationType = new global::Gtk.HPaned ();
+		this.pnl_MutationType.CanFocus = true;
+		this.pnl_MutationType.Name = "pnl_MutationType";
+		this.pnl_MutationType.Position = 114;
+		// Container child pnl_MutationType.Gtk.Paned+PanedChild
 		this.label8 = new global::Gtk.Label ();
 		this.label8.Name = "label8";
 		this.label8.LabelProp = global::Mono.Unix.Catalog.GetString ("Mutation");
-		this.hpaned3.Add (this.label8);
-		global::Gtk.Paned.PanedChild w36 = ((global::Gtk.Paned.PanedChild)(this.hpaned3 [this.label8]));
+		this.pnl_MutationType.Add (this.label8);
+		global::Gtk.Paned.PanedChild w36 = ((global::Gtk.Paned.PanedChild)(this.pnl_MutationType [this.label8]));
 		w36.Resize = false;
-		// Container child hpaned3.Gtk.Paned+PanedChild
+		// Container child pnl_MutationType.Gtk.Paned+PanedChild
 		this.hbox2 = new global::Gtk.HBox ();
 		this.hbox2.Name = "hbox2";
 		this.hbox2.Spacing = 6;
@@ -457,9 +457,9 @@ public partial class MainWindow
 		this.hbox2.Add (this.rb_Invert);
 		global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.rb_Invert]));
 		w38.Position = 1;
-		this.hpaned3.Add (this.hbox2);
-		this.vbox6.Add (this.hpaned3);
-		global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.hpaned3]));
+		this.pnl_MutationType.Add (this.hbox2);
+		this.vbox6.Add (this.pnl_MutationType);
+		global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.pnl_MutationType]));
 		w40.Position = 0;
 		w40.Expand = false;
 		w40.Fill = false;
@@ -645,6 +645,7 @@ public partial class MainWindow
 		}
 		this.DefaultWidth = 811;
 		this.DefaultHeight = 548;
+		this.pnl_MutationType.Hide ();
 		this.cbo_recombBinary.Hide ();
 		this.cbo_recombReal.Hide ();
 		this.Show ();

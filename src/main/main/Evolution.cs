@@ -225,7 +225,7 @@ namespace main
 
 			//Ausgabe der besten Genome
 			//todo: Distinct funzt nich
-			output.Buffer.Text += "\r\nBestenliste\r\n";
+			output.Buffer.Text += "\r\nLetzte Generation\r\n";
 			List<Genome> bestGenomes = p.curGeneration.Distinct().ToList();
 			foreach (Genome genome in bestGenomes) {
 				output.Buffer.Text += genome.AsString() + "\r\n";
@@ -255,7 +255,7 @@ namespace main
 			bestAverageFitness = bestAverageFitness / bestSolutions.Count;
 			bestAverageGenerations = bestAverageGenerations / bestSolutionsGeneration.Count;
 			
-			Console.WriteLine(String.Format("BestSolutions: {0}\r\nBestSolutionsGeneration: {1}", Helper.ListToString(bestSolutions), Helper.ListToString(bestSolutionsGeneration)));
+			Console.WriteLine(String.Format("Beste Lösungen je Durchgang: {0}\r\nAufgetreten in Generation: {1}", Helper.ListToString(bestSolutions), Helper.ListToString(bestSolutionsGeneration)));
 			Console.WriteLine(String.Format("Durchschnittliche Fitness: {0}\r\nDurchschnittliche Generation: {1}", bestAverageFitness, bestAverageGenerations));
 		}			
 	}

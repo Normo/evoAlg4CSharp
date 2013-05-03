@@ -3,6 +3,7 @@ using Gtk;
 using System.Collections.Generic;
 using main;
 using System.Linq;
+using System.Diagnostics;
 
 public partial class MainWindow: Gtk.Window
 {		
@@ -84,7 +85,15 @@ public partial class MainWindow: Gtk.Window
 			Evolution evol = new Evolution(problem);
 			evol.output = txt_Output;
 			
+			// Laufzeitmessung
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
+			
 			evol.Compute();
+			
+			//Laufzeitauswertung
+			watch.Stop();
+			txt_Output.Buffer.Text += "\r\n\r\nLaufzeit: " + watch.Elapsed;
 		}
 		catch (Exception ex)
 		{
@@ -99,13 +108,15 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnBtnStart10Clicked (object sender, System.EventArgs e)
 	{
-		Problem problem = null;
+		try
+		{
+			Problem problem = null;
 			
 			switch (cbo_Problem.Active)
 			{
 				case 0 :	problem = new TravelingSalesMan(); break;
-	//			case 1 :	problem = new TravelingSalesMan(); break;
-	//			case 2 :	problem = new TravelingSalesMan(); break;
+				case 1 :	problem = new Griewank(); break;
+				case 2 :	problem = new Ackley(); break;
 			}
 			
 			if (problem == null)
@@ -116,33 +127,64 @@ public partial class MainWindow: Gtk.Window
 			problem.countIndividuals = (int)txt_countIndividuals.Value;
 			problem.countChilds = (int)txt_countChilds.Value;
 			problem.recombinationProbability = txt_recombProb.Value;
+			
+			if (cbo_Encryption.Active == 1)
+			{
+				problem.RecombBinaryIsSinglePoint = cbo_recombBinary.Active == 0;
+			}
+			if (cbo_Encryption.Active == 2)
+			{
+				problem.RecombRealIsIntermidiate = cbo_recombReal.Active == 0;
+			}
+		
 			problem.InvertOnMutate = rb_Invert.Active ? true : false;
+		
+			problem.minAllelValue = problem.minAllelValue == 0 ? 1 : problem.minAllelValue;
+			problem.maxAllelValue = problem.maxAllelValue == 0 ? problem.countGene + 1 : problem.maxAllelValue;
+		
 			problem.SelPropType = rb_Fitness.Active ? main.Helper.Enums.SelPropType.Fitness : main.Helper.Enums.SelPropType.Ranking;
 			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
 			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
 			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
-					
+							
 			Evolution evol = new Evolution(problem);
 			evol.output = txt_Output;
 			
+			// Laufzeitmessung
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
 			
 			for(int i = 0; i < 10; i++)
 			{
 				evol.Compute();
 			}
 			evol.GetStats();
+			
+			//Laufzeitauswertung
+			watch.Stop();
+			txt_Output.Buffer.Text += "\r\n\r\nLaufzeit: " + watch.Elapsed;
+		}
+		catch (Exception ex)
+		{
+			txt_Output.Buffer.Text += "\r\n\r\nFehler: " + ex.Message + "\r\n\r\n" + ex.StackTrace;
+		}
 	}
 
 	protected void OnCboEncryptionChanged (object sender, System.EventArgs e)
 	{
 		//throw new System.NotImplementedException ();
 		
+		pnl_MutationType.Visible = false;
 		pnl_recombEncrypt.Sensitive = false;
 		cbo_recombBinary.Visible = false;
 		cbo_recombReal.Visible = false;
 		
 		switch (cbo_Encryption.Active) {
-			case 0:	break;
+			case 0:
+			{
+				pnl_MutationType.Visible = true;
+				break;
+			}
 			case 1:	
 			{
 				pnl_recombEncrypt.Sensitive = true;

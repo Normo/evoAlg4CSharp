@@ -85,7 +85,7 @@
                   <widget class="Gtk.Notebook" id="notebook1">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">0</property>
+                    <property name="CurrentPage">1</property>
                     <child>
                       <widget class="Gtk.VBox" id="vbox7">
                         <property name="MemberName" />
@@ -477,8 +477,9 @@ Reell</property>
                                     <property name="MemberName" />
                                     <property name="Spacing">6</property>
                                     <child>
-                                      <widget class="Gtk.HPaned" id="hpaned3">
+                                      <widget class="Gtk.HPaned" id="pnl_MutationType">
                                         <property name="MemberName" />
+                                        <property name="Visible">False</property>
                                         <property name="CanFocus">True</property>
                                         <property name="Position">114</property>
                                         <child>
