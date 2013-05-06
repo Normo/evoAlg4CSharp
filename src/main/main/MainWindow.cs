@@ -17,6 +17,7 @@ public partial class MainWindow: Gtk.Window
 		worker = new BackgroundWorker();
 		worker.DoWork += worker_DoWork;
 		worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+		worker.ProgressChanged += worker_ProgressChanged;
 	}
 	
 	protected void worker_DoWork(object sender, DoWorkEventArgs e)
@@ -37,6 +38,11 @@ public partial class MainWindow: Gtk.Window
 		
 			e.Result = problem;
 	
+	}
+	
+	protected void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+	{
+		
 	}
 	
 	protected void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
