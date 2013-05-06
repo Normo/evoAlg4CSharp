@@ -8,45 +8,51 @@ using System.ComponentModel;
 
 public partial class MainWindow: Gtk.Window
 {		
-	public BackgroundWorker worker;
+	private BackgroundWorker worker;
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		OnCboEncryptionChanged(cbo_Encryption, null);
 		worker = new BackgroundWorker();
-		worker.DoWork += worker_DoWork;
-		worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-		worker.ProgressChanged += worker_ProgressChanged;
+		worker.WorkerReportsProgress = true;
+		worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+		worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+		worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
 	}
 	
 	protected void worker_DoWork(object sender, DoWorkEventArgs e)
 	{
-			Problem problem = e.Argument as Problem;				
-			Evolution evol = new Evolution(problem);
-			//evol.output = txt_Output;
-			
-			// Laufzeitmessung
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
-			
-			evol.Compute();
-			
-			//Laufzeitauswertung
-			watch.Stop();
-			problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
+		BackgroundWorker worker = sender as BackgroundWorker;
+		Problem problem = e.Argument as Problem;				
+		Evolution evol = new Evolution(problem);
 		
-			e.Result = problem;
+		//evol.output = txt_Output;
+		
+		// Laufzeitmessung
+		Stopwatch watch = new Stopwatch();
+		watch.Start();
+		
+		evol.Compute(worker);
+		
+		//Laufzeitauswertung
+		watch.Stop();
+		problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
 	
+		e.Result = problem;
 	}
 	
 	protected void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 	{
-		
+		progressbar.Fraction = (double)e.ProgressPercentage / 100;
+		progressbar.Text = e.ProgressPercentage.ToString();
 	}
 	
 	protected void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 	{
+		if (e.Error != null)
+			txt_Output.Buffer.Text += "\r\n\r\n" + e.Error.Message;
+		
 		Problem problem = e.Result as Problem;
 		txt_Output.Buffer.Text = problem.Output.ToString();
 		Console.WriteLine(problem.Output.ToString());
@@ -179,7 +185,7 @@ public partial class MainWindow: Gtk.Window
 			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
 							
 			Evolution evol = new Evolution(problem);
-			evol.output = txt_Output;
+			//evol.output = txt_Output;
 			
 			// Laufzeitmessung
 			Stopwatch watch = new Stopwatch();
@@ -187,7 +193,7 @@ public partial class MainWindow: Gtk.Window
 			
 			for(int i = 0; i < 10; i++)
 			{
-				evol.Compute();
+				//evol.Compute();
 			}
 			evol.GetStats();
 			

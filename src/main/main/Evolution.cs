@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gtk;
 using System.Text;
+using System.ComponentModel;
 
 namespace main
 {
@@ -29,7 +30,6 @@ namespace main
 		public Helper.Enums.SelType SelType;			// Selektionsverfahren: Roulette, Single-, MultiTournament
 		public Helper.Enums.Encryption Encryption;		// Genomkodierung
 		public int TournamentMemberCount;				// Anzahl Teilnehmer der Turnierselektion
-		public Gtk.TextView output;						// Textbox Objekt
 		
 		public double bestFitness;						// Bester Fitnesswert
 		public double averageFitness;					// Durchschnittliche Fitness der aktuellen Generation
@@ -97,35 +97,31 @@ namespace main
 		/// <summary>
 		/// Der eigentliche evolutionäre Algorithmus - entspricht doc/EvoAlgTSP.pdf.
 		/// </summary>
-		public void Compute()
+		public void Compute(BackgroundWorker worker)
 		{
 			int countGeneration = 0;	
 			
 			bestFitness = double.MaxValue;
 			averageFitness = double.MaxValue;
 			bestFitnessGeneration = 0;
-			
-			//output.Buffer.Text = "Compute:\r\n";
-			sb.AppendLine("Compute:");
-			
 			Genome bestGenome;
+			
+			sb.AppendLine("Compute:");
 			
 			// 1. Initialisiere Population P(0) mit zufälligen Genomen
 			Population p = new Population(countIndividuals, countGene, minAllelValue, maxAllelValue, Encryption);
 			
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
-			//for (countGeneration = 0; countGeneration < maxGenerations; countGeneration++)
 			{	
-				//Console.WriteLine(countGeneration +1);
+				//Prozentualer Fortschritte an BackgroundWorker weiter geben
+				int percentage = (int)((float)(countGeneration + 1) / (float)maxGenerations * 100);
+				worker.ReportProgress(percentage);
 				
 				// 2. Berechne die Fitnesswerte von P(0)
 				foreach (Genome genome in p.curGeneration) {
 					CalcFitness(genome);
 				}
 				
-//				output.Buffer.Text += string.Format("\r\nGeneration: {0}\r\n", countGeneration + 1);
-//				output.Buffer.Text += string.Format("\tAktuelle Population (Count: {1}): \r\n{0}", p.CurrentGenerationAsString(), p.curGeneration.Count());
-
 				bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration); // p.GetBestGenome();
 				
 				// Fitness des besten Genoms, ist hoeher als bisherige beste Fitness
@@ -140,18 +136,11 @@ namespace main
 					stableGenerations++;
 				}
 				
-				//output.Buffer.Text += string.Format("\tBeste Fitness {0}\r\n", bestGenome.Fitness);
-//				output.Buffer.Text += string.Format("\tBestes Genom {0}\r\n", bestGenome.AsString());
-				
-				// Berechne Durchschnittsfitnesswert der aktuellen Generation
-//				output.Buffer.Text += string.Format("\tDurchschnittliche Fitness {0}\r\n", Helper.Fitness.GetAverageFitness(p.curGeneration));
-			
 				//alte Generation merken
 				p.SaveAsOldGen();
 
 				// 3. Erzeuge Kinder und füge sie P' hinzu
 				double rndDouble;
-				
 				int c = 0;
 				while (c < countChilds) 
 				{
@@ -183,32 +172,20 @@ namespace main
 									papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
 									break;							
 							}
+							//Mama und Papa dürfen nicht die selben sein, sonst evtl. Duplikat
 							if (!mama.IsEqual(papa))
 								equals = false;
 						}
 						
-						
+						//Rekombinieren und Fitness berechnen
 						List<Genome> childs = Recombine(mama,papa);
-						CalcFitness(childs[0]);
-						//PAUSE!!!!!
+						foreach (Genome genome in childs)
+							CalcFitness(genome);
 						
 						// II.	Mutiere Kind c
 						Mutate(childs);
-//						
-//						Console.WriteLine("Old: ");
-//						foreach (Genome genome in p.oldGeneration) {
-//							Console.WriteLine(genome.AsString());
-//						}
-//						Console.WriteLine("New: ");
-//						foreach (Genome genome in p.curGeneration) {
-//							Console.WriteLine(genome.AsString());
-//						}
-//						Console.WriteLine("Child: " + childs[0].AsString());
-//						Console.WriteLine("Mama: " + mama.AsString());
-//						Console.WriteLine("Papa: " + papa.AsString());
 						
 						// III.	Füge Kinder C zu P' hinzu
-						//if (!p.oldGeneration.Contains(childs[0]) && !p.curGeneration.Contains(childs[0]))
 						if (!p.ContainsGenome(childs[0]))
 						{
 							p.curGeneration.AddRange(childs);
@@ -230,17 +207,10 @@ namespace main
 			}
 
 			//Ausgabe der besten Genome
-			//todo: Distinct funzt nich
-			//output.Buffer.Text += "\r\nLetzte Generation\r\n";
 			sb.AppendLine("Letzte Generation");
 			List<Genome> bestGenomes = p.curGeneration.Distinct().ToList();
-			foreach (Genome genome in bestGenomes) {
-				//output.Buffer.Text += genome.AsString() + "\r\n";
+			foreach (Genome genome in bestGenomes)
 				sb.AppendLine(genome.AsString());
-			}
-			
-			// Konsolenausgabe der Endergebnisse
-			//Console.WriteLine(String.Format("Beste Fitness: {0}\r\nGeneration: {1}", bestFitness, bestFitnessGeneration));
 			
 			// Speichere den besten Fitnesswert und die Generation in der er aufgetreten ist zur späteren Auswertung
 			bestSolutions.Add(bestFitness);
@@ -265,7 +235,7 @@ namespace main
 			
 			Console.WriteLine(String.Format("Beste Lösungen je Durchgang: {0}\r\nAufgetreten in Generation: {1}", Helper.ListToString(bestSolutions), Helper.ListToString(bestSolutionsGeneration)));
 			Console.WriteLine(String.Format("Durchschnittliche Fitness: {0}\r\nDurchschnittliche Generation: {1}", bestAverageFitness, bestAverageGenerations));
-		}			
+		}	
 	}
 }
 
