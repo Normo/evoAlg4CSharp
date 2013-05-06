@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace main
 {
@@ -19,9 +20,11 @@ namespace main
 		public int maxAllelValue;
 		public bool? RecombBinaryIsSinglePoint;
 		public bool RecombRealIsIntermidiate;
+		public StringBuilder Output;
 		
 		public Problem ()
 		{
+			Output = new StringBuilder();
 			RecombBinaryIsSinglePoint = true;
 			RecombRealIsIntermidiate = true;
 		}

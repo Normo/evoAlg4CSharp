@@ -4,13 +4,47 @@ using System.Collections.Generic;
 using main;
 using System.Linq;
 using System.Diagnostics;
+using System.ComponentModel;
 
 public partial class MainWindow: Gtk.Window
 {		
+	public BackgroundWorker worker;
+	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		OnCboEncryptionChanged(cbo_Encryption, null);
+		worker = new BackgroundWorker();
+		worker.DoWork += worker_DoWork;
+		worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+	}
+	
+	protected void worker_DoWork(object sender, DoWorkEventArgs e)
+	{
+			Problem problem = e.Argument as Problem;				
+			Evolution evol = new Evolution(problem);
+			//evol.output = txt_Output;
+			
+			// Laufzeitmessung
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
+			
+			evol.Compute();
+			
+			//Laufzeitauswertung
+			watch.Stop();
+			problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
+		
+			e.Result = problem;
+	
+	}
+	
+	protected void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+	{
+		Problem problem = e.Result as Problem;
+		txt_Output.Buffer.Text = problem.Output.ToString();
+		Console.WriteLine(problem.Output.ToString());
+		btn_Start.Sensitive = true;
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -43,6 +77,8 @@ public partial class MainWindow: Gtk.Window
 		Console.WriteLine("Create new Population:");
 		Population p0 = new Population(100, 8);
 		*/
+		btn_Start.Sensitive = false;
+		
 		try
 		{
 			Problem problem = null;
@@ -81,19 +117,8 @@ public partial class MainWindow: Gtk.Window
 			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
 			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
 			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
-							
-			Evolution evol = new Evolution(problem);
-			evol.output = txt_Output;
 			
-			// Laufzeitmessung
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
-			
-			evol.Compute();
-			
-			//Laufzeitauswertung
-			watch.Stop();
-			txt_Output.Buffer.Text += "\r\n\r\nLaufzeit: " + watch.Elapsed;
+			worker.RunWorkerAsync(problem);
 		}
 		catch (Exception ex)
 		{

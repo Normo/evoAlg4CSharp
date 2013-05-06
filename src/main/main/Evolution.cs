@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
+using System.Text;
 
 namespace main
 {
@@ -38,6 +39,8 @@ namespace main
 		public List<double> bestSolutions;				// Liste mit den besten Fitnesswerten aus mehreren Durchläufen
 		public List<int> bestSolutionsGeneration;		// Liste mit den Generationzahlen, in denen die beste Fitness das erste Mal aufgetreten ist
 		
+		private StringBuilder sb;
+		
 		/// <summary>
 		/// Konstruktor
 		/// </summary>
@@ -56,6 +59,8 @@ namespace main
 			SelType = problem.SelType;
 			Encryption = problem.Encryption;
 			TournamentMemberCount = problem.TournamentMemberCount;
+			
+			sb = problem.Output;
 			
 			bestFitness = double.MaxValue;
 			averageFitness = double.MaxValue;
@@ -100,7 +105,8 @@ namespace main
 			averageFitness = double.MaxValue;
 			bestFitnessGeneration = 0;
 			
-			output.Buffer.Text = "Compute:\r\n";
+			//output.Buffer.Text = "Compute:\r\n";
+			sb.AppendLine("Compute:");
 			
 			Genome bestGenome;
 			
@@ -110,7 +116,7 @@ namespace main
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
 			//for (countGeneration = 0; countGeneration < maxGenerations; countGeneration++)
 			{	
-				Console.WriteLine(countGeneration +1);
+				//Console.WriteLine(countGeneration +1);
 				
 				// 2. Berechne die Fitnesswerte von P(0)
 				foreach (Genome genome in p.curGeneration) {
@@ -225,10 +231,12 @@ namespace main
 
 			//Ausgabe der besten Genome
 			//todo: Distinct funzt nich
-			output.Buffer.Text += "\r\nLetzte Generation\r\n";
+			//output.Buffer.Text += "\r\nLetzte Generation\r\n";
+			sb.AppendLine("Letzte Generation");
 			List<Genome> bestGenomes = p.curGeneration.Distinct().ToList();
 			foreach (Genome genome in bestGenomes) {
-				output.Buffer.Text += genome.AsString() + "\r\n";
+				//output.Buffer.Text += genome.AsString() + "\r\n";
+				sb.AppendLine(genome.AsString());
 			}
 			
 			// Konsolenausgabe der Endergebnisse
