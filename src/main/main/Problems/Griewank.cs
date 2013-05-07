@@ -8,10 +8,9 @@ namespace main
 		public Griewank ()
 		{
 			minAllelValue = -512;
-			maxAllelValue = 511;
+			maxAllelValue = 512;
 		}
 
-		#region implemented abstract members of main.Problem
 		public override List<Genome> RecombineDefault (Genome genomeA, Genome genomeB)
 		{
 			throw new NotImplementedException ();
@@ -32,9 +31,9 @@ namespace main
 			foreach (double gene in genome)
 			{
 				// sum[i = 1 bis n, xi² / 400n]
-				a = a + (gene * gene);
+				a += gene * gene;
 				// prod[i = 1 bis n, cos(xi / wurzel(i))]
-				b = b * Math.Cos(gene / Math.Sqrt(i));
+				b *= Math.Cos(gene / Math.Sqrt(i));
 				
 				i++;
 			}
@@ -50,14 +49,11 @@ namespace main
 		{
 			CalcFitnessDefault(genome);
 		}
-		#endregion
-
-		#region implemented abstract members of main.Problem
+		
 		public override void MutateDefault (List<Genome> genomes)
 		{
 			throw new NotImplementedException();
 		}
-		#endregion
 	}
 }
 

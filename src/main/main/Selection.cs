@@ -11,15 +11,11 @@ namespace main
 			List<Genome> newGen = new List<Genome> ();
 			newGen.AddRange (population.curGeneration);
 			newGen.AddRange (population.oldGeneration);
-			//list.Sort((a,b) => a.date.CompareTo(b.date));
 			newGen.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
-
 			newGen.RemoveRange(TopCount, newGen.Count() - TopCount);
 
 			population.curGeneration.Clear();
-			foreach (Genome genome in newGen) {
-				population.curGeneration.Add(genome.Copy());
-			}
+			population.curGeneration.AddRange(newGen);
 		}
 		
 		public static void Comma (Population population, int TopCount)
@@ -31,9 +27,7 @@ namespace main
 			newGen.RemoveRange(TopCount, newGen.Count() - TopCount);
 
 			population.curGeneration.Clear();
-			foreach (Genome genome in newGen) {
-				population.curGeneration.Add(genome.Copy());
-			}
+			population.curGeneration.AddRange(newGen);
 		}
 		
 		public static void RandomParents (List<Genome> parents, ref int indexA, ref int indexB)
@@ -42,43 +36,21 @@ namespace main
 			indexB = Helper.GetRandomInteger(1, parents.Count)-1;
 		}
 		
-		
-		
-		public static Genome Roulette (List<Genome> generation, Helper.Enums.SelPropType type)
+		public static Genome Roulette (List<Genome> generation)
 		{			
-			switch(type)
-			{
-				case Helper.Enums.SelPropType.Fitness : 
-					CalcSelPropByFitness(generation);
-					break;
-				case Helper.Enums.SelPropType.Ranking : 
-					CalcSelPropByRanking(generation);
-					break;
-			}
-			
 			double rnd = Helper.GetRandomDouble();
 			double cur = 0;
 			
 			for (int i = 0; i < generation.Count; i++) {
 				cur += generation[i].SelectionProbability;
 				if ( rnd <= cur)
-					return generation[i].Copy();
+					return generation[i];
 			}
 			return null;
 		}
 		
-		public static Genome SingleTournament(List<Genome> generation, int memberCount, Helper.Enums.SelPropType type)
+		public static Genome SingleTournament(List<Genome> generation, int memberCount)
 		{
-			switch(type)
-			{
-				case Helper.Enums.SelPropType.Fitness : 
-					CalcSelPropByFitness(generation);
-					break;
-				case Helper.Enums.SelPropType.Ranking : 
-					CalcSelPropByRanking(generation);
-					break;
-			}
-			
 			List<Genome> member = new List<Genome>();
 			for (int i = 0; i < memberCount; i++) {
 				member.Add(generation[Helper.GetRandomInteger(0,generation.Count-1)]);
@@ -89,18 +61,8 @@ namespace main
 			return member[0].Copy();
 		}
 		
-		public static Genome MultiTournament(List<Genome> generation, int memberCount, Helper.Enums.SelPropType type)
-		{
-			switch(type)
-			{
-				case Helper.Enums.SelPropType.Fitness : 
-					CalcSelPropByFitness(generation);
-					break;
-				case Helper.Enums.SelPropType.Ranking : 
-					CalcSelPropByRanking(generation);
-					break;
-			}
-			
+		public static Genome MultiTournament(List<Genome> generation, int memberCount)
+		{			
 			Dictionary<Genome, int> tournament = new Dictionary<Genome, int>();
 			int winCounter;
 			
@@ -119,25 +81,6 @@ namespace main
 			
 			winTable.Sort((a,b) => b.Value.CompareTo(a.Value));
 			return winTable[0].Key.Copy();
-		}
-		
-		private static void CalcSelPropByFitness(List<Genome> generation)
-		{
-			double totalFitness = Helper.Fitness.GetTotalFitness(generation);
-			foreach (Genome genome in generation)
-			{
-				genome.SelectionProbability = genome.Fitness / totalFitness;
-			}
-		}
-		
-		private static void CalcSelPropByRanking(List<Genome> generation)
-		{
-			generation.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
-			foreach (Genome genome in generation)
-			{
-				// 2 / r * ( 1 - (i-1) / (r-1))
-				genome.SelectionProbability = (double)(2 / (double)generation.Count) * ( 1 - ((double)(generation.IndexOf(genome))/(double)(generation.Count-1)));
-			}
 		}
 	}
 }

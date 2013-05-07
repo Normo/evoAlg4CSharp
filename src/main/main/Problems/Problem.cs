@@ -107,7 +107,6 @@ namespace main
 						a = genomeB[i];
 						b = genomeA[i];
 					}
-					// todo: int-cast entfernen, wenn auf alles auf double umgestellt wurde
 					child.Add((a + t * (b - a)));
 				}
 			}
@@ -131,14 +130,18 @@ namespace main
 		
 		public void MutateReal (List<Genome> genomes)
 		{
-			double rndProb = 0.5;
+			double rndProb = 0.3;
+			
+			Random random =  new Random(Guid.NewGuid().GetHashCode());
+			 
 			double rnd;
+			
 			foreach (Genome genome in genomes) {
 				for (int i = 0; i <= genome.Count -1; i++) 
 				{
-					rnd = Helper.GetRandomDouble();
+					rnd = random.NextDouble();
 					if (rnd <= rndProb)
-						genome[i] += 0.01;
+						genome[i] += 0.1;
 				}
 			}
 		}

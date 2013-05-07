@@ -72,16 +72,8 @@ namespace main
 			/// <returns>Genom</returns>
 			public static Genome GetBestGenome(List<Genome> generation)
 			{
-				Genome bestGenome = new Genome();
-				bestGenome.Fitness = double.MaxValue;
-	
-				foreach (Genome genome in generation)
-				{
-					if (genome.Fitness < bestGenome.Fitness) {
-						bestGenome = genome;
-					}
-				}
-				return bestGenome.Copy();
+				generation.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
+				return generation[0];
 			}
 			
 			/// <summary>
@@ -107,6 +99,28 @@ namespace main
 				return GetTotalFitness(generation) / generation.Count;
 			}
 			
+		}
+		
+		public static class Selection 
+		{
+			public static void CalcSelPropByFitness(List<Genome> generation)
+			{
+				double totalFitness = Helper.Fitness.GetTotalFitness(generation);
+				foreach (Genome genome in generation)
+				{
+					genome.SelectionProbability = genome.Fitness / totalFitness;
+				}
+			}
+			
+			public static void CalcSelPropByRanking(List<Genome> generation)
+			{
+				generation.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
+				foreach (Genome genome in generation)
+				{
+					// 2 / r * ( 1 - (i-1) / (r-1))
+					genome.SelectionProbability = (double)(2 / (double)generation.Count) * ( 1 - ((double)(generation.IndexOf(genome))/(double)(generation.Count-1)));
+				}
+			}
 		}
 	}
 }
