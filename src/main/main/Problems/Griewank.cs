@@ -25,20 +25,20 @@ namespace main
 			//1 + sum[i = 1 bis n, xi² / 400n] - prod[i = 1 bis n, cos(xi / wurzel(i))] 
 			// −512 ≤ xi ≤ 511, 1 ≤ i ≤ n (n = 5, 10, 15, 20, 25, 30, 40, . . .),
 			
-			double a = 0;
-			double b = 1;
-			double i = 1;
+			double a = 0.0;
+			double b = 1.0;
+			double i = 1.0;
 			
-			foreach (int gene in genome)
+			foreach (double gene in genome)
 			{
 				// sum[i = 1 bis n, xi² / 400n]
-				a = a + ((gene * gene) / (400 * genome.Count));
+				a = a + (gene * gene);
 				// prod[i = 1 bis n, cos(xi / wurzel(i))]
-				b = b * Math.Cos((double)gene / Math.Sqrt(i));
+				b = b * Math.Cos(gene / Math.Sqrt(i));
 				
 				i++;
 			}
-			genome.Fitness = 1 + a - b;
+			genome.Fitness = 1.0 + a / (400.0 * genome.Count) - b;
 		}
 
 		public override void CalcFitnessBinary (Genome genome)

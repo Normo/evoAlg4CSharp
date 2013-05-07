@@ -19,7 +19,7 @@ namespace main
 
 		public override void CalcFitnessDefault (Genome genome)
 		{
-			//Genome genome = new GenomeReal(new double[] {0.0,0.0,0.0,0.0,0.0});
+//			Genome genome = new GenomeReal(new double[] {0.0,0.0,0.0,0.0,0.0});
 			genome.Fitness = 0;
 			
 			// Summenformeln
@@ -37,11 +37,14 @@ namespace main
 				i++;
 			}
 			
-			c = 0.2 * Math.Sqrt(1/i * a);
-			d = (1/i) * b;
-			genome.Fitness = 20.0 + Math.Exp(1) - 20.0 * Math.Exp (c) - Math.Exp(d);
+			c = 0.2 * Math.Sqrt(a/i);
+			d = b/i;
+			genome.Fitness = 20.0 + Math.Exp(1.0) - 20.0 * Math.Exp (c) - Math.Exp(d);
+			
+//			genome.Fitness = 20.0 + Math.Exp(1.0) - 20.0 * Math.Exp (0.2 * Math.Sqrt(a/i)) - Math.Exp(b/i);
+			
 			genome.Fitness *= genome.Fitness < 0 ? -1 : 1;
-			//Console.WriteLine(genome.Fitness);
+//			Console.WriteLine(genome.Fitness);
 		}
 
 		public override void CalcFitnessBinary (Genome genome)

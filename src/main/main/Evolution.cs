@@ -121,8 +121,10 @@ namespace main
 				foreach (Genome genome in p.curGeneration) {
 					CalcFitness(genome);
 				}
-				
-				bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration); // p.GetBestGenome();
+				if (countGeneration > 0)
+					bestGenome = p.curGeneration[0];
+				else
+					bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration); // p.GetBestGenome();
 				
 				// Fitness des besten Genoms, ist hoeher als bisherige beste Fitness
 				if (bestGenome.Fitness < bestFitness)
@@ -192,11 +194,6 @@ namespace main
 							c++;
 						}
 					}
-				}
-				
-				// 4. Berechne die Fitness von P'
-				foreach (Genome genome in p.curGeneration) {
-					CalcFitness(genome);
 				}
 				
 				// 5. Erzeuge Kind-Population -> die besten Individuen aus P' + P(0)

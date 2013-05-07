@@ -123,10 +123,10 @@ namespace main
 		
 		private static void CalcSelPropByFitness(List<Genome> generation)
 		{
-			
+			double totalFitness = Helper.Fitness.GetTotalFitness(generation);
 			foreach (Genome genome in generation)
 			{
-				genome.SelectionProbability = genome.Fitness / Helper.Fitness.GetTotalFitness(generation);
+				genome.SelectionProbability = genome.Fitness / totalFitness;
 			}
 		}
 		

@@ -39,23 +39,23 @@ public partial class MainWindow: Gtk.Window
 		watch.Stop();
 		problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
 	
-		e.Result = problem;
+		e.Result = problem.Output.ToString();
 	}
 	
 	protected void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 	{
 		progressbar.Fraction = (double)e.ProgressPercentage / 100;
-		progressbar.Text = e.ProgressPercentage.ToString();
+		progressbar.Text = e.ProgressPercentage.ToString() + "%";
 	}
 	
 	protected void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 	{
-		if (e.Error != null)
-			txt_Output.Buffer.Text += "\r\n\r\n" + e.Error.Message;
+//		if (e.Error != null)
+//			txt_Output.Buffer.Text += "\r\n\r\n" + e.Error.Message;
 		
-		Problem problem = e.Result as Problem;
-		txt_Output.Buffer.Text = problem.Output.ToString();
-		Console.WriteLine(problem.Output.ToString());
+		string result = e.Result as string;
+		//txt_Output.Buffer.Text = result;
+		Console.WriteLine(result);
 		btn_Start.Sensitive = true;
 	}
 	
@@ -89,6 +89,7 @@ public partial class MainWindow: Gtk.Window
 		Console.WriteLine("Create new Population:");
 		Population p0 = new Population(100, 8);
 		*/
+		
 		btn_Start.Sensitive = false;
 		
 		try

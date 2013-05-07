@@ -46,9 +46,9 @@ namespace main
 				
 		public bool IsEqual (Genome genome)
 		{
-			foreach (double item in this) 
+			for (int i = 0; i < genome.Count -1; i++) 
 			{
-				if (!item.Equals(genome[this.IndexOf(item)]))
+				if (this[i] != genome[i])
 				    return false;
 			}
 			return true;

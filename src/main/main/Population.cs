@@ -40,7 +40,7 @@ namespace main
 					// um Duplikate bei der Erzeugung der Population zu vermeiden
 					while(curGeneration.Contains(tmp))
 					{
-						Console.WriteLine(String.Format("Duplikat: {0}\r\ni = {1}", tmp.AsString(),i));
+						//Console.WriteLine(String.Format("Duplikat: {0}\r\ni = {1}", tmp.AsString(),i));
 						tmp = new GenomeReal(genomeSize, minAllelValue, maxAllelValue);
 					}
 					curGeneration.Add(tmp);
@@ -54,21 +54,16 @@ namespace main
 		public void SaveAsOldGen ()
 		{
 			oldGeneration.Clear();
-			foreach (Genome genome in curGeneration) {
-				oldGeneration.Add(genome.Copy());
-			}
+			oldGeneration.AddRange(curGeneration);
 			curGeneration.Clear();
 		}
 		
 		public bool ContainsGenome (Genome genome)
 		{
-			foreach (Genome popGenome in curGeneration)
+			foreach (Genome popGenome in oldGeneration)
 			{
 				if (popGenome.IsEqual(genome))
 					return true;
-			}
-			foreach (Genome popGenome in oldGeneration)
-			{
 				if (popGenome.IsEqual(genome))
 					return true;
 			}

@@ -115,6 +115,7 @@ public partial class MainWindow
 		this.txt_Output = new global::Gtk.TextView ();
 		this.txt_Output.CanFocus = true;
 		this.txt_Output.Name = "txt_Output";
+		this.txt_Output.AcceptsTab = false;
 		this.GtkScrolledWindow.Add (this.txt_Output);
 		this.GtkAlignment3.Add (this.GtkScrolledWindow);
 		this.frame4.Add (this.GtkAlignment3);
@@ -262,7 +263,7 @@ public partial class MainWindow
 		this.txt_countIndividuals.Adjustment.PageIncrement = 10;
 		this.txt_countIndividuals.ClimbRate = 1;
 		this.txt_countIndividuals.Numeric = true;
-		this.txt_countIndividuals.Value = 10;
+		this.txt_countIndividuals.Value = 150;
 		this.hbox7.Add (this.txt_countIndividuals);
 		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox7 [this.txt_countIndividuals]));
 		w16.Position = 1;
@@ -294,7 +295,7 @@ public partial class MainWindow
 		this.txt_maxGeneration.Adjustment.PageIncrement = 10;
 		this.txt_maxGeneration.ClimbRate = 1;
 		this.txt_maxGeneration.Numeric = true;
-		this.txt_maxGeneration.Value = 10;
+		this.txt_maxGeneration.Value = 150;
 		this.hbox8.Add (this.txt_maxGeneration);
 		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox8 [this.txt_maxGeneration]));
 		w19.Position = 1;
@@ -326,7 +327,7 @@ public partial class MainWindow
 		this.txt_countChilds.Adjustment.PageIncrement = 10;
 		this.txt_countChilds.ClimbRate = 1;
 		this.txt_countChilds.Numeric = true;
-		this.txt_countChilds.Value = 10;
+		this.txt_countChilds.Value = 200;
 		this.hbox9.Add (this.txt_countChilds);
 		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox9 [this.txt_countChilds]));
 		w22.Position = 1;
@@ -359,7 +360,7 @@ public partial class MainWindow
 		this.txt_recombProb.ClimbRate = 1;
 		this.txt_recombProb.Digits = ((uint)(2));
 		this.txt_recombProb.Numeric = true;
-		this.txt_recombProb.Value = 0.3;
+		this.txt_recombProb.Value = 0.8;
 		this.hbox10.Add (this.txt_recombProb);
 		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox10 [this.txt_recombProb]));
 		w25.Position = 1;
