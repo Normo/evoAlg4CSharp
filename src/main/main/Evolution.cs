@@ -14,6 +14,9 @@ namespace main
 		public delegate void FitnessMethod (Genome genome);
 		public delegate void MutateMethod (List<Genome> genomes);
 		
+		public delegate void OnProgressEvent(double percentage);
+      	public event OnProgressEvent OnProgress;
+		
 		public RecombineMethod Recombine;
 		public FitnessMethod CalcFitness;
 		public MutateMethod Mutate;
@@ -97,7 +100,7 @@ namespace main
 		/// <summary>
 		/// Der eigentliche evolutionäre Algorithmus - entspricht doc/EvoAlgTSP.pdf.
 		/// </summary>
-		public void Compute(BackgroundWorker worker)
+		public void Compute()
 		{
 			int countGeneration = 0;	
 			
@@ -113,9 +116,17 @@ namespace main
 			
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
 			{	
-				//Prozentualer Fortschritte an BackgroundWorker weiter geben
-				int percentage = (int)((float)(countGeneration + 1) / (float)maxGenerations * 100);
-				worker.ReportProgress(percentage);
+				//Event für Fortschritt feuern 
+				if (OnProgress != null)
+				{
+					double percentage = ((double)(countGeneration + 1) / (double)maxGenerations);
+					OnProgress(percentage);
+				}
+				
+				//Sagt dem Betriebssystem das es seine Evenets abarbeiten soll.
+				//Das verhindert (u.A.) das einfrieren der GUI
+				while (Application.EventsPending ())
+        			Application.RunIteration ();
 				
 				// 2. Berechne die Fitnesswerte von P(0)
 				foreach (Genome genome in p.curGeneration) {

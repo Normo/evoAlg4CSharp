@@ -14,50 +14,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		Build ();
 		OnCboEncryptionChanged(cbo_Encryption, null);
-		worker = new BackgroundWorker();
-		worker.WorkerReportsProgress = true;
-		worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-		worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-		worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-	}
-	
-	protected void worker_DoWork(object sender, DoWorkEventArgs e)
-	{
-		BackgroundWorker worker = sender as BackgroundWorker;
-		Problem problem = e.Argument as Problem;				
-		Evolution evol = new Evolution(problem);
-		
-		//evol.output = txt_Output;
-		
-		// Laufzeitmessung
-		Stopwatch watch = new Stopwatch();
-		watch.Start();
-		
-		evol.Compute(worker);
-		
-		//Laufzeitauswertung
-		watch.Stop();
-		problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
-	
-		e.Result = problem.Output.ToString();
-	}
-	
-	protected void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-	{
-		progressbar.Fraction = (double)e.ProgressPercentage / 100;
-		progressbar.Text = e.ProgressPercentage.ToString() + "%";
-	}
-	
-	protected void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-	{
-//		if (e.Error != null)
-//			txt_Output.Buffer.Text += "\r\n\r\n" + e.Error.Message;
-		
-		string result = e.Result as string;
-		//txt_Output.Buffer.Text = result;
-		Console.WriteLine(result);
-		btn_Start.Sensitive = true;
-	}
+	}	
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
@@ -66,30 +23,7 @@ public partial class MainWindow: Gtk.Window
 	}
 
 	protected void OnBtnStartClicked (object sender, EventArgs e)
-	{
-		/*
-		List<int> a = new List<int>() {1,2,3,4,8,5,6,7};
-		List<int> b = new List<int>() {1,4,8,6,5,7,2,3};
-		
-		a = Evolution.Mutate(a);
-		List<int> c = Evolution.Recombine(a,b);
-		
-		// für Fehlersuche: x sollte { 1, 3, 8, 4, 4, 2, 6, 7 } sein
-		Genome z = new Genome(new int[]{1,5,8,4,3,2,6,7});
-		Genome y = new Genome(new int[]{1,4,8,6,5,7,2,3});
-		Genome x = Evolution.Recombine(z,y);
-		
-		// Beispiel aus der Vorlesung
-		Genome z = new Genome(new int[]{1,2,3,4,8,5,6,7});
-		Genome y = new Genome(new int[]{1,4,8,6,5,7,2,3});
-		Genome x = Evolution.Recombine(z,y);
-		
-		//List<int> d = Genome.GetNewGenome(8);
-		
-		Console.WriteLine("Create new Population:");
-		Population p0 = new Population(100, 8);
-		*/
-		
+	{		
 		btn_Start.Sensitive = false;
 		
 		try
@@ -131,12 +65,35 @@ public partial class MainWindow: Gtk.Window
 			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
 			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
 			
-			worker.RunWorkerAsync(problem);
+							
+			Evolution evol = new Evolution(problem);
+			
+			//Methode zum behandeln des Fortschritt-Events zuweisen
+			evol.OnProgress += new Evolution.OnProgressEvent(OnEvolutionProgressChanged);
+			
+			// Laufzeitmessung
+			Stopwatch watch = new Stopwatch();
+			watch.Start();
+			
+			evol.Compute();
+			
+			//Laufzeitauswertung
+			watch.Stop();
+			problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
+						
+			txt_Output.Buffer.Text = problem.Output.ToString();
 		}
 		catch (Exception ex)
 		{
 			txt_Output.Buffer.Text += "\r\n\r\nFehler: " + ex.Message + "\r\n\r\n" + ex.StackTrace;
+			btn_Start.Sensitive = true;
 		}
+	}
+	
+	protected void OnEvolutionProgressChanged(double percentage)
+	{
+		progressbar.Fraction = percentage;
+		progressbar.Text = string.Format ("{0:0.00} %", percentage * 100);
 	}
 
 	protected void OnCboSelTypeChanged (object sender, System.EventArgs e)
