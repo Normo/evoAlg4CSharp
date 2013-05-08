@@ -597,6 +597,7 @@ public partial class MainWindow
 		this.cbo_recombBinary = global::Gtk.ComboBox.NewText ();
 		this.cbo_recombBinary.AppendText (global::Mono.Unix.Catalog.GetString ("1-Punkt"));
 		this.cbo_recombBinary.AppendText (global::Mono.Unix.Catalog.GetString ("2-Punkt"));
+		this.cbo_recombBinary.AppendText (global::Mono.Unix.Catalog.GetString ("Gleichmäßige (Template)"));
 		this.cbo_recombBinary.WidthRequest = 92;
 		this.cbo_recombBinary.Name = "cbo_recombBinary";
 		this.cbo_recombBinary.Active = 0;
