@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 
 namespace main
 {
@@ -125,7 +126,30 @@ namespace main
 		
 		public void MutateBinary (List<Genome> genomes)
 		{
-			//
+			//Test double <-> binary
+			
+			//Ausgangswert
+			double d = 512.123456789012345678901234567890;
+			Console.WriteLine("Dec:\t\t" + d);
+			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
+			
+			//double --> binary
+			Console.Write("Dbl Bin:\t");
+			BitArray bitarr = new BitArray(BitConverter.GetBytes(d));
+			for (int i = 0; i <= bitarr.Length -1; i++)
+			{
+				Console.Write(bitarr[i] ? 1 : 0);
+				//Punkte zur besseren Übersicht
+//				if ((i+1) % 4 == 0)
+//					Console.Write(".");
+			}
+			Console.WriteLine();
+			
+			//binary --> double
+			byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarr.Length / 8)];
+			bitarr.CopyTo(byteArray, 0); 
+			double result = BitConverter.ToDouble(byteArray, 0);
+			Console.WriteLine("Dec:\t\t" + result);
 		}
 		
 		public void MutateReal (List<Genome> genomes)

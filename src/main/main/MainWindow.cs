@@ -108,6 +108,8 @@ public partial class MainWindow: Gtk.Window
 	{
 		//Mal ne Exception, will ich eh alles anders machen
 		statusbar.Push(1,"Ditt jeht noch nich, keule.");
+		Problem bin = new Griewank();
+		bin.MutateBinary(null);
 	}
 
 	protected void OnCboEncryptionChanged (object sender, System.EventArgs e)
