@@ -8,7 +8,7 @@ namespace main
 	{		
 		public static void Plus (Population population, int TopCount)
 		{
-			List<Genome> newGen = new List<Genome> ();
+			List<Genome> newGen = new List<Genome> (population.totalSize*2);
 			newGen.AddRange (population.curGeneration);
 			newGen.AddRange (population.oldGeneration);
 			newGen.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
@@ -20,7 +20,7 @@ namespace main
 		
 		public static void Comma (Population population, int TopCount)
 		{
-			List<Genome> newGen = new List<Genome> ();
+			List<Genome> newGen = new List<Genome> (population.totalSize);
 			newGen.AddRange (population.curGeneration);
 			newGen.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
 

@@ -20,6 +20,8 @@ namespace main
 			//List<int> genome = new List<int>() {1};
 //			this.Add(1); //todo 1.1 Travelings Salesman ... muss dafür immer umkommentiert werden
 			
+			// Lege Kapazität des Genoms vorab fest
+			this.Capacity = size;
 			Random rnd = new Random(Guid.NewGuid().GetHashCode());
 			
 			double rndInt;

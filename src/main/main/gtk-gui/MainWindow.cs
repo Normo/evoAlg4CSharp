@@ -50,16 +50,16 @@ public partial class MainWindow
 	private global::Gtk.Label GtkLabel3;
 	private global::Gtk.Frame frame_Evolution;
 	private global::Gtk.Alignment GtkAlignment2;
-	private global::Gtk.VBox vbox6;
+	private global::Gtk.VBox pnl_EvolutionProperties;
 	private global::Gtk.HBox pnl_MutationType;
 	private global::Gtk.Label label8;
 	private global::Gtk.RadioButton rb_Change;
 	private global::Gtk.RadioButton rb_Invert;
-	private global::Gtk.HBox hbox5;
+	private global::Gtk.HBox pnl_SelPropType;
 	private global::Gtk.Label label9;
 	private global::Gtk.RadioButton rb_Fitness;
 	private global::Gtk.RadioButton rb_Rank;
-	private global::Gtk.HBox hbox6;
+	private global::Gtk.HBox pnl_ParentSelection;
 	private global::Gtk.Label label10;
 	private global::Gtk.ComboBox cbo_SelType;
 	private global::Gtk.SpinButton txt_TournamentMemberCount;
@@ -80,7 +80,7 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.Name = "MainWindow";
 		this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
-		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+		this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 		this.AllowShrink = true;
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox_main = new global::Gtk.VBox ();
@@ -91,7 +91,7 @@ public partial class MainWindow
 		this.pnl_mainWidget.CanDefault = true;
 		this.pnl_mainWidget.CanFocus = true;
 		this.pnl_mainWidget.Name = "pnl_mainWidget";
-		this.pnl_mainWidget.Position = 452;
+		this.pnl_mainWidget.Position = 382;
 		// Container child pnl_mainWidget.Gtk.Paned+PanedChild
 		this.vbox_left = new global::Gtk.VBox ();
 		this.vbox_left.WidthRequest = 382;
@@ -259,11 +259,9 @@ public partial class MainWindow
 		w15.Fill = false;
 		// Container child hbox7.Gtk.Box+BoxChild
 		this.txt_countIndividuals = new global::Gtk.SpinButton (0, 1000, 1);
+		this.txt_countIndividuals.WidthRequest = 70;
 		this.txt_countIndividuals.CanFocus = true;
 		this.txt_countIndividuals.Name = "txt_countIndividuals";
-		this.txt_countIndividuals.Adjustment.PageIncrement = 10;
-		this.txt_countIndividuals.ClimbRate = 1;
-		this.txt_countIndividuals.Numeric = true;
 		this.txt_countIndividuals.Value = 150;
 		this.hbox7.Add (this.txt_countIndividuals);
 		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox7 [this.txt_countIndividuals]));
@@ -291,11 +289,9 @@ public partial class MainWindow
 		w18.Fill = false;
 		// Container child hbox8.Gtk.Box+BoxChild
 		this.txt_maxGeneration = new global::Gtk.SpinButton (0, 10000, 1);
+		this.txt_maxGeneration.WidthRequest = 70;
 		this.txt_maxGeneration.CanFocus = true;
 		this.txt_maxGeneration.Name = "txt_maxGeneration";
-		this.txt_maxGeneration.Adjustment.PageIncrement = 10;
-		this.txt_maxGeneration.ClimbRate = 1;
-		this.txt_maxGeneration.Numeric = true;
 		this.txt_maxGeneration.Value = 150;
 		this.hbox8.Add (this.txt_maxGeneration);
 		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox8 [this.txt_maxGeneration]));
@@ -323,11 +319,9 @@ public partial class MainWindow
 		w21.Fill = false;
 		// Container child hbox9.Gtk.Box+BoxChild
 		this.txt_countChilds = new global::Gtk.SpinButton (0, 1000, 1);
+		this.txt_countChilds.WidthRequest = 70;
 		this.txt_countChilds.CanFocus = true;
 		this.txt_countChilds.Name = "txt_countChilds";
-		this.txt_countChilds.Adjustment.PageIncrement = 10;
-		this.txt_countChilds.ClimbRate = 1;
-		this.txt_countChilds.Numeric = true;
 		this.txt_countChilds.Value = 200;
 		this.hbox9.Add (this.txt_countChilds);
 		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox9 [this.txt_countChilds]));
@@ -355,12 +349,11 @@ public partial class MainWindow
 		w24.Fill = false;
 		// Container child hbox10.Gtk.Box+BoxChild
 		this.txt_recombProb = new global::Gtk.SpinButton (0, 1, 0.1);
+		this.txt_recombProb.WidthRequest = 70;
 		this.txt_recombProb.CanFocus = true;
 		this.txt_recombProb.Name = "txt_recombProb";
 		this.txt_recombProb.Adjustment.PageIncrement = 0.1;
-		this.txt_recombProb.ClimbRate = 1;
 		this.txt_recombProb.Digits = ((uint)(2));
-		this.txt_recombProb.Numeric = true;
 		this.txt_recombProb.Value = 0.8;
 		this.hbox10.Add (this.txt_recombProb);
 		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox10 [this.txt_recombProb]));
@@ -409,11 +402,9 @@ public partial class MainWindow
 		w30.Fill = false;
 		// Container child hbox11.Gtk.Box+BoxChild
 		this.txt_countGenes = new global::Gtk.SpinButton (0, 1000, 5);
+		this.txt_countGenes.WidthRequest = 0;
 		this.txt_countGenes.CanFocus = true;
 		this.txt_countGenes.Name = "txt_countGenes";
-		this.txt_countGenes.Adjustment.PageIncrement = 10;
-		this.txt_countGenes.ClimbRate = 1;
-		this.txt_countGenes.Numeric = true;
 		this.txt_countGenes.Value = 5;
 		this.hbox11.Add (this.txt_countGenes);
 		global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.hbox11 [this.txt_countGenes]));
@@ -446,10 +437,10 @@ public partial class MainWindow
 		this.GtkAlignment2.Name = "GtkAlignment2";
 		this.GtkAlignment2.LeftPadding = ((uint)(12));
 		// Container child GtkAlignment2.Gtk.Container+ContainerChild
-		this.vbox6 = new global::Gtk.VBox ();
-		this.vbox6.Name = "vbox6";
-		this.vbox6.Spacing = 6;
-		// Container child vbox6.Gtk.Box+BoxChild
+		this.pnl_EvolutionProperties = new global::Gtk.VBox ();
+		this.pnl_EvolutionProperties.Name = "pnl_EvolutionProperties";
+		this.pnl_EvolutionProperties.Spacing = 6;
+		// Container child pnl_EvolutionProperties.Gtk.Box+BoxChild
 		this.pnl_MutationType = new global::Gtk.HBox ();
 		this.pnl_MutationType.Name = "pnl_MutationType";
 		this.pnl_MutationType.Spacing = 6;
@@ -483,35 +474,35 @@ public partial class MainWindow
 		this.pnl_MutationType.Add (this.rb_Invert);
 		global::Gtk.Box.BoxChild w37 = ((global::Gtk.Box.BoxChild)(this.pnl_MutationType [this.rb_Invert]));
 		w37.Position = 2;
-		this.vbox6.Add (this.pnl_MutationType);
-		global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.pnl_MutationType]));
+		this.pnl_EvolutionProperties.Add (this.pnl_MutationType);
+		global::Gtk.Box.BoxChild w38 = ((global::Gtk.Box.BoxChild)(this.pnl_EvolutionProperties [this.pnl_MutationType]));
 		w38.Position = 0;
 		w38.Expand = false;
 		w38.Fill = false;
-		// Container child vbox6.Gtk.Box+BoxChild
-		this.hbox5 = new global::Gtk.HBox ();
-		this.hbox5.Name = "hbox5";
-		this.hbox5.Spacing = 6;
-		// Container child hbox5.Gtk.Box+BoxChild
+		// Container child pnl_EvolutionProperties.Gtk.Box+BoxChild
+		this.pnl_SelPropType = new global::Gtk.HBox ();
+		this.pnl_SelPropType.Name = "pnl_SelPropType";
+		this.pnl_SelPropType.Spacing = 6;
+		// Container child pnl_SelPropType.Gtk.Box+BoxChild
 		this.label9 = new global::Gtk.Label ();
 		this.label9.Name = "label9";
 		this.label9.LabelProp = global::Mono.Unix.Catalog.GetString ("Zufallsselektion");
-		this.hbox5.Add (this.label9);
-		global::Gtk.Box.BoxChild w39 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.label9]));
+		this.pnl_SelPropType.Add (this.label9);
+		global::Gtk.Box.BoxChild w39 = ((global::Gtk.Box.BoxChild)(this.pnl_SelPropType [this.label9]));
 		w39.Position = 0;
 		w39.Expand = false;
 		w39.Fill = false;
-		// Container child hbox5.Gtk.Box+BoxChild
+		// Container child pnl_SelPropType.Gtk.Box+BoxChild
 		this.rb_Fitness = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Fitness"));
 		this.rb_Fitness.CanFocus = true;
 		this.rb_Fitness.Name = "rb_Fitness";
 		this.rb_Fitness.DrawIndicator = true;
 		this.rb_Fitness.UseUnderline = true;
 		this.rb_Fitness.Group = new global::GLib.SList (global::System.IntPtr.Zero);
-		this.hbox5.Add (this.rb_Fitness);
-		global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.rb_Fitness]));
+		this.pnl_SelPropType.Add (this.rb_Fitness);
+		global::Gtk.Box.BoxChild w40 = ((global::Gtk.Box.BoxChild)(this.pnl_SelPropType [this.rb_Fitness]));
 		w40.Position = 1;
-		// Container child hbox5.Gtk.Box+BoxChild
+		// Container child pnl_SelPropType.Gtk.Box+BoxChild
 		this.rb_Rank = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Rang"));
 		this.rb_Rank.WidthRequest = 0;
 		this.rb_Rank.CanFocus = true;
@@ -519,29 +510,29 @@ public partial class MainWindow
 		this.rb_Rank.DrawIndicator = true;
 		this.rb_Rank.UseUnderline = true;
 		this.rb_Rank.Group = this.rb_Fitness.Group;
-		this.hbox5.Add (this.rb_Rank);
-		global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(this.hbox5 [this.rb_Rank]));
+		this.pnl_SelPropType.Add (this.rb_Rank);
+		global::Gtk.Box.BoxChild w41 = ((global::Gtk.Box.BoxChild)(this.pnl_SelPropType [this.rb_Rank]));
 		w41.Position = 2;
-		this.vbox6.Add (this.hbox5);
-		global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.hbox5]));
+		this.pnl_EvolutionProperties.Add (this.pnl_SelPropType);
+		global::Gtk.Box.BoxChild w42 = ((global::Gtk.Box.BoxChild)(this.pnl_EvolutionProperties [this.pnl_SelPropType]));
 		w42.Position = 1;
 		w42.Expand = false;
 		w42.Fill = false;
-		// Container child vbox6.Gtk.Box+BoxChild
-		this.hbox6 = new global::Gtk.HBox ();
-		this.hbox6.Name = "hbox6";
-		this.hbox6.Spacing = 6;
-		// Container child hbox6.Gtk.Box+BoxChild
+		// Container child pnl_EvolutionProperties.Gtk.Box+BoxChild
+		this.pnl_ParentSelection = new global::Gtk.HBox ();
+		this.pnl_ParentSelection.Name = "pnl_ParentSelection";
+		this.pnl_ParentSelection.Spacing = 6;
+		// Container child pnl_ParentSelection.Gtk.Box+BoxChild
 		this.label10 = new global::Gtk.Label ();
 		this.label10.WidthRequest = 107;
 		this.label10.Name = "label10";
 		this.label10.LabelProp = global::Mono.Unix.Catalog.GetString ("Elternselektion");
-		this.hbox6.Add (this.label10);
-		global::Gtk.Box.BoxChild w43 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.label10]));
+		this.pnl_ParentSelection.Add (this.label10);
+		global::Gtk.Box.BoxChild w43 = ((global::Gtk.Box.BoxChild)(this.pnl_ParentSelection [this.label10]));
 		w43.Position = 0;
 		w43.Expand = false;
 		w43.Fill = false;
-		// Container child hbox6.Gtk.Box+BoxChild
+		// Container child pnl_ParentSelection.Gtk.Box+BoxChild
 		this.cbo_SelType = global::Gtk.ComboBox.NewText ();
 		this.cbo_SelType.AppendText (global::Mono.Unix.Catalog.GetString ("Roulette"));
 		this.cbo_SelType.AppendText (global::Mono.Unix.Catalog.GetString ("q-Fache Turnierselektion"));
@@ -549,31 +540,29 @@ public partial class MainWindow
 		this.cbo_SelType.WidthRequest = 122;
 		this.cbo_SelType.Name = "cbo_SelType";
 		this.cbo_SelType.Active = 0;
-		this.hbox6.Add (this.cbo_SelType);
-		global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.cbo_SelType]));
+		this.pnl_ParentSelection.Add (this.cbo_SelType);
+		global::Gtk.Box.BoxChild w44 = ((global::Gtk.Box.BoxChild)(this.pnl_ParentSelection [this.cbo_SelType]));
 		w44.Position = 1;
 		w44.Expand = false;
 		w44.Fill = false;
-		// Container child hbox6.Gtk.Box+BoxChild
+		// Container child pnl_ParentSelection.Gtk.Box+BoxChild
 		this.txt_TournamentMemberCount = new global::Gtk.SpinButton (0, 100, 1);
 		this.txt_TournamentMemberCount.WidthRequest = 88;
 		this.txt_TournamentMemberCount.Sensitive = false;
 		this.txt_TournamentMemberCount.CanFocus = true;
 		this.txt_TournamentMemberCount.Name = "txt_TournamentMemberCount";
-		this.txt_TournamentMemberCount.Adjustment.PageIncrement = 10;
-		this.txt_TournamentMemberCount.ClimbRate = 1;
-		this.txt_TournamentMemberCount.Numeric = true;
-		this.hbox6.Add (this.txt_TournamentMemberCount);
-		global::Gtk.Box.BoxChild w45 = ((global::Gtk.Box.BoxChild)(this.hbox6 [this.txt_TournamentMemberCount]));
+		this.txt_TournamentMemberCount.Value = 3;
+		this.pnl_ParentSelection.Add (this.txt_TournamentMemberCount);
+		global::Gtk.Box.BoxChild w45 = ((global::Gtk.Box.BoxChild)(this.pnl_ParentSelection [this.txt_TournamentMemberCount]));
 		w45.Position = 2;
 		w45.Expand = false;
 		w45.Fill = false;
-		this.vbox6.Add (this.hbox6);
-		global::Gtk.Box.BoxChild w46 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.hbox6]));
+		this.pnl_EvolutionProperties.Add (this.pnl_ParentSelection);
+		global::Gtk.Box.BoxChild w46 = ((global::Gtk.Box.BoxChild)(this.pnl_EvolutionProperties [this.pnl_ParentSelection]));
 		w46.Position = 2;
 		w46.Expand = false;
 		w46.Fill = false;
-		// Container child vbox6.Gtk.Box+BoxChild
+		// Container child pnl_EvolutionProperties.Gtk.Box+BoxChild
 		this.pnl_recombEncrypt = new global::Gtk.HBox ();
 		this.pnl_recombEncrypt.Name = "pnl_recombEncrypt";
 		this.pnl_recombEncrypt.Spacing = 6;
@@ -611,12 +600,12 @@ public partial class MainWindow
 		w49.Position = 2;
 		w49.Expand = false;
 		w49.Fill = false;
-		this.vbox6.Add (this.pnl_recombEncrypt);
-		global::Gtk.Box.BoxChild w50 = ((global::Gtk.Box.BoxChild)(this.vbox6 [this.pnl_recombEncrypt]));
+		this.pnl_EvolutionProperties.Add (this.pnl_recombEncrypt);
+		global::Gtk.Box.BoxChild w50 = ((global::Gtk.Box.BoxChild)(this.pnl_EvolutionProperties [this.pnl_recombEncrypt]));
 		w50.Position = 3;
 		w50.Expand = false;
 		w50.Fill = false;
-		this.GtkAlignment2.Add (this.vbox6);
+		this.GtkAlignment2.Add (this.pnl_EvolutionProperties);
 		this.frame_Evolution.Add (this.GtkAlignment2);
 		this.GtkLabel9 = new global::Gtk.Label ();
 		this.GtkLabel9.Name = "GtkLabel9";
@@ -690,7 +679,7 @@ public partial class MainWindow
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
-		this.DefaultWidth = 820;
+		this.DefaultWidth = 744;
 		this.DefaultHeight = 547;
 		this.pnl_MutationType.Hide ();
 		this.cbo_recombBinary.Hide ();

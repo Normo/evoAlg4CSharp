@@ -34,9 +34,9 @@ namespace main
 		
 		public List<Genome> RecombineBinary (Genome genomeA, Genome genomeB)
 		{		
-			
-			List<double> childA = new List<double>();
-			List<double> childB = new List<double>();
+			int capacity = genomeA.Capacity;
+			List<double> childA = new List<double>(capacity);
+			List<double> childB = new List<double>(capacity);
 			
 			if (!RecombBinaryIsSinglePoint.HasValue)
 			{
@@ -70,7 +70,7 @@ namespace main
 				if ((rnd1+rnd2+1) <= genomeA.Count -1)
 					childB.AddRange(genomeB.GetRange((rnd1+rnd2+1), (genomeA.Count-1-rnd1-rnd2)));
 			}
-			List<Genome> result = new List<Genome>();
+			List<Genome> result = new List<Genome>(2);
 			result.Add(new GenomeReal(childA.ToArray()));
 			result.Add(new GenomeReal(childB.ToArray()));
 			return result;
@@ -78,7 +78,7 @@ namespace main
 		
 		public List<Genome> RecombineReal (Genome genomeA, Genome genomeB)
 		{
-			List<double> child = new List<double>();
+			List<double> child = new List<double>(genomeA.Capacity);
 			
 			if (RecombRealIsIntermidiate)
 			{
@@ -112,7 +112,7 @@ namespace main
 				}
 			}
 			
-			List<Genome> result = new List<Genome>();
+			List<Genome> result = new List<Genome>(1);
 			result.Add(new GenomeReal(child.ToArray()));
 			
 			return result;	
@@ -126,30 +126,31 @@ namespace main
 		
 		public void MutateBinary (List<Genome> genomes)
 		{
-			BitArray bitarray;
-			
-<<<<<<< HEAD
-			foreach (Genome genome in genomes)
-=======
-			//Ausgangswert
-			double d = -512.123456789012345678901234567890;
-			Console.WriteLine("Dec:\t\t" + d);
-			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
-			
-			//double --> binary
-			Console.Write("Dbl Bin:\t");
-			BitArray bitarr = new BitArray(BitConverter.GetBytes(d));
-			for (int i = 0; i <= bitarr.Length -1; i++)
->>>>>>> ff34d2e83fc5751d41fa024c54f076e63360e268
-			{
-				for (int i = 0; i <= genome.Count -1; i++)
-				{
-					bitarray = Helper.DoubleToBitArray(genome[i]);
-					//todo: Hobbit fragen: Invertieren oder Invertieren? xD
-					for (int j = 0; j <= bitarray.Count -1; j++)
-						bitarray[i] = bitarray[i] ? false : true;
-				}
-			}
+			throw new NotImplementedException ();
+//			BitArray bitarray;
+//			
+//<<<<<<< HEAD
+//			foreach (Genome genome in genomes)
+//=======
+//			//Ausgangswert
+//			double d = -512.123456789012345678901234567890;
+//			Console.WriteLine("Dec:\t\t" + d);
+//			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
+//			
+//			//double --> binary
+//			Console.Write("Dbl Bin:\t");
+//			BitArray bitarr = new BitArray(BitConverter.GetBytes(d));
+//			for (int i = 0; i <= bitarr.Length -1; i++)
+//>>>>>>> ff34d2e83fc5751d41fa024c54f076e63360e268
+//			{
+//				for (int i = 0; i <= genome.Count -1; i++)
+//				{
+//					bitarray = Helper.DoubleToBitArray(genome[i]);
+//					//todo: Hobbit fragen: Invertieren oder Invertieren? xD
+//					for (int j = 0; j <= bitarray.Count -1; j++)
+//						bitarray[i] = bitarray[i] ? false : true;
+//				}
+//			}
 		}
 		
 		public void MutateReal (List<Genome> genomes)
@@ -165,7 +166,7 @@ namespace main
 				{
 					rnd = random.NextDouble();
 					if (rnd <= rndProb)
-						genome[i] += 0.1;
+						genome[i] += 0.05;
 				}
 			}
 		}

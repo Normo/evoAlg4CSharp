@@ -10,7 +10,7 @@ namespace main
 	public class Population
 	{	
 		private Helper.Enums.Encryption _encryption;
-		
+		public int totalSize;
 		public List<Genome> curGeneration;
 		public List<Genome> oldGeneration;
 		
@@ -21,9 +21,11 @@ namespace main
 		/// <param name='genomeSize'>Größe des einzelnen Genomes</param>
 		public Population (int size, int genomeSize, double minAllelValue, double maxAllelValue, Helper.Enums.Encryption encryption)
 		{
-			_encryption = encryption;			
-			curGeneration = new List<Genome>();
-			oldGeneration = new List<Genome>();
+			_encryption = encryption;
+			// Erzeuge Listen mit fester Kapazität
+			curGeneration = new List<Genome>(size);
+			oldGeneration = new List<Genome>(size);
+			totalSize = size;
 			Genome tmp;
 			
 			for(int i = 0; i < size; i++)

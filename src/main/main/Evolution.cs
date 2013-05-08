@@ -41,6 +41,7 @@ namespace main
 		public int stableGenerations;					// Anzahl an Generationen, in denen sich die beste Fitness nicht geaendert hat
 		public List<double> bestSolutions;				// Liste mit den besten Fitnesswerten aus mehreren Durchläufen
 		public List<int> bestSolutionsGeneration;		// Liste mit den Generationzahlen, in denen die beste Fitness das erste Mal aufgetreten ist
+		public List<Genome> bestList;	
 		
 		private StringBuilder sb;
 		
@@ -70,6 +71,7 @@ namespace main
 			bestFitnessGeneration = 0;
 			bestSolutions = new List<double>();
 			bestSolutionsGeneration = new List<int>();
+			bestList = new List<Genome>(maxGenerations-1);
 			
 			switch (Encryption)
 			{
@@ -118,6 +120,8 @@ namespace main
 			foreach (Genome genome in p.curGeneration) {
 				CalcFitness(genome);
 			}
+			// Ermittel beste Lösung von P(0)
+			bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration);
 				
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
 			{	
@@ -133,16 +137,12 @@ namespace main
 				while (Application.EventsPending ())
         			Application.RunIteration ();
 				
-				if (countGeneration > 0)
-					bestGenome = p.curGeneration[0];
-				else
-					bestGenome = Helper.Fitness.GetBestGenome(p.curGeneration); // p.GetBestGenome();
-				
 				// Fitness des besten Genoms, ist hoeher als bisherige beste Fitness
 				if (bestGenome.Fitness < bestFitness)
 				{
 					bestFitness = bestGenome.Fitness;
 					bestFitnessGeneration = countGeneration + 1;
+					bestList.Add(bestGenome);
 				} 
 				else 
 				{
@@ -207,6 +207,7 @@ namespace main
 						Mutate(childs);
 						
 						// III.	Füge Kinder C zu P' hinzu
+						//todo: Binäre Rekombination liefert 2 Kinder zurück
 						if (!p.ContainsGenome(childs[0]))
 						{
 							p.curGeneration.AddRange(childs);
@@ -215,19 +216,28 @@ namespace main
 					}
 				}
 				
-				// 5. Erzeuge Kind-Population -> die besten Individuen aus P' + P(0)
+				// 5. Erzeuge Kind-Population -> die besten Individuen aus Kind- + Eltern-Generation
 				Selection.Plus(p, countIndividuals);
-				//todo: Selection.Comma(p, countIndividuals);
-				
+				bestGenome = p.curGeneration[0];
+
 				countGeneration++;
 			}
 
-			//Ausgabe der besten Genome
-			sb.AppendLine("Letzte Generation");
-			foreach (Genome genome in p.curGeneration)
-				sb.AppendLine(genome.AsString());
+			//Ausgabe der letzten Generation
+//			sb.AppendLine("Letzte Generation");
+//			foreach (Genome genome in p.curGeneration)
+//				sb.AppendLine(genome.AsString());
 			
-			// Speichere den besten Fitnesswert und die Generation in der er aufgetreten ist zur späteren Auswertung
+			// Ausgabe der besten Lösungen
+			sb.AppendLine("\r\nBestenliste");
+			int counter = 1;
+			for (int i = bestList.Count-1; i >= 0; i--)
+			{
+				sb.AppendLine(counter + ".\t" + bestList[i].AsString());
+				counter++;
+			}
+			
+			// Speichere den besten Fitnesswert und die Generation in der er aufgetreten ist zur späteren Auswertung (Evolutioniere x 10)
 			bestSolutions.Add(bestFitness);
 			bestSolutionsGeneration.Add(bestFitnessGeneration);
 		}
