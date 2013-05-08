@@ -66,12 +66,14 @@ namespace main
 			Dictionary<Genome, int> tournament = new Dictionary<Genome, int>();
 			int winCounter;
 			
+			Random random =  new Random(Guid.NewGuid().GetHashCode());
+			
 			foreach (Genome genome in generation)
 			{
 				winCounter = 0;
 				
 				for (int i = 0; i < memberCount; i++) {
-					if (genome.SelectionProbability > generation[Helper.GetRandomInteger(0,generation.Count-1)].SelectionProbability)
+					if (genome.SelectionProbability > generation[random.Next(0, generation.Count)].SelectionProbability)
 						winCounter++;
 				}				
 				tournament.Add(genome, winCounter);
@@ -80,7 +82,7 @@ namespace main
 			List<KeyValuePair<Genome, int>> winTable = tournament.ToList();
 			
 			winTable.Sort((a,b) => b.Value.CompareTo(a.Value));
-			return winTable[0].Key.Copy();
+			return winTable[0].Key;
 		}
 	}
 }

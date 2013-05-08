@@ -60,12 +60,13 @@ namespace main
 		
 		public bool ContainsGenome (Genome genome)
 		{
-			foreach (Genome popGenome in oldGeneration)
+			for (int i = 0; i <= oldGeneration.Count -1; i++)
 			{
-				if (popGenome.IsEqual(genome))
+				if (oldGeneration[i].IsEqual(genome))
 					return true;
-				if (popGenome.IsEqual(genome))
-					return true;
+				if (i <= curGeneration.Count -1)
+					if (curGeneration[i].IsEqual(genome))
+					    return true;
 			}
 			return false;			
 		}

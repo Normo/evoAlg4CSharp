@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace main
 {
@@ -55,6 +56,18 @@ namespace main
 		{
 			Random rnd =  new Random(Guid.NewGuid().GetHashCode());
 			return rnd.NextDouble();
+		}
+		
+		public static BitArray DoubleToBitArray(double value)
+		{
+			return new BitArray(BitConverter.GetBytes(value));
+		}
+		
+		public static double BitArrayToDouble(BitArray value)
+		{
+			byte[] byteArray = new byte[(int)Math.Ceiling((double)value.Length / 8)];
+			value.CopyTo(byteArray, 0); 
+			return BitConverter.ToDouble(byteArray, 0);
 		}
 		
 		public static class Enums

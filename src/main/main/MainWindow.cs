@@ -7,8 +7,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 
 public partial class MainWindow: Gtk.Window
-{		
-	private BackgroundWorker worker;
+{
 	private Stopwatch watch;
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)

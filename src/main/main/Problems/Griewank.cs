@@ -8,7 +8,7 @@ namespace main
 		public Griewank ()
 		{
 			minAllelValue = -512;
-			maxAllelValue = 512;
+			maxAllelValue = 511;
 		}
 
 		public override List<Genome> RecombineDefault (Genome genomeA, Genome genomeB)

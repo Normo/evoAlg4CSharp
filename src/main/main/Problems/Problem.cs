@@ -98,16 +98,16 @@ namespace main
 				
 				for (int i = 0; i <= genomeA.Count-1; i++)
 				{
-					if (genomeA[i] <= genomeB[i])
-					{
+//					if (genomeA[i] <= genomeB[i])
+//					{
 						a = genomeA[i];
 						b = genomeB[i];
-					}
-					else
-					{
-						a = genomeB[i];
-						b = genomeA[i];
-					}
+//					}
+//					else
+//					{
+//						a = genomeB[i];
+//						b = genomeA[i];
+//					}
 					child.Add((a + t * (b - a)));
 				}
 			}
@@ -126,30 +126,18 @@ namespace main
 		
 		public void MutateBinary (List<Genome> genomes)
 		{
-			//Test double <-> binary
+			BitArray bitarray;
 			
-			//Ausgangswert
-			double d = 512.123456789012345678901234567890;
-			Console.WriteLine("Dec:\t\t" + d);
-			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
-			
-			//double --> binary
-			Console.Write("Dbl Bin:\t");
-			BitArray bitarr = new BitArray(BitConverter.GetBytes(d));
-			for (int i = 0; i <= bitarr.Length -1; i++)
+			foreach (Genome genome in genomes)
 			{
-				Console.Write(bitarr[i] ? 1 : 0);
-				//Punkte zur besseren Übersicht
-//				if ((i+1) % 4 == 0)
-//					Console.Write(".");
+				for (int i = 0; i <= genome.Count -1; i++)
+				{
+					bitarray = Helper.DoubleToBitArray(genome[i]);
+					//todo: Hobbit fragen: Invertieren oder Invertieren? xD
+					for (int j = 0; j <= bitarray.Count -1; j++)
+						bitarray[i] = bitarray[i] ? false : true;
+				}
 			}
-			Console.WriteLine();
-			
-			//binary --> double
-			byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarr.Length / 8)];
-			bitarr.CopyTo(byteArray, 0); 
-			double result = BitConverter.ToDouble(byteArray, 0);
-			Console.WriteLine("Dec:\t\t" + result);
 		}
 		
 		public void MutateReal (List<Genome> genomes)
