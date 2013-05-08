@@ -109,7 +109,15 @@ public partial class MainWindow: Gtk.Window
 		//Mal ne Exception, will ich eh alles anders machen
 		statusbar.Push(1,"Ditt jeht noch nich, keule.");
 		Problem bin = new Griewank();
-		bin.MutateBinary(null);
+		bin.countIndividuals = (int)txt_countIndividuals.Value;
+		Genome a = new GenomeReal(5,-50,50);
+		Genome b = new GenomeReal(5,-50,50);
+		List<Genome> childs = new List<Genome>(2);
+		childs.Add(a);
+		childs.Add(b);
+		Console.WriteLine(a.AsString());
+		Console.WriteLine(b.AsString());
+		bin.MutateBinary(childs);
 	}
 
 	protected void OnCboEncryptionChanged (object sender, System.EventArgs e)

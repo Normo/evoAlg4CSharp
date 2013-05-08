@@ -262,6 +262,9 @@ public partial class MainWindow
 		this.txt_countIndividuals.WidthRequest = 70;
 		this.txt_countIndividuals.CanFocus = true;
 		this.txt_countIndividuals.Name = "txt_countIndividuals";
+		this.txt_countIndividuals.Adjustment.PageIncrement = 10;
+		this.txt_countIndividuals.ClimbRate = 1;
+		this.txt_countIndividuals.Numeric = true;
 		this.txt_countIndividuals.Value = 150;
 		this.hbox7.Add (this.txt_countIndividuals);
 		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox7 [this.txt_countIndividuals]));
@@ -292,6 +295,9 @@ public partial class MainWindow
 		this.txt_maxGeneration.WidthRequest = 70;
 		this.txt_maxGeneration.CanFocus = true;
 		this.txt_maxGeneration.Name = "txt_maxGeneration";
+		this.txt_maxGeneration.Adjustment.PageIncrement = 10;
+		this.txt_maxGeneration.ClimbRate = 1;
+		this.txt_maxGeneration.Numeric = true;
 		this.txt_maxGeneration.Value = 150;
 		this.hbox8.Add (this.txt_maxGeneration);
 		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox8 [this.txt_maxGeneration]));
@@ -322,6 +328,9 @@ public partial class MainWindow
 		this.txt_countChilds.WidthRequest = 70;
 		this.txt_countChilds.CanFocus = true;
 		this.txt_countChilds.Name = "txt_countChilds";
+		this.txt_countChilds.Adjustment.PageIncrement = 10;
+		this.txt_countChilds.ClimbRate = 1;
+		this.txt_countChilds.Numeric = true;
 		this.txt_countChilds.Value = 200;
 		this.hbox9.Add (this.txt_countChilds);
 		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox9 [this.txt_countChilds]));
@@ -353,7 +362,9 @@ public partial class MainWindow
 		this.txt_recombProb.CanFocus = true;
 		this.txt_recombProb.Name = "txt_recombProb";
 		this.txt_recombProb.Adjustment.PageIncrement = 0.1;
+		this.txt_recombProb.ClimbRate = 1;
 		this.txt_recombProb.Digits = ((uint)(2));
+		this.txt_recombProb.Numeric = true;
 		this.txt_recombProb.Value = 0.8;
 		this.hbox10.Add (this.txt_recombProb);
 		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox10 [this.txt_recombProb]));
@@ -405,6 +416,9 @@ public partial class MainWindow
 		this.txt_countGenes.WidthRequest = 0;
 		this.txt_countGenes.CanFocus = true;
 		this.txt_countGenes.Name = "txt_countGenes";
+		this.txt_countGenes.Adjustment.PageIncrement = 10;
+		this.txt_countGenes.ClimbRate = 1;
+		this.txt_countGenes.Numeric = true;
 		this.txt_countGenes.Value = 5;
 		this.hbox11.Add (this.txt_countGenes);
 		global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.hbox11 [this.txt_countGenes]));
@@ -551,6 +565,9 @@ public partial class MainWindow
 		this.txt_TournamentMemberCount.Sensitive = false;
 		this.txt_TournamentMemberCount.CanFocus = true;
 		this.txt_TournamentMemberCount.Name = "txt_TournamentMemberCount";
+		this.txt_TournamentMemberCount.Adjustment.PageIncrement = 10;
+		this.txt_TournamentMemberCount.ClimbRate = 1;
+		this.txt_TournamentMemberCount.Numeric = true;
 		this.txt_TournamentMemberCount.Value = 3;
 		this.pnl_ParentSelection.Add (this.txt_TournamentMemberCount);
 		global::Gtk.Box.BoxChild w45 = ((global::Gtk.Box.BoxChild)(this.pnl_ParentSelection [this.txt_TournamentMemberCount]));

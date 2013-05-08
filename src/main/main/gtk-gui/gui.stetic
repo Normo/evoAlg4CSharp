@@ -261,6 +261,10 @@ Reell</property>
                                             <property name="WidthRequest">70</property>
                                             <property name="CanFocus">True</property>
                                             <property name="Upper">1000</property>
+                                            <property name="PageIncrement">10</property>
+                                            <property name="StepIncrement">1</property>
+                                            <property name="ClimbRate">1</property>
+                                            <property name="Numeric">True</property>
                                             <property name="Value">150</property>
                                           </widget>
                                           <packing>
@@ -301,6 +305,10 @@ Reell</property>
                                             <property name="WidthRequest">70</property>
                                             <property name="CanFocus">True</property>
                                             <property name="Upper">10000</property>
+                                            <property name="PageIncrement">10</property>
+                                            <property name="StepIncrement">1</property>
+                                            <property name="ClimbRate">1</property>
+                                            <property name="Numeric">True</property>
                                             <property name="Value">150</property>
                                           </widget>
                                           <packing>
@@ -341,6 +349,10 @@ Reell</property>
                                             <property name="WidthRequest">70</property>
                                             <property name="CanFocus">True</property>
                                             <property name="Upper">1000</property>
+                                            <property name="PageIncrement">10</property>
+                                            <property name="StepIncrement">1</property>
+                                            <property name="ClimbRate">1</property>
+                                            <property name="Numeric">True</property>
                                             <property name="Value">200</property>
                                           </widget>
                                           <packing>
@@ -383,7 +395,9 @@ Reell</property>
                                             <property name="Upper">1</property>
                                             <property name="PageIncrement">0.1</property>
                                             <property name="StepIncrement">0.1</property>
+                                            <property name="ClimbRate">1</property>
                                             <property name="Digits">2</property>
+                                            <property name="Numeric">True</property>
                                             <property name="Value">0.8</property>
                                           </widget>
                                           <packing>
@@ -455,7 +469,10 @@ Reell</property>
                                         <property name="WidthRequest">0</property>
                                         <property name="CanFocus">True</property>
                                         <property name="Upper">1000</property>
+                                        <property name="PageIncrement">10</property>
                                         <property name="StepIncrement">5</property>
+                                        <property name="ClimbRate">1</property>
+                                        <property name="Numeric">True</property>
                                         <property name="Value">5</property>
                                       </widget>
                                       <packing>
@@ -662,6 +679,11 @@ q-Stufige Zweifache Turnierselektion</property>
                                             <property name="WidthRequest">88</property>
                                             <property name="Sensitive">False</property>
                                             <property name="CanFocus">True</property>
+                                            <property name="Upper">100</property>
+                                            <property name="PageIncrement">10</property>
+                                            <property name="StepIncrement">1</property>
+                                            <property name="ClimbRate">1</property>
+                                            <property name="Numeric">True</property>
                                             <property name="Value">3</property>
                                           </widget>
                                           <packing>

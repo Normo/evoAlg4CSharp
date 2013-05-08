@@ -126,31 +126,51 @@ namespace main
 		
 		public void MutateBinary (List<Genome> genomes)
 		{
-			throw new NotImplementedException ();
-//			BitArray bitarray;
-//			
-//<<<<<<< HEAD
-//			foreach (Genome genome in genomes)
-//=======
-//			//Ausgangswert
-//			double d = -512.123456789012345678901234567890;
-//			Console.WriteLine("Dec:\t\t" + d);
-//			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
-//			
-//			//double --> binary
-//			Console.Write("Dbl Bin:\t");
-//			BitArray bitarr = new BitArray(BitConverter.GetBytes(d));
-//			for (int i = 0; i <= bitarr.Length -1; i++)
-//>>>>>>> ff34d2e83fc5751d41fa024c54f076e63360e268
-//			{
-//				for (int i = 0; i <= genome.Count -1; i++)
-//				{
-//					bitarray = Helper.DoubleToBitArray(genome[i]);
-//					//todo: Hobbit fragen: Invertieren oder Invertieren? xD
-//					for (int j = 0; j <= bitarray.Count -1; j++)
-//						bitarray[i] = bitarray[i] ? false : true;
-//				}
-//			}
+			//throw new NotImplementedException ();
+			
+			// Erzeugung zweier Zufallsindices
+			Random rnd = new Random(Guid.NewGuid().GetHashCode());
+			// 1 < z1 < Populationsgröße
+			int z1 = rnd.Next(1, countIndividuals);
+			// 0 < z2 < Anzahl der Gene
+			int z2 = rnd.Next(1, genomes[0].Count);
+			
+			double rndProb = 1.0 / countIndividuals;
+			
+			BitArray bitarray = new BitArray(Helper.DoubleToBitArray(512.0));
+			foreach (Genome genome in genomes)
+			{
+				Console.Write("\r\nGenom: ");
+				for (int i = 0; i <= genome.Count -1; i++)
+				{
+					bitarray = Helper.DoubleToBitArray(genome[i]);
+					Console.Write(String.Format("\r\n\tDec:\t\t {0}\r\n\tVorher:\t", genome[i].ToString()));
+					for (int j = 0; j <= bitarray.Count -1; j++)
+					{
+						Console.Write(bitarray[j] ? 1 : 0);
+						//Punkte zur besseren Übersicht
+						if ((j+1) % 4 == 0)
+						Console.Write(".");
+						bitarray[j] = bitarray[j] ? false : true;
+					}
+					Console.Write("\r\n\tNachher:\t");
+					for (int k = 0; k <= bitarray.Length -1; k++)
+					{
+						Console.Write(bitarray[k] ? 1 : 0);
+						//Punkte zur besseren Übersicht
+				        if ((k+1) % 4 == 0)
+				          Console.Write(".");
+					}
+					byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarray.Length / 8.0)];
+					bitarray.CopyTo(byteArray, 0); 
+					double result = BitConverter.ToDouble(byteArray, 0);
+					Console.WriteLine("\r\n\tDec:\t\t" + result); 
+				}
+			}
+//			byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarray.Length / 8.0)];
+//			bitarray.CopyTo(byteArray, 0); 
+//			double result = BitConverter.ToDouble(byteArray, 0);
+//			Console.WriteLine("\r\nDec:\t\t" + result); 
 		}
 		
 		public void MutateReal (List<Genome> genomes)
