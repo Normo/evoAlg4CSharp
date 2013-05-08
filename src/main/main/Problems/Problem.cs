@@ -22,6 +22,7 @@ namespace main
 		public bool? RecombBinaryIsSinglePoint;
 		public bool RecombRealIsIntermidiate;
 		public StringBuilder Output;
+		public List<bool> templateGenom;
 		
 		public Problem ()
 		{
@@ -34,14 +35,39 @@ namespace main
 		
 		public List<Genome> RecombineBinary (Genome genomeA, Genome genomeB)
 		{		
-			int capacity = genomeA.Capacity;
-			List<double> childA = new List<double>(capacity);
-			List<double> childB = new List<double>(capacity);
+			List<double> childA = new List<double>(countGene);
+			List<double> childB = new List<double>(countGene);
 			
 			if (!RecombBinaryIsSinglePoint.HasValue)
 			{
-				//todo gleichmäßige Rekomb.
-				return null;
+				// Gleichmäßige Rekombination
+				
+				// Erzeuge Template einmalig
+				if (templateGenom == null)
+				{
+					templateGenom = new List<bool>(countGene);
+					Random random = new Random(Guid.NewGuid().GetHashCode());
+					for (int i=0; i < countGene; i++)
+					{
+						templateGenom[i] = (Convert.ToBoolean(random.Next(2)))? true : false;
+					}
+				}
+				
+				childA.AddRange(genomeA);
+				childB.AddRange(genomeB);
+				
+				// Tausche Allele anhand Template
+				double tmp;
+				for (int i=0; i < countGene; i++)
+				{
+					// Wenn false im Template -> tausche Allele
+					if (!templateGenom[i])
+					{
+						tmp = childA[i];
+						childA[i] = childB[i];
+						childB[i] = tmp;
+					}
+				}
 			}
 			else if (RecombBinaryIsSinglePoint.Value)
 			{
