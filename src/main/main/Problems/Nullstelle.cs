@@ -6,6 +6,8 @@ namespace main
 	{
 		public Nullstelle ()
 		{
+			minAllelValue = -50;
+			maxAllelValue = 50;
 		}
 
 		#region implemented abstract members of main.Problem
@@ -17,25 +19,17 @@ namespace main
 		public override void CalcFitnessDefault (Genome genome)
 		{
 			//throw new NotImplementedException ();
-			
+			//Genome genome = new GenomeReal(new double[] {0.0,0.0,0.0,0.0,0.0});
 			genome.Fitness = 0;
 			
-			double i = 1.0;
-			double fi = 0.0;
-			double n = (double)genome.Count;
-			double a = 0.0, b = 1.0;
+			double a = 0.0;
 			
 			foreach (double gene in genome)
 			{
-				if (i + 1 == n)
-				{
-//					for (int j = 1; j <= n; j++)
-				}
-					
-				i++;
+				a += gene * gene;
 			}
-			
-			
+			genome.Fitness = Math.Sqrt(a);
+			//Console.WriteLine(genome.Fitness);
 		}
 
 		public override void CalcFitnessBinary (Genome genome)

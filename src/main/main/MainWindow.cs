@@ -36,6 +36,7 @@ public partial class MainWindow: Gtk.Window
 				case 0 :	problem = new TravelingSalesMan(); break;
 				case 1 :	problem = new Griewank(); break;
 				case 2 :	problem = new Ackley(); break;
+				case 3 :	problem = new Nullstelle(); break;
 			}
 			
 			if (problem == null)

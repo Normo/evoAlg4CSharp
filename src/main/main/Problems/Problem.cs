@@ -128,7 +128,19 @@ namespace main
 		{
 			BitArray bitarray;
 			
+<<<<<<< HEAD
 			foreach (Genome genome in genomes)
+=======
+			//Ausgangswert
+			double d = -512.123456789012345678901234567890;
+			Console.WriteLine("Dec:\t\t" + d);
+			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
+			
+			//double --> binary
+			Console.Write("Dbl Bin:\t");
+			BitArray bitarr = new BitArray(BitConverter.GetBytes(d));
+			for (int i = 0; i <= bitarr.Length -1; i++)
+>>>>>>> ff34d2e83fc5751d41fa024c54f076e63360e268
 			{
 				for (int i = 0; i <= genome.Count -1; i++)
 				{
