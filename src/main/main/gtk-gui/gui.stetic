@@ -725,7 +725,8 @@ q-Stufige Zweifache Turnierselektion</property>
                                             <property name="Visible">False</property>
                                             <property name="IsTextCombo">True</property>
                                             <property name="Items" translatable="yes">1-Punkt
-2-Punkt</property>
+2-Punkt
+Gleichmäßige (Template)</property>
                                             <property name="Active">0</property>
                                           </widget>
                                           <packing>
