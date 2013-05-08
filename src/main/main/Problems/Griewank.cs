@@ -39,16 +39,6 @@ namespace main
 			}
 			genome.Fitness = 1.0 + a / (400.0 * genome.Count) - b;
 		}
-
-		public override void CalcFitnessBinary (Genome genome)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void CalcFitnessReal (Genome genome)
-		{
-			CalcFitnessDefault(genome);
-		}
 		
 		public override void MutateDefault (List<Genome> genomes)
 		{

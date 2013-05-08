@@ -73,26 +73,25 @@ namespace main
 			bestSolutionsGeneration = new List<int>();
 			bestList = new List<Genome>(maxGenerations-1);
 			
+			CalcFitness = problem.CalcFitnessDefault;
+			
 			switch (Encryption)
 			{
 				case Helper.Enums.Encryption.None :
 				{
 					Recombine = problem.RecombineDefault; 
-					CalcFitness = problem.CalcFitnessDefault;
 					Mutate = problem.MutateDefault;
 					break;
 				}
 				case Helper.Enums.Encryption.Binary :
 				{
-					Recombine = problem.RecombineBinary;
-					CalcFitness = problem.CalcFitnessBinary;				
+					Recombine = problem.RecombineBinary;				
 					Mutate = problem.MutateBinary;
 					break;
 				}
 				case Helper.Enums.Encryption.Real :
 				{
 					Recombine = problem.RecombineReal;
-					CalcFitness = problem.CalcFitnessReal;
 					Mutate = problem.MutateReal;
 					break;
 				}

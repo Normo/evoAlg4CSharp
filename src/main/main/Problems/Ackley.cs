@@ -47,16 +47,6 @@ namespace main
 //			Console.WriteLine(genome.Fitness);
 		}
 
-		public override void CalcFitnessBinary (Genome genome)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void CalcFitnessReal (Genome genome)
-		{
-			CalcFitnessDefault(genome);
-		}
-
 		public override void MutateDefault (List<Genome> genomes)
 		{
 			throw new NotImplementedException ();

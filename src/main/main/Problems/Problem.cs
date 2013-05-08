@@ -119,8 +119,6 @@ namespace main
 		}
 		
 		public abstract void CalcFitnessDefault (Genome genome);
-		public abstract void CalcFitnessBinary (Genome genome);
-		public abstract void CalcFitnessReal (Genome genome);
 		
 		public abstract void MutateDefault (List<Genome> genomes);
 		

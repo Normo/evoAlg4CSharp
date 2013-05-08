@@ -158,18 +158,6 @@ namespace main
 			}
 			return;
 		}
-
-		#region implemented abstract members of main.Problem
-		public override void CalcFitnessBinary (Genome genome)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void CalcFitnessReal (Genome genome)
-		{
-			throw new NotImplementedException ();
-		}
-		#endregion
 	}
 }
 
