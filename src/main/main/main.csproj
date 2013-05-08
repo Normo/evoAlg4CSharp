@@ -82,6 +82,7 @@
     <Compile Include="Problems\Griewank.cs" />
     <Compile Include="Problems\TestBinary.cs" />
     <Compile Include="Problems\Ackley.cs" />
+    <Compile Include="Problems\Nullstelle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
