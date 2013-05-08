@@ -129,13 +129,13 @@ namespace main
 			//throw new NotImplementedException ();
 			
 			// Erzeugung zweier Zufallsindices
-			Random rnd = new Random(Guid.NewGuid().GetHashCode());
-			// 1 < z1 < Populationsgröße
-			int z1 = rnd.Next(1, countIndividuals);
-			// 0 < z2 < Anzahl der Gene
-			int z2 = rnd.Next(1, genomes[0].Count);
-			
-			double rndProb = 1.0 / countIndividuals;
+//			Random rnd = new Random(Guid.NewGuid().GetHashCode());
+//			// 1 < z1 < Populationsgröße
+//			int z1 = rnd.Next(1, countIndividuals);
+//			// 0 < z2 < Anzahl der Gene
+//			int z2 = rnd.Next(1, genomes[0].Count);
+//			
+//			double rndProb = 1.0 / countIndividuals;
 			
 			BitArray bitarray = new BitArray(Helper.DoubleToBitArray(512.0));
 			foreach (Genome genome in genomes)
@@ -145,6 +145,7 @@ namespace main
 				{
 					bitarray = Helper.DoubleToBitArray(genome[i]);
 					Console.Write(String.Format("\r\n\tDec:\t\t {0}\r\n\tVorher:\t", genome[i].ToString()));
+					// Ausgabe und anschließend Invertierung
 					for (int j = 0; j <= bitarray.Count -1; j++)
 					{
 						Console.Write(bitarray[j] ? 1 : 0);
@@ -154,6 +155,7 @@ namespace main
 						bitarray[j] = bitarray[j] ? false : true;
 					}
 					Console.Write("\r\n\tNachher:\t");
+					// Ausgabe nach Invertierung
 					for (int k = 0; k <= bitarray.Length -1; k++)
 					{
 						Console.Write(bitarray[k] ? 1 : 0);
