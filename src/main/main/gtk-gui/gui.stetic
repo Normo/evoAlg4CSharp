@@ -117,7 +117,8 @@
                                         <property name="IsTextCombo">True</property>
                                         <property name="Items" translatable="yes">Traveling Salesman
 Griewank
-Ackley</property>
+Ackley
+Nullstelle</property>
                                         <property name="Active">1</property>
                                       </widget>
                                       <packing>
@@ -462,12 +463,12 @@ Reell</property>
                                       <widget class="Gtk.SpinButton" id="txt_countGenes">
                                         <property name="MemberName" />
                                         <property name="CanFocus">True</property>
-                                        <property name="Upper">100</property>
+                                        <property name="Upper">1000</property>
                                         <property name="PageIncrement">10</property>
-                                        <property name="StepIncrement">1</property>
+                                        <property name="StepIncrement">5</property>
                                         <property name="ClimbRate">1</property>
                                         <property name="Numeric">True</property>
-                                        <property name="Value">6</property>
+                                        <property name="Value">5</property>
                                       </widget>
                                       <packing>
                                         <property name="Position">1</property>

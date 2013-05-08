@@ -161,6 +161,7 @@ public partial class MainWindow
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Traveling Salesman"));
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Griewank"));
 		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Ackley"));
+		this.cbo_Problem.AppendText (global::Mono.Unix.Catalog.GetString ("Nullstelle"));
 		this.cbo_Problem.Name = "cbo_Problem";
 		this.cbo_Problem.Active = 1;
 		this.vbox_ProblemArt.Add (this.cbo_Problem);
@@ -407,13 +408,13 @@ public partial class MainWindow
 		w30.Expand = false;
 		w30.Fill = false;
 		// Container child hbox11.Gtk.Box+BoxChild
-		this.txt_countGenes = new global::Gtk.SpinButton (0, 100, 1);
+		this.txt_countGenes = new global::Gtk.SpinButton (0, 1000, 5);
 		this.txt_countGenes.CanFocus = true;
 		this.txt_countGenes.Name = "txt_countGenes";
 		this.txt_countGenes.Adjustment.PageIncrement = 10;
 		this.txt_countGenes.ClimbRate = 1;
 		this.txt_countGenes.Numeric = true;
-		this.txt_countGenes.Value = 6;
+		this.txt_countGenes.Value = 5;
 		this.hbox11.Add (this.txt_countGenes);
 		global::Gtk.Box.BoxChild w31 = ((global::Gtk.Box.BoxChild)(this.hbox11 [this.txt_countGenes]));
 		w31.Position = 1;

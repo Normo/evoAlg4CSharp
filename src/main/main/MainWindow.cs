@@ -7,8 +7,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 
 public partial class MainWindow: Gtk.Window
-{		
-	private BackgroundWorker worker;
+{
 	private Stopwatch watch;
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
@@ -37,6 +36,7 @@ public partial class MainWindow: Gtk.Window
 				case 0 :	problem = new TravelingSalesMan(); break;
 				case 1 :	problem = new Griewank(); break;
 				case 2 :	problem = new Ackley(); break;
+				case 3 :	problem = new Nullstelle(); break;
 			}
 			
 			if (problem == null)

@@ -129,7 +129,7 @@ namespace main
 			//Test double <-> binary
 			
 			//Ausgangswert
-			double d = 512.123456789012345678901234567890;
+			double d = -512.123456789012345678901234567890;
 			Console.WriteLine("Dec:\t\t" + d);
 			Console.WriteLine("Int Bin:\t" + Convert.ToString((int)d,2));
 			
