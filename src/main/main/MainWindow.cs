@@ -9,11 +9,13 @@ using System.ComponentModel;
 public partial class MainWindow: Gtk.Window
 {		
 	private BackgroundWorker worker;
+	private Stopwatch watch;
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		OnCboEncryptionChanged(cbo_Encryption, null);
+		watch = new Stopwatch();
 	}	
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -25,7 +27,7 @@ public partial class MainWindow: Gtk.Window
 	protected void OnBtnStartClicked (object sender, EventArgs e)
 	{		
 		btn_Start.Sensitive = false;
-		
+		txt_Output.Buffer.Clear();
 		try
 		{
 			Problem problem = null;
@@ -72,16 +74,16 @@ public partial class MainWindow: Gtk.Window
 			evol.OnProgress += new Evolution.OnProgressEvent(OnEvolutionProgressChanged);
 			
 			// Laufzeitmessung
-			Stopwatch watch = new Stopwatch();
 			watch.Start();
 			
 			evol.Compute();
 			
 			//Laufzeitauswertung
-			watch.Stop();
-			problem.Output.AppendLine("\r\nLaufzeit: " + watch.Elapsed);
-						
+			watch.Reset();
+			
 			txt_Output.Buffer.Text = problem.Output.ToString();
+			
+			btn_Start.Sensitive = true;
 		}
 		catch (Exception ex)
 		{
@@ -94,6 +96,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		progressbar.Fraction = percentage;
 		progressbar.Text = string.Format ("{0:0.00} %", percentage * 100);
+		statusbar.Push(1,"Laufzeit: " + watch.Elapsed);
 	}
 
 	protected void OnCboSelTypeChanged (object sender, System.EventArgs e)
@@ -103,66 +106,10 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnBtnStart10Clicked (object sender, System.EventArgs e)
 	{
-		try
-		{
-			Problem problem = null;
-			
-			switch (cbo_Problem.Active)
-			{
-				case 0 :	problem = new TravelingSalesMan(); break;
-				case 1 :	problem = new Griewank(); break;
-				case 2 :	problem = new Ackley(); break;
-			}
-			
-			if (problem == null)
-				throw new NullReferenceException();
-			
-			problem.countGene = (int)txt_countGenes.Value;
-			problem.maxGenerations = (int)txt_maxGeneration.Value;
-			problem.countIndividuals = (int)txt_countIndividuals.Value;
-			problem.countChilds = (int)txt_countChilds.Value;
-			problem.recombinationProbability = txt_recombProb.Value;
-			
-			if (cbo_Encryption.Active == 1)
-			{
-				problem.RecombBinaryIsSinglePoint = cbo_recombBinary.Active == 0;
-			}
-			if (cbo_Encryption.Active == 2)
-			{
-				problem.RecombRealIsIntermidiate = cbo_recombReal.Active == 0;
-			}
-		
-			problem.InvertOnMutate = rb_Invert.Active ? true : false;
-		
-			problem.minAllelValue = problem.minAllelValue == 0 ? 1 : problem.minAllelValue;
-			problem.maxAllelValue = problem.maxAllelValue == 0 ? problem.countGene + 1 : problem.maxAllelValue;
-		
-			problem.SelPropType = rb_Fitness.Active ? main.Helper.Enums.SelPropType.Fitness : main.Helper.Enums.SelPropType.Ranking;
-			problem.SelType = (main.Helper.Enums.SelType)cbo_SelType.Active;
-			problem.Encryption = (main.Helper.Enums.Encryption)cbo_Encryption.Active;	
-			problem.TournamentMemberCount = (int)txt_TournamentMemberCount.Value;
-							
-			Evolution evol = new Evolution(problem);
-			//evol.output = txt_Output;
-			
-			// Laufzeitmessung
-			Stopwatch watch = new Stopwatch();
-			watch.Start();
-			
-			for(int i = 0; i < 10; i++)
-			{
-				//evol.Compute();
-			}
-			evol.GetStats();
-			
-			//Laufzeitauswertung
-			watch.Stop();
-			txt_Output.Buffer.Text += "\r\n\r\nLaufzeit: " + watch.Elapsed;
-		}
-		catch (Exception ex)
-		{
-			txt_Output.Buffer.Text += "\r\n\r\nFehler: " + ex.Message + "\r\n\r\n" + ex.StackTrace;
-		}
+		//Mal ne Exception, will ich eh alles anders machen
+		statusbar.Push(1,"Ditt jeht noch nich, keule.");
+		Problem bin = new Griewank();
+		bin.MutateBinary(null);
 	}
 
 	protected void OnCboEncryptionChanged (object sender, System.EventArgs e)

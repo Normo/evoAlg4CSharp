@@ -8,7 +8,7 @@
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../bin/Debug/main.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="744 547">
+  <widget class="Gtk.Window" id="MainWindow" design-size="820 547">
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -24,7 +24,7 @@
             <property name="CanDefault">True</property>
             <property name="HasDefault">True</property>
             <property name="CanFocus">True</property>
-            <property name="Position">382</property>
+            <property name="Position">452</property>
             <child>
               <widget class="Gtk.VBox" id="vbox_left">
                 <property name="MemberName" />
@@ -132,7 +132,7 @@ Ackley</property>
                               </widget>
                             </child>
                             <child>
-                              <widget class="Gtk.Label" id="GtkLabel">
+                              <widget class="Gtk.Label" id="GtkLabel1">
                                 <property name="MemberName" />
                                 <property name="LabelProp" translatable="yes">&lt;b&gt;Art&lt;/b&gt;</property>
                                 <property name="UseMarkup">True</property>
@@ -415,7 +415,7 @@ Reell</property>
                               </widget>
                             </child>
                             <child>
-                              <widget class="Gtk.Label" id="GtkLabel1">
+                              <widget class="Gtk.Label" id="GtkLabel2">
                                 <property name="MemberName" />
                                 <property name="LabelProp" translatable="yes">&lt;b&gt;Population&lt;/b&gt;</property>
                                 <property name="UseMarkup">True</property>
@@ -487,7 +487,7 @@ Reell</property>
                               </widget>
                             </child>
                             <child>
-                              <widget class="Gtk.Label" id="GtkLabel2">
+                              <widget class="Gtk.Label" id="GtkLabel3">
                                 <property name="MemberName" />
                                 <property name="LabelProp" translatable="yes">&lt;b&gt;Genom&lt;/b&gt;</property>
                                 <property name="UseMarkup">True</property>
@@ -830,6 +830,7 @@ Arithmetisch</property>
                 </child>
               </widget>
               <packing>
+                <property name="Resize">False</property>
                 <property name="Shrink">False</property>
               </packing>
             </child>
@@ -842,6 +843,7 @@ Arithmetisch</property>
         <child>
           <widget class="Gtk.Statusbar" id="statusbar">
             <property name="MemberName" />
+            <property name="Homogeneous">True</property>
             <property name="Spacing">6</property>
             <child>
               <widget class="Gtk.ProgressBar" id="progressbar">
@@ -858,7 +860,7 @@ Arithmetisch</property>
           </widget>
           <packing>
             <property name="Position">1</property>
-            <property name="AutoSize">True</property>
+            <property name="AutoSize">False</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
           </packing>

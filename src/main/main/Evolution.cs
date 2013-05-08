@@ -114,6 +114,11 @@ namespace main
 			// 1. Initialisiere Population P(0) mit zufälligen Genomen
 			Population p = new Population(countIndividuals, countGene, minAllelValue, maxAllelValue, Encryption);
 			
+			// 2. Berechne die Fitnesswerte von P(0)
+			foreach (Genome genome in p.curGeneration) {
+				CalcFitness(genome);
+			}
+				
 			while(countGeneration < maxGenerations && stableGenerations < 1000)
 			{	
 				//Event für Fortschritt feuern 
@@ -128,10 +133,6 @@ namespace main
 				while (Application.EventsPending ())
         			Application.RunIteration ();
 				
-				// 2. Berechne die Fitnesswerte von P(0)
-				foreach (Genome genome in p.curGeneration) {
-					CalcFitness(genome);
-				}
 				if (countGeneration > 0)
 					bestGenome = p.curGeneration[0];
 				else
@@ -151,16 +152,23 @@ namespace main
 				
 				//alte Generation merken
 				p.SaveAsOldGen();
-
-				// 3. Erzeuge Kinder und füge sie P' hinzu
-				double rndDouble;
-				int c = 0;
-				while (c < countChilds) 
+				
+				switch(SelPropType)
 				{
-					// Zufallszahl zwischen 0 und 1					
-					rndDouble = Helper.GetRandomDouble();
-					
-					if (rndDouble <= recombinationProbability)
+					case Helper.Enums.SelPropType.Fitness : 
+						Helper.Selection.CalcSelPropByFitness(p.oldGeneration);
+						break;
+					case Helper.Enums.SelPropType.Ranking : 
+						Helper.Selection.CalcSelPropByRanking(p.oldGeneration);
+						break;
+				}
+				
+				// 3. Erzeuge Kinder und füge sie P' hinzu
+				int c = 0;
+				Random rnd =  new Random(Guid.NewGuid().GetHashCode());
+				while (c < countChilds) 
+				{					
+					if (rnd.NextDouble() <= recombinationProbability)
 					{
 						// I.	Rekombination zweier Individuen A und B aus Population P(0)
 						//todo: Genom aus der Populationsklasse liefern lassen damit der Genom-Typ immer passt
@@ -173,16 +181,16 @@ namespace main
 							switch (SelType)
 							{
 								case main.Helper.Enums.SelType.Roulette :
-									mama = Selection.Roulette(p.oldGeneration, SelPropType);
-									papa = Selection.Roulette(p.oldGeneration, SelPropType);
+									mama = Selection.Roulette(p.oldGeneration);
+									papa = Selection.Roulette(p.oldGeneration);
 									break;
 								case main.Helper.Enums.SelType.SingleTournament :
-									mama = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-									papa = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+									mama = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount);
+									papa = Selection.SingleTournament(p.oldGeneration, TournamentMemberCount);
 									break;
 								case main.Helper.Enums.SelType.MultiTournament :
-									mama = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
-									papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount, SelPropType);
+									mama = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount);
+									papa = Selection.MultiTournament(p.oldGeneration, TournamentMemberCount);
 									break;							
 							}
 							//Mama und Papa dürfen nicht die selben sein, sonst evtl. Duplikat
@@ -216,8 +224,7 @@ namespace main
 
 			//Ausgabe der besten Genome
 			sb.AppendLine("Letzte Generation");
-			List<Genome> bestGenomes = p.curGeneration.Distinct().ToList();
-			foreach (Genome genome in bestGenomes)
+			foreach (Genome genome in p.curGeneration)
 				sb.AppendLine(genome.AsString());
 			
 			// Speichere den besten Fitnesswert und die Generation in der er aufgetreten ist zur späteren Auswertung

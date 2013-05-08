@@ -18,7 +18,7 @@ public partial class MainWindow
 	private global::Gtk.Alignment GtkAlignment4;
 	private global::Gtk.VBox vbox_ProblemArt;
 	private global::Gtk.ComboBox cbo_Problem;
-	private global::Gtk.Label GtkLabel;
+	private global::Gtk.Label GtkLabel1;
 	private global::Gtk.Frame frame_Kodierung;
 	private global::Gtk.Alignment GtkAlignment5;
 	private global::Gtk.VBox vbox_Kodierung;
@@ -41,13 +41,13 @@ public partial class MainWindow
 	private global::Gtk.HBox hbox10;
 	private global::Gtk.Label label6;
 	private global::Gtk.SpinButton txt_recombProb;
-	private global::Gtk.Label GtkLabel1;
+	private global::Gtk.Label GtkLabel2;
 	private global::Gtk.Frame frame_Genom;
 	private global::Gtk.VBox vbox4;
 	private global::Gtk.HBox hbox11;
 	private global::Gtk.Label label7;
 	private global::Gtk.SpinButton txt_countGenes;
-	private global::Gtk.Label GtkLabel2;
+	private global::Gtk.Label GtkLabel3;
 	private global::Gtk.Frame frame_Evolution;
 	private global::Gtk.Alignment GtkAlignment2;
 	private global::Gtk.VBox vbox6;
@@ -91,7 +91,7 @@ public partial class MainWindow
 		this.pnl_mainWidget.CanDefault = true;
 		this.pnl_mainWidget.CanFocus = true;
 		this.pnl_mainWidget.Name = "pnl_mainWidget";
-		this.pnl_mainWidget.Position = 382;
+		this.pnl_mainWidget.Position = 452;
 		// Container child pnl_mainWidget.Gtk.Paned+PanedChild
 		this.vbox_left = new global::Gtk.VBox ();
 		this.vbox_left.WidthRequest = 382;
@@ -170,11 +170,11 @@ public partial class MainWindow
 		w6.Fill = false;
 		this.GtkAlignment4.Add (this.vbox_ProblemArt);
 		this.frame_ProblemArt.Add (this.GtkAlignment4);
-		this.GtkLabel = new global::Gtk.Label ();
-		this.GtkLabel.Name = "GtkLabel";
-		this.GtkLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Art</b>");
-		this.GtkLabel.UseMarkup = true;
-		this.frame_ProblemArt.LabelWidget = this.GtkLabel;
+		this.GtkLabel1 = new global::Gtk.Label ();
+		this.GtkLabel1.Name = "GtkLabel1";
+		this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Art</b>");
+		this.GtkLabel1.UseMarkup = true;
+		this.frame_ProblemArt.LabelWidget = this.GtkLabel1;
 		this.vbox_TabProblem.Add (this.frame_ProblemArt);
 		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox_TabProblem [this.frame_ProblemArt]));
 		w9.Position = 0;
@@ -373,11 +373,11 @@ public partial class MainWindow
 		w26.Fill = false;
 		this.GtkAlignment.Add (this.vbox3);
 		this.frame_Population.Add (this.GtkAlignment);
-		this.GtkLabel1 = new global::Gtk.Label ();
-		this.GtkLabel1.Name = "GtkLabel1";
-		this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Population</b>");
-		this.GtkLabel1.UseMarkup = true;
-		this.frame_Population.LabelWidget = this.GtkLabel1;
+		this.GtkLabel2 = new global::Gtk.Label ();
+		this.GtkLabel2.Name = "GtkLabel2";
+		this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Population</b>");
+		this.GtkLabel2.UseMarkup = true;
+		this.frame_Population.LabelWidget = this.GtkLabel2;
 		this.vbox_TabEigenschaften.Add (this.frame_Population);
 		global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.vbox_TabEigenschaften [this.frame_Population]));
 		w29.Position = 0;
@@ -425,11 +425,11 @@ public partial class MainWindow
 		w32.Expand = false;
 		w32.Fill = false;
 		this.frame_Genom.Add (this.vbox4);
-		this.GtkLabel2 = new global::Gtk.Label ();
-		this.GtkLabel2.Name = "GtkLabel2";
-		this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Genom</b>");
-		this.GtkLabel2.UseMarkup = true;
-		this.frame_Genom.LabelWidget = this.GtkLabel2;
+		this.GtkLabel3 = new global::Gtk.Label ();
+		this.GtkLabel3.Name = "GtkLabel3";
+		this.GtkLabel3.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Genom</b>");
+		this.GtkLabel3.UseMarkup = true;
+		this.frame_Genom.LabelWidget = this.GtkLabel3;
 		this.vbox_TabEigenschaften.Add (this.frame_Genom);
 		global::Gtk.Box.BoxChild w34 = ((global::Gtk.Box.BoxChild)(this.vbox_TabEigenschaften [this.frame_Genom]));
 		w34.Position = 1;
@@ -664,6 +664,7 @@ public partial class MainWindow
 		w57.Fill = false;
 		this.pnl_mainWidget.Add (this.vbox_right);
 		global::Gtk.Paned.PanedChild w58 = ((global::Gtk.Paned.PanedChild)(this.pnl_mainWidget [this.vbox_right]));
+		w58.Resize = false;
 		w58.Shrink = false;
 		this.vbox_main.Add (this.pnl_mainWidget);
 		global::Gtk.Box.BoxChild w59 = ((global::Gtk.Box.BoxChild)(this.vbox_main [this.pnl_mainWidget]));
@@ -671,6 +672,7 @@ public partial class MainWindow
 		// Container child vbox_main.Gtk.Box+BoxChild
 		this.statusbar = new global::Gtk.Statusbar ();
 		this.statusbar.Name = "statusbar";
+		this.statusbar.Homogeneous = true;
 		this.statusbar.Spacing = 6;
 		// Container child statusbar.Gtk.Box+BoxChild
 		this.progressbar = new global::Gtk.ProgressBar ();
@@ -687,7 +689,7 @@ public partial class MainWindow
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
-		this.DefaultWidth = 744;
+		this.DefaultWidth = 820;
 		this.DefaultHeight = 547;
 		this.pnl_MutationType.Hide ();
 		this.cbo_recombBinary.Hide ();

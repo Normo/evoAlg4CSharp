@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace main
 {
@@ -64,7 +65,7 @@ namespace main
 			string tmp = "{";
 			string sep = string.Empty;
 			foreach (double i in this) {
-				tmp = string.Format("{0}{1} {2}", tmp, sep, i);
+				tmp = string.Format("{0}{1} {2:0.000}", tmp, sep, i);
 				sep = ",";
 			}
 			tmp = string.Format("{0} }} Fitness: {1}", tmp, _Fitness);
