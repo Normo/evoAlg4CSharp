@@ -32,11 +32,12 @@ namespace main
 			{
 				if (_encryption == Helper.Enums.Encryption.None)
 					throw new NotImplementedException(); //todo Genome mit Integerwerten
-				else if (_encryption == Helper.Enums.Encryption.Binary)
-				{
-					throw new NotImplementedException(); //todo
-				}
-				else if (_encryption == Helper.Enums.Encryption.Real)
+//				else if (_encryption == Helper.Enums.Encryption.Binary)
+//				{
+//					throw new NotImplementedException(); //todo
+//				}
+//				else if (_encryption == Helper.Enums.Encryption.Real)
+				else
 				{
 					tmp = new GenomeReal(genomeSize, minAllelValue, maxAllelValue);
 					// um Duplikate bei der Erzeugung der Population zu vermeiden

@@ -45,12 +45,14 @@ namespace main
 				// Erzeuge Template einmalig
 				if (templateGenom == null)
 				{
+					Console.Write("\r\nErzeuge Templategenom: ");
 					templateGenom = new List<bool>(countGene);
 					Random random = new Random(Guid.NewGuid().GetHashCode());
 					for (int i=0; i < countGene; i++)
 					{
 						templateGenom[i] = (Convert.ToBoolean(random.Next(2)))? true : false;
 					}
+					Console.Write(templateGenom.ToString());
 				}
 				
 				childA.AddRange(genomeA);
@@ -160,39 +162,39 @@ namespace main
 //			int z2 = rnd.Next(1, genomes[0].Count);
 //			
 //			double rndProb = 1.0 / countIndividuals;
-			
-			BitArray bitarray = new BitArray(Helper.DoubleToBitArray(512.0));
-			foreach (Genome genome in genomes)
-			{
-				Console.Write("\r\nGenom: ");
-				for (int i = 0; i <= genome.Count -1; i++)
-				{
-					bitarray = Helper.DoubleToBitArray(genome[i]);
-					Console.Write(String.Format("\r\n\tDec:\t\t {0}\r\n\tVorher:\t", genome[i].ToString()));
-					// Ausgabe und anschließend Invertierung
-					for (int j = 0; j <= bitarray.Count -1; j++)
-					{
-						Console.Write(bitarray[j] ? 1 : 0);
-						//Punkte zur besseren Übersicht
-						if ((j+1) % 4 == 0)
-						Console.Write(".");
-						bitarray[j] = bitarray[j] ? false : true;
-					}
-					Console.Write("\r\n\tNachher:\t");
-					// Ausgabe nach Invertierung
-					for (int k = 0; k <= bitarray.Length -1; k++)
-					{
-						Console.Write(bitarray[k] ? 1 : 0);
-						//Punkte zur besseren Übersicht
-				        if ((k+1) % 4 == 0)
-				          Console.Write(".");
-					}
-					byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarray.Length / 8.0)];
-					bitarray.CopyTo(byteArray, 0); 
-					double result = BitConverter.ToDouble(byteArray, 0);
-					Console.WriteLine("\r\n\tDec:\t\t" + result); 
-				}
-			} 
+//			
+//			BitArray bitarray = new BitArray(Helper.DoubleToBitArray(512.0));
+//			foreach (Genome genome in genomes)
+//			{
+//				Console.Write("\r\nGenom: ");
+//				for (int i = 0; i <= genome.Count -1; i++)
+//				{
+//					bitarray = Helper.DoubleToBitArray(genome[i]);
+//					Console.Write(String.Format("\r\n\tDec:\t\t {0}\r\n\tVorher:\t", genome[i].ToString()));
+//					// Ausgabe und anschließend Invertierung
+//					for (int j = 0; j <= bitarray.Count -1; j++)
+//					{
+//						Console.Write(bitarray[j] ? 1 : 0);
+//						//Punkte zur besseren Übersicht
+//						if ((j+1) % 4 == 0)
+//						Console.Write(".");
+//						bitarray[j] = bitarray[j] ? false : true;
+//					}
+//					Console.Write("\r\n\tNachher:\t");
+//					// Ausgabe nach Invertierung
+//					for (int k = 0; k <= bitarray.Length -1; k++)
+//					{
+//						Console.Write(bitarray[k] ? 1 : 0);
+//						//Punkte zur besseren Übersicht
+//				        if ((k+1) % 4 == 0)
+//				          Console.Write(".");
+//					}
+//					byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarray.Length / 8.0)];
+//					bitarray.CopyTo(byteArray, 0); 
+//					double result = BitConverter.ToDouble(byteArray, 0);
+//					Console.WriteLine("\r\n\tDec:\t\t" + result); 
+//				}
+//			} 
 		}
 		
 		public void MutateReal (List<Genome> genomes)
