@@ -56,9 +56,9 @@ namespace main
 				member.Add(generation[Helper.GetRandomInteger(0,generation.Count-1)]);
 			}
 			
-			member.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
+			member.Sort((a,b) => a.SelectionProbability.CompareTo(b.SelectionProbability));
 			
-			return member[0].Copy();
+			return member[0];
 		}
 		
 		public static Genome MultiTournament(List<Genome> generation, int memberCount)

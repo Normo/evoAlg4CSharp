@@ -265,7 +265,7 @@ Reell</property>
                                             <property name="StepIncrement">1</property>
                                             <property name="ClimbRate">1</property>
                                             <property name="Numeric">True</property>
-                                            <property name="Value">150</property>
+                                            <property name="Value">10</property>
                                           </widget>
                                           <packing>
                                             <property name="Position">1</property>
@@ -309,7 +309,7 @@ Reell</property>
                                             <property name="StepIncrement">1</property>
                                             <property name="ClimbRate">1</property>
                                             <property name="Numeric">True</property>
-                                            <property name="Value">150</property>
+                                            <property name="Value">10</property>
                                           </widget>
                                           <packing>
                                             <property name="Position">1</property>
@@ -353,7 +353,7 @@ Reell</property>
                                             <property name="StepIncrement">1</property>
                                             <property name="ClimbRate">1</property>
                                             <property name="Numeric">True</property>
-                                            <property name="Value">200</property>
+                                            <property name="Value">10</property>
                                           </widget>
                                           <packing>
                                             <property name="Position">1</property>

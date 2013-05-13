@@ -104,6 +104,7 @@ namespace main
 		public void Compute()
 		{
 			int countGeneration = 0;	
+			int c; // child-counter
 			
 			bestFitness = double.MaxValue;
 			averageFitness = double.MaxValue;
@@ -141,7 +142,7 @@ namespace main
 				{
 					bestFitness = bestGenome.Fitness;
 					bestFitnessGeneration = countGeneration + 1;
-					bestList.Add(bestGenome);
+					bestList.Add(bestGenome.Copy());
 				} 
 				else 
 				{
@@ -163,7 +164,7 @@ namespace main
 				}
 				
 				// 3. Erzeuge Kinder und füge sie P' hinzu
-				int c = 0;
+				c = 0;
 				Random rnd =  new Random(Guid.NewGuid().GetHashCode());
 				while (c < countChilds) 
 				{					
@@ -199,24 +200,49 @@ namespace main
 						
 						//Rekombinieren und Fitness berechnen
 						List<Genome> childs = Recombine(mama,papa);
+						
+						// II.	Mutiere Kind c
+						if (Encryption != Helper.Enums.Encryption.Binary)
+							Mutate(childs);
+						
 						foreach (Genome genome in childs)
 							CalcFitness(genome);
 						
-						// II.	Mutiere Kind c
-						Mutate(childs);
-						
 						// III.	Füge Kinder C zu P' hinzu
 						//todo: Binäre Rekombination liefert 2 Kinder zurück
-						if (!p.ContainsGenome(childs[0]))
+						if (!p.ContainsGenome(childs[0]) || ((childs.Count > 1)? !p.ContainsGenome(childs[1]) : false))
+//						if (!p.ContainsGenome(childs[0]) )
 						{
 							p.curGeneration.AddRange(childs);
-							c++;
+							if (Encryption == Helper.Enums.Encryption.Binary)
+								c += 2;
+							else
+								c++;
 						}
 					}
 				}
 				
 				// 5. Erzeuge Kind-Population -> die besten Individuen aus Kind- + Eltern-Generation
-				Selection.Plus(p, countIndividuals);
+				if (Encryption != Helper.Enums.Encryption.Binary)
+					Selection.Plus(p, countIndividuals);
+				else
+				{
+					int perc = (int)Math.Round((double)p.curGeneration.Count * 0.3);
+//					perc = countIndividuals - perc;
+					List<Genome> lst = new List<Genome>();
+					Random rnd1 =  new Random(Guid.NewGuid().GetHashCode());
+					for (perc = countIndividuals - perc; perc <= p.oldGeneration.Count; perc++)
+					{
+						lst.Clear();
+						lst.Add(p.oldGeneration[rnd1.Next(0,p.oldGeneration.Count)]);
+						Mutate(lst);
+						p.curGeneration[perc-1] = lst[0];
+					}
+					foreach (Genome genome in p.curGeneration)
+							CalcFitness(genome);
+					p.curGeneration.Sort((a,b) => a.Fitness.CompareTo(b.Fitness));
+				}
+				
 				bestGenome = p.curGeneration[0];
 
 				countGeneration++;

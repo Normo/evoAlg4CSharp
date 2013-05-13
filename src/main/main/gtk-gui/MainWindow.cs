@@ -265,7 +265,7 @@ public partial class MainWindow
 		this.txt_countIndividuals.Adjustment.PageIncrement = 10;
 		this.txt_countIndividuals.ClimbRate = 1;
 		this.txt_countIndividuals.Numeric = true;
-		this.txt_countIndividuals.Value = 150;
+		this.txt_countIndividuals.Value = 10;
 		this.hbox7.Add (this.txt_countIndividuals);
 		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox7 [this.txt_countIndividuals]));
 		w16.Position = 1;
@@ -298,7 +298,7 @@ public partial class MainWindow
 		this.txt_maxGeneration.Adjustment.PageIncrement = 10;
 		this.txt_maxGeneration.ClimbRate = 1;
 		this.txt_maxGeneration.Numeric = true;
-		this.txt_maxGeneration.Value = 150;
+		this.txt_maxGeneration.Value = 10;
 		this.hbox8.Add (this.txt_maxGeneration);
 		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox8 [this.txt_maxGeneration]));
 		w19.Position = 1;
@@ -331,7 +331,7 @@ public partial class MainWindow
 		this.txt_countChilds.Adjustment.PageIncrement = 10;
 		this.txt_countChilds.ClimbRate = 1;
 		this.txt_countChilds.Numeric = true;
-		this.txt_countChilds.Value = 200;
+		this.txt_countChilds.Value = 10;
 		this.hbox9.Add (this.txt_countChilds);
 		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox9 [this.txt_countChilds]));
 		w22.Position = 1;

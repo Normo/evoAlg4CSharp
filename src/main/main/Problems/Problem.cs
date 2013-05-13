@@ -35,8 +35,12 @@ namespace main
 		
 		public List<Genome> RecombineBinary (Genome genomeA, Genome genomeB)
 		{		
+			//Console.WriteLine(String.Format("\r\nRecombineBinary:\r\n\tGenom A:\t{0}\r\n\tGenom B:\t{1}", genomeA.AsString(),genomeB.AsString()));
+			
 			List<double> childA = new List<double>(countGene);
 			List<double> childB = new List<double>(countGene);
+			
+			
 			
 			if (!RecombBinaryIsSinglePoint.HasValue)
 			{
@@ -45,14 +49,12 @@ namespace main
 				// Erzeuge Template einmalig
 				if (templateGenom == null)
 				{
-					Console.Write("\r\nErzeuge Templategenom: ");
-					templateGenom = new List<bool>(countGene);
+					templateGenom = new List<bool>();
 					Random random = new Random(Guid.NewGuid().GetHashCode());
 					for (int i=0; i < countGene; i++)
 					{
-						templateGenom[i] = (Convert.ToBoolean(random.Next(2)))? true : false;
+						templateGenom.Add(Convert.ToBoolean(random.Next(2)));
 					}
-					Console.Write(templateGenom.ToString());
 				}
 				
 				childA.AddRange(genomeA);
@@ -101,6 +103,7 @@ namespace main
 			List<Genome> result = new List<Genome>(2);
 			result.Add(new GenomeReal(childA.ToArray()));
 			result.Add(new GenomeReal(childB.ToArray()));
+
 			return result;
 		}
 		
@@ -155,46 +158,18 @@ namespace main
 			//throw new NotImplementedException ();
 			
 			// Erzeugung zweier Zufallsindices
-//			Random rnd = new Random(Guid.NewGuid().GetHashCode());
-//			// 1 < z1 < Populationsgröße
-//			int z1 = rnd.Next(1, countIndividuals);
-//			// 0 < z2 < Anzahl der Gene
-//			int z2 = rnd.Next(1, genomes[0].Count);
-//			
-//			double rndProb = 1.0 / countIndividuals;
-//			
-//			BitArray bitarray = new BitArray(Helper.DoubleToBitArray(512.0));
-//			foreach (Genome genome in genomes)
-//			{
-//				Console.Write("\r\nGenom: ");
-//				for (int i = 0; i <= genome.Count -1; i++)
-//				{
-//					bitarray = Helper.DoubleToBitArray(genome[i]);
-//					Console.Write(String.Format("\r\n\tDec:\t\t {0}\r\n\tVorher:\t", genome[i].ToString()));
-//					// Ausgabe und anschließend Invertierung
-//					for (int j = 0; j <= bitarray.Count -1; j++)
-//					{
-//						Console.Write(bitarray[j] ? 1 : 0);
-//						//Punkte zur besseren Übersicht
-//						if ((j+1) % 4 == 0)
-//						Console.Write(".");
-//						bitarray[j] = bitarray[j] ? false : true;
-//					}
-//					Console.Write("\r\n\tNachher:\t");
-//					// Ausgabe nach Invertierung
-//					for (int k = 0; k <= bitarray.Length -1; k++)
-//					{
-//						Console.Write(bitarray[k] ? 1 : 0);
-//						//Punkte zur besseren Übersicht
-//				        if ((k+1) % 4 == 0)
-//				          Console.Write(".");
-//					}
-//					byte[] byteArray = new byte[(int)Math.Ceiling((double)bitarray.Length / 8.0)];
-//					bitarray.CopyTo(byteArray, 0); 
-//					double result = BitConverter.ToDouble(byteArray, 0);
-//					Console.WriteLine("\r\n\tDec:\t\t" + result); 
-//				}
-//			} 
+			Random rnd = new Random(Guid.NewGuid().GetHashCode());
+			// 0 < z2 < Anzahl der Gene
+			int z = rnd.Next(0, genomes[0].Count);
+			
+			BitArray bitarray = Helper.DoubleToBitArray(genomes[0][z]);
+
+			for (int j = 0; j <= bitarray.Count -1; j++)
+			{
+				bitarray[j] = bitarray[j] ? false : true;
+			}
+			
+			genomes[0][z]= Helper.BitArrayToDouble(bitarray);
 		}
 		
 		public void MutateReal (List<Genome> genomes)
@@ -211,7 +186,8 @@ namespace main
 					rnd = random.NextDouble();
 					if (rnd <= rndProb)
 					{
-						genome[i] += (Convert.ToBoolean(random.Next(2)))? 0.05 : -0.05;
+						//genome[i] += (Convert.ToBoolean(random.Next(2)))? 0.05 : -0.05;
+						genome[i] += genome[i] < 0 ? 0.05 : -0.05;
 					}
 				}
 			}

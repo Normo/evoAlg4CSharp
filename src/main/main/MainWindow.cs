@@ -50,7 +50,7 @@ public partial class MainWindow: Gtk.Window
 			
 			if (cbo_Encryption.Active == 1)
 			{
-				problem.RecombBinaryIsSinglePoint = cbo_recombBinary.Active == 0;
+				problem.RecombBinaryIsSinglePoint = (cbo_recombBinary.Active == 0)? true : (cbo_recombBinary.Active == 1)? false : (bool?)null;
 			}
 			if (cbo_Encryption.Active == 2)
 			{
